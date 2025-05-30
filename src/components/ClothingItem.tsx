@@ -15,11 +15,11 @@ interface ClothingItemProps {
 
 const ClothingItem: React.FC<ClothingItemProps> = ({ item, type }) => {
   return (
-    <Card className="border-0 shadow-none">
+    <Card className="border-0 shadow-none bg-transparent">
       <CardContent className="p-0">
-        <div className="space-y-4">
+        <div className="space-y-6">
           {/* Image Container */}
-          <div className="relative bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl overflow-hidden aspect-square flex items-center justify-center">
+          <div className="relative bg-gradient-to-br from-gray-50 via-white to-gray-100 rounded-2xl overflow-hidden aspect-square flex items-center justify-center shadow-inner border border-gray-100/50">
             {item.imageUrl ? (
               <img
                 src={item.imageUrl}
@@ -28,24 +28,37 @@ const ClothingItem: React.FC<ClothingItemProps> = ({ item, type }) => {
               />
             ) : (
               <div className="text-center p-8">
-                <div className="w-16 h-16 bg-slate-300 rounded-lg mx-auto mb-4 flex items-center justify-center">
-                  <span className="text-slate-500 text-2xl">👕</span>
+                <div className="w-20 h-20 bg-gradient-to-br from-gray-200 to-gray-300 rounded-2xl mx-auto mb-6 flex items-center justify-center shadow-lg">
+                  <span className="text-gray-500 text-3xl">
+                    {type === 'top' ? '👕' : '👖'}
+                  </span>
                 </div>
-                <p className="text-slate-500 text-sm">
+                <p className="text-gray-400 text-sm font-light italic">
+                  {type === 'top' ? 'Top Image Placeholder' : 'Bottom Image Placeholder'}
+                </p>
+                <p className="text-xs text-gray-300 mt-2 uppercase tracking-wider">
                   {/* PASTE {type.toUpperCase()} IMAGE URL IN THE DATA ABOVE */}
-                  {type === 'top' ? 'Top Image Here' : 'Bottom Image Here'}
+                  Image URL Required
                 </p>
               </div>
+            )}
+            
+            {/* Elegant overlay for image placeholder */}
+            {!item.imageUrl && (
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-100/50 to-transparent"></div>
             )}
           </div>
           
           {/* Item Info */}
-          <div className="space-y-2">
-            <h3 className="font-semibold text-slate-800">{item.name}</h3>
+          <div className="space-y-3 text-center">
+            <h3 className="font-light text-xl text-gray-800 tracking-wide">{item.name}</h3>
             <div className="flex items-center justify-between">
-              <span className="text-sm text-slate-600">{item.brand}</span>
-              <span className="font-medium text-blue-600">{item.price}</span>
+              <span className="text-sm text-gray-500 font-light tracking-wider uppercase">{item.brand}</span>
+              <span className="font-medium text-lg bg-gradient-to-r from-rose-600 to-amber-600 bg-clip-text text-transparent">
+                {item.price}
+              </span>
             </div>
+            <div className="w-12 h-0.5 bg-gradient-to-r from-gray-300 to-gray-400 mx-auto"></div>
           </div>
         </div>
       </CardContent>
