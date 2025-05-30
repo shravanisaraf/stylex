@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { ArrowLeft, ArrowRight, Sparkles, Heart } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Plus } from 'lucide-react';
 import ClothingItem from '../components/ClothingItem';
 import OutfitDisplay from '../components/OutfitDisplay';
 
@@ -91,152 +90,123 @@ const Index = () => {
   const currentBottom = bottoms[currentBottomIndex];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-rose-50 via-white to-amber-50 relative overflow-hidden">
-      {/* Decorative Background Elements */}
-      <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-rose-200/30 to-amber-200/30 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-br from-purple-200/30 to-pink-200/30 rounded-full blur-3xl"></div>
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-br from-blue-100/20 to-indigo-100/20 rounded-full blur-3xl"></div>
-
+    <div className="min-h-screen bg-neutral-50">
       {/* Header */}
-      <div className="relative z-10 bg-white/80 backdrop-blur-md shadow-lg border-b border-rose-100/50">
-        <div className="max-w-4xl mx-auto px-6 py-8">
-          <div className="flex items-center justify-center mb-4">
-            <div className="flex items-center space-x-4">
-              <div className="relative">
-                <div className="w-16 h-16 bg-gradient-to-br from-rose-500 to-amber-500 rounded-2xl flex items-center justify-center shadow-xl transform rotate-3">
-                  <Sparkles className="text-white text-2xl" />
-                </div>
-                <div className="absolute -top-1 -right-1 w-4 h-4 bg-pink-400 rounded-full animate-pulse"></div>
-              </div>
-              <div className="text-center">
-                <h1 className="text-4xl font-bold bg-gradient-to-r from-rose-600 via-purple-600 to-amber-600 bg-clip-text text-transparent">
-                  ATELIER
-                </h1>
-                <p className="text-sm font-medium text-gray-600 tracking-widest">DIGITAL CLOSET</p>
-              </div>
-            </div>
+      <header className="bg-white border-b border-neutral-200">
+        <div className="max-w-6xl mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            <h1 className="text-2xl font-light tracking-wide text-neutral-900">STYLEX</h1>
+            <button className="bg-neutral-900 text-white px-6 py-2 text-sm font-medium tracking-wide hover:bg-neutral-800 transition-colors">
+              GET THE APP →
+            </button>
           </div>
-          <p className="text-center text-gray-600 font-light italic">Curate your perfect ensemble with timeless elegance</p>
         </div>
-      </div>
+      </header>
 
-      {/* Main Content */}
-      <div className="relative z-10 max-w-3xl mx-auto px-6 py-12">
-        <div className="space-y-12">
-          
-          {/* Tops Section */}
-          <div className="space-y-6">
-            <div className="text-center">
-              <h2 className="text-3xl font-light text-gray-800 mb-2">Tops</h2>
-              <div className="w-16 h-0.5 bg-gradient-to-r from-rose-400 to-amber-400 mx-auto"></div>
-            </div>
-            
-            <div className="bg-white/70 backdrop-blur-md rounded-3xl shadow-2xl p-8 border border-white/50">
-              <div className="flex items-center justify-between mb-6">
-                <button
-                  onClick={prevTop}
-                  className="group p-4 rounded-full bg-gradient-to-r from-rose-100 to-amber-100 hover:from-rose-200 hover:to-amber-200 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
-                  aria-label="Previous top"
-                >
-                  <ArrowLeft className="w-6 h-6 text-gray-700 group-hover:text-gray-900 transition-colors" />
-                </button>
-                
-                <div className="flex items-center space-x-2">
-                  <div className="flex space-x-1">
-                    {tops.map((_, index) => (
-                      <div
-                        key={index}
-                        className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                          index === currentTopIndex 
-                            ? 'bg-gradient-to-r from-rose-400 to-amber-400 w-6' 
-                            : 'bg-gray-300'
-                        }`}
-                      />
-                    ))}
-                  </div>
-                  <span className="text-sm text-gray-500 ml-3 font-light">
-                    {currentTopIndex + 1} of {tops.length}
+      {/* Hero Section */}
+      <section className="bg-white py-16">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h2 className="text-4xl md:text-5xl font-light text-neutral-900 mb-6 leading-tight">
+            The <em className="italic">one-stop</em> digital wardrobe app
+          </h2>
+          <p className="text-lg text-neutral-600 mb-8 font-light">
+            <em className="italic">unlocking the potential</em> of what you already own
+          </p>
+          <button className="bg-white border border-neutral-300 text-neutral-900 px-8 py-3 text-sm font-medium tracking-wide hover:bg-neutral-50 transition-colors">
+            GET THE APP →
+          </button>
+        </div>
+      </section>
+
+      {/* Wardrobe Section */}
+      <section className="py-16 bg-neutral-50">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <h3 className="text-2xl font-light text-neutral-900 mb-4">Curate your style</h3>
+            <p className="text-neutral-600 font-light">Organize your wardrobe and discover new combinations</p>
+          </div>
+
+          <div className="space-y-12">
+            {/* Tops Section */}
+            <div className="bg-white rounded-lg border border-neutral-200 p-8">
+              <div className="flex items-center justify-between mb-8">
+                <h4 className="text-lg font-medium text-neutral-900 tracking-wide">TOPS</h4>
+                <div className="flex items-center space-x-4">
+                  <button
+                    onClick={prevTop}
+                    className="p-2 border border-neutral-300 rounded-full hover:bg-neutral-50 transition-colors"
+                    aria-label="Previous top"
+                  >
+                    <ArrowLeft className="w-4 h-4 text-neutral-600" />
+                  </button>
+                  <span className="text-sm text-neutral-500 font-light">
+                    {currentTopIndex + 1} / {tops.length}
                   </span>
+                  <button
+                    onClick={nextTop}
+                    className="p-2 border border-neutral-300 rounded-full hover:bg-neutral-50 transition-colors"
+                    aria-label="Next top"
+                  >
+                    <ArrowRight className="w-4 h-4 text-neutral-600" />
+                  </button>
                 </div>
-                
-                <button
-                  onClick={nextTop}
-                  className="group p-4 rounded-full bg-gradient-to-r from-rose-100 to-amber-100 hover:from-rose-200 hover:to-amber-200 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
-                  aria-label="Next top"
-                >
-                  <ArrowRight className="w-6 h-6 text-gray-700 group-hover:text-gray-900 transition-colors" />
-                </button>
               </div>
               <ClothingItem item={currentTop} type="top" />
             </div>
-          </div>
 
-          {/* Bottoms Section */}
-          <div className="space-y-6">
-            <div className="text-center">
-              <h2 className="text-3xl font-light text-gray-800 mb-2">Bottoms</h2>
-              <div className="w-16 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto"></div>
-            </div>
-            
-            <div className="bg-white/70 backdrop-blur-md rounded-3xl shadow-2xl p-8 border border-white/50">
-              <div className="flex items-center justify-between mb-6">
-                <button
-                  onClick={prevBottom}
-                  className="group p-4 rounded-full bg-gradient-to-r from-purple-100 to-pink-100 hover:from-purple-200 hover:to-pink-200 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
-                  aria-label="Previous bottom"
-                >
-                  <ArrowLeft className="w-6 h-6 text-gray-700 group-hover:text-gray-900 transition-colors" />
-                </button>
-                
-                <div className="flex items-center space-x-2">
-                  <div className="flex space-x-1">
-                    {bottoms.map((_, index) => (
-                      <div
-                        key={index}
-                        className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                          index === currentBottomIndex 
-                            ? 'bg-gradient-to-r from-purple-400 to-pink-400 w-6' 
-                            : 'bg-gray-300'
-                        }`}
-                      />
-                    ))}
-                  </div>
-                  <span className="text-sm text-gray-500 ml-3 font-light">
-                    {currentBottomIndex + 1} of {bottoms.length}
+            {/* Bottoms Section */}
+            <div className="bg-white rounded-lg border border-neutral-200 p-8">
+              <div className="flex items-center justify-between mb-8">
+                <h4 className="text-lg font-medium text-neutral-900 tracking-wide">BOTTOMS</h4>
+                <div className="flex items-center space-x-4">
+                  <button
+                    onClick={prevBottom}
+                    className="p-2 border border-neutral-300 rounded-full hover:bg-neutral-50 transition-colors"
+                    aria-label="Previous bottom"
+                  >
+                    <ArrowLeft className="w-4 h-4 text-neutral-600" />
+                  </button>
+                  <span className="text-sm text-neutral-500 font-light">
+                    {currentBottomIndex + 1} / {bottoms.length}
                   </span>
+                  <button
+                    onClick={nextBottom}
+                    className="p-2 border border-neutral-300 rounded-full hover:bg-neutral-50 transition-colors"
+                    aria-label="Next bottom"
+                  >
+                    <ArrowRight className="w-4 h-4 text-neutral-600" />
+                  </button>
                 </div>
-                
-                <button
-                  onClick={nextBottom}
-                  className="group p-4 rounded-full bg-gradient-to-r from-purple-100 to-pink-100 hover:from-purple-200 hover:to-pink-200 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
-                  aria-label="Next bottom"
-                >
-                  <ArrowRight className="w-6 h-6 text-gray-700 group-hover:text-gray-900 transition-colors" />
-                </button>
               </div>
               <ClothingItem item={currentBottom} type="bottom" />
             </div>
-          </div>
 
-          {/* Outfit Display */}
-          <div className="space-y-6">
-            <div className="text-center">
-              <h2 className="text-3xl font-light text-gray-800 mb-2">Your Curated Look</h2>
-              <div className="w-20 h-0.5 bg-gradient-to-r from-rose-400 via-purple-400 to-amber-400 mx-auto"></div>
+            {/* Outfit Display */}
+            <div className="bg-white rounded-lg border border-neutral-200 p-8">
+              <div className="text-center mb-8">
+                <h4 className="text-lg font-medium text-neutral-900 tracking-wide mb-2">YOUR OUTFIT</h4>
+                <p className="text-neutral-600 font-light text-sm">Complete look ready to wear</p>
+              </div>
+              <OutfitDisplay top={currentTop} bottom={currentBottom} />
             </div>
-            <OutfitDisplay top={currentTop} bottom={currentBottom} />
           </div>
         </div>
+      </section>
 
-        {/* Call to Action */}
-        <div className="mt-16 text-center">
-          <div className="inline-flex items-center bg-gradient-to-r from-rose-500 via-purple-500 to-amber-500 text-white px-10 py-4 rounded-full font-medium shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 cursor-pointer">
-            <Heart className="w-5 h-5 mr-3 animate-pulse" />
-            <span className="bg-white/20 px-4 py-1 rounded-full text-xs mr-4 font-light tracking-wider">EXCLUSIVE</span>
-            DISCOVER MORE COLLECTIONS
-          </div>
+      {/* Footer CTA */}
+      <section className="bg-neutral-900 py-16">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h3 className="text-2xl font-light text-white mb-4">
+            Know what you own, <em className="italic">love</em> what you wear
+          </h3>
+          <p className="text-neutral-400 mb-8 font-light">
+            Discover endless styling possibilities with pieces you already have
+          </p>
+          <button className="bg-white text-neutral-900 px-8 py-3 text-sm font-medium tracking-wide hover:bg-neutral-100 transition-colors">
+            START STYLING
+          </button>
         </div>
-      </div>
+      </section>
     </div>
   );
 };
