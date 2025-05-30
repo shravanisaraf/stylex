@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, ArrowRight, Plus } from 'lucide-react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import ClothingItem from '../components/ClothingItem';
 import OutfitDisplay from '../components/OutfitDisplay';
 
@@ -94,11 +94,8 @@ const Index = () => {
       {/* Header */}
       <header className="bg-white border-b border-neutral-200">
         <div className="max-w-6xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-center">
             <h1 className="text-2xl font-light tracking-wide text-neutral-900">STYLEX</h1>
-            <button className="bg-neutral-900 text-white px-6 py-2 text-sm font-medium tracking-wide hover:bg-neutral-800 transition-colors">
-              GET THE APP →
-            </button>
           </div>
         </div>
       </header>
@@ -112,9 +109,6 @@ const Index = () => {
           <p className="text-lg text-neutral-600 mb-8 font-light">
             <em className="italic">unlocking the potential</em> of what you already own
           </p>
-          <button className="bg-white border border-neutral-300 text-neutral-900 px-8 py-3 text-sm font-medium tracking-wide hover:bg-neutral-50 transition-colors">
-            GET THE APP →
-          </button>
         </div>
       </section>
 
@@ -184,7 +178,7 @@ const Index = () => {
             {/* Outfit Display */}
             <div className="bg-white rounded-lg border border-neutral-200 p-8">
               <div className="text-center mb-8">
-                <h4 className="text-lg font-medium text-neutral-900 tracking-wide mb-2">YOUR OUTFIT</h4>
+                <h4 className="text-lg font-medium text-neutral-900 tracking-wide mb-2">YOUR CURATED LOOK</h4>
                 <p className="text-neutral-600 font-light text-sm">Complete look ready to wear</p>
               </div>
               <OutfitDisplay top={currentTop} bottom={currentBottom} />
@@ -202,9 +196,6 @@ const Index = () => {
           <p className="text-neutral-400 mb-8 font-light">
             Discover endless styling possibilities with pieces you already have
           </p>
-          <button className="bg-white text-neutral-900 px-8 py-3 text-sm font-medium tracking-wide hover:bg-neutral-100 transition-colors">
-            START STYLING
-          </button>
         </div>
       </section>
     </div>

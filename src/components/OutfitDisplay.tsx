@@ -1,5 +1,7 @@
+
 import React from 'react';
 import { Plus } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface OutfitDisplayProps {
   top: {
@@ -19,7 +21,19 @@ interface OutfitDisplayProps {
 }
 
 const OutfitDisplay: React.FC<OutfitDisplayProps> = ({ top, bottom }) => {
+  const navigate = useNavigate();
   const totalPrice = parseInt(top.price.replace('Rs.', '')) + parseInt(bottom.price.replace('Rs.', ''));
+
+  const handleSaveOutfit = () => {
+    // Navigate to checkout page with outfit data
+    navigate('/checkout', { 
+      state: { 
+        top, 
+        bottom, 
+        totalPrice 
+      } 
+    });
+  };
 
   return (
     <div className="space-y-8">
@@ -36,7 +50,6 @@ const OutfitDisplay: React.FC<OutfitDisplayProps> = ({ top, bottom }) => {
           ) : (
             <div className="text-center">
               <span className="text-2xl text-neutral-400">👕</span>
-              
             </div>
           )}
         </div>
@@ -55,7 +68,6 @@ const OutfitDisplay: React.FC<OutfitDisplayProps> = ({ top, bottom }) => {
           ) : (
             <div className="text-center">
               <span className="text-2xl text-neutral-400">👖</span>
-              
             </div>
           )}
         </div>
@@ -79,7 +91,10 @@ const OutfitDisplay: React.FC<OutfitDisplayProps> = ({ top, bottom }) => {
       <div className="text-center pt-4 border-t border-neutral-200">
         <p className="text-sm text-neutral-600 mb-2 font-light">Total</p>
         <p className="text-xl font-medium text-neutral-900 mb-4">Rs.{totalPrice.toLocaleString()}</p>
-        <button className="bg-neutral-900 text-white px-6 py-2 text-sm font-medium tracking-wide hover:bg-neutral-800 transition-colors">
+        <button 
+          onClick={handleSaveOutfit}
+          className="bg-neutral-900 text-white px-6 py-2 text-sm font-medium tracking-wide hover:bg-neutral-800 transition-colors"
+        >
           SAVE OUTFIT
         </button>
       </div>
