@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import ClothingItem from '../components/ClothingItem';
@@ -145,7 +146,35 @@ const Index = () => {
                   </button>
                 </div>
               </div>
-              <ClothingItem item={currentTop} type="top" />
+              
+              {/* Centered layout with navigation */}
+              <div className="flex items-center justify-center space-x-8">
+                <button
+                  onClick={prevTop}
+                  className="p-4 hover:bg-neutral-50 transition-colors rounded-full"
+                  aria-label="Previous top"
+                >
+                  <ArrowLeft className="w-8 h-8 text-neutral-400" />
+                </button>
+                
+                <div className="flex-1 max-w-md">
+                  <ClothingItem item={currentTop} type="top" />
+                  {/* Item details below image */}
+                  <div className="text-center mt-6">
+                    <h3 className="text-xl font-medium text-neutral-900 mb-2">{currentTop.name}</h3>
+                    <p className="text-base text-neutral-600 mb-3 font-light">{currentTop.brand}</p>
+                    <p className="text-xl font-medium text-neutral-900">{currentTop.price}</p>
+                  </div>
+                </div>
+                
+                <button
+                  onClick={nextTop}
+                  className="p-4 hover:bg-neutral-50 transition-colors rounded-full"
+                  aria-label="Next top"
+                >
+                  <ArrowRight className="w-8 h-8 text-neutral-400" />
+                </button>
+              </div>
             </div>
 
             {/* Bottoms Section */}
@@ -172,7 +201,35 @@ const Index = () => {
                   </button>
                 </div>
               </div>
-              <ClothingItem item={currentBottom} type="bottom" />
+              
+              {/* Centered layout with navigation */}
+              <div className="flex items-center justify-center space-x-8">
+                <button
+                  onClick={prevBottom}
+                  className="p-4 hover:bg-neutral-50 transition-colors rounded-full"
+                  aria-label="Previous bottom"
+                >
+                  <ArrowLeft className="w-8 h-8 text-neutral-400" />
+                </button>
+                
+                <div className="flex-1 max-w-md">
+                  <ClothingItem item={currentBottom} type="bottom" />
+                  {/* Item details below image */}
+                  <div className="text-center mt-6">
+                    <h3 className="text-xl font-medium text-neutral-900 mb-2">{currentBottom.name}</h3>
+                    <p className="text-base text-neutral-600 mb-3 font-light">{currentBottom.brand}</p>
+                    <p className="text-xl font-medium text-neutral-900">{currentBottom.price}</p>
+                  </div>
+                </div>
+                
+                <button
+                  onClick={nextBottom}
+                  className="p-4 hover:bg-neutral-50 transition-colors rounded-full"
+                  aria-label="Next bottom"
+                >
+                  <ArrowRight className="w-8 h-8 text-neutral-400" />
+                </button>
+              </div>
             </div>
 
             {/* Outfit Display */}
