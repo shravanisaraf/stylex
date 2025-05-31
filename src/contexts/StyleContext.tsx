@@ -9,21 +9,9 @@ interface ClothingItem {
   price: string;
 }
 
-interface Outfit {
-  id: string;
-  top: ClothingItem;
-  bottom: ClothingItem;
-  createdAt: Date;
-  isFavorite?: boolean;
-}
-
 interface StyleContextType {
   favoriteItems: number[];
-  favoriteOutfits: string[];
-  outfitHistory: Outfit[];
   toggleItemFavorite: (itemId: number) => void;
-  toggleOutfitFavorite: (outfitId: string) => void;
-  addToHistory: (top: ClothingItem, bottom: ClothingItem) => void;
   shareOutfit: (top: ClothingItem, bottom: ClothingItem) => void;
 }
 
@@ -31,8 +19,6 @@ const StyleContext = createContext<StyleContextType | undefined>(undefined);
 
 export const StyleProvider = ({ children }: { children: ReactNode }) => {
   const [favoriteItems, setFavoriteItems] = useState<number[]>([]);
-  const [favoriteOutfits, setFavoriteOutfits] = useState<string[]>([]);
-  const [outfitHistory, setOutfitHistory] = useState<Outfit[]>([]);
 
   const toggleItemFavorite = (itemId: number) => {
     setFavoriteItems(prev => 
@@ -40,26 +26,6 @@ export const StyleProvider = ({ children }: { children: ReactNode }) => {
         ? prev.filter(id => id !== itemId)
         : [...prev, itemId]
     );
-  };
-
-  const toggleOutfitFavorite = (outfitId: string) => {
-    setFavoriteOutfits(prev => 
-      prev.includes(outfitId) 
-        ? prev.filter(id => id !== outfitId)
-        : [...prev, outfitId]
-    );
-  };
-
-  const addToHistory = (top: ClothingItem, bottom: ClothingItem) => {
-    const outfitId = `${top.id}-${bottom.id}-${Date.now()}`;
-    const newOutfit: Outfit = {
-      id: outfitId,
-      top,
-      bottom,
-      createdAt: new Date()
-    };
-    
-    setOutfitHistory(prev => [newOutfit, ...prev.slice(0, 9)]); // Keep last 10
   };
 
   const shareOutfit = (top: ClothingItem, bottom: ClothingItem) => {
@@ -80,11 +46,7 @@ export const StyleProvider = ({ children }: { children: ReactNode }) => {
   return (
     <StyleContext.Provider value={{
       favoriteItems,
-      favoriteOutfits,
-      outfitHistory,
       toggleItemFavorite,
-      toggleOutfitFavorite,
-      addToHistory,
       shareOutfit
     }}>
       {children}

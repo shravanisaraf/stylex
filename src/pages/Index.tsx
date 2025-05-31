@@ -1,10 +1,8 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import ClothingItem from '../components/ClothingItem';
 import OutfitDisplay from '../components/OutfitDisplay';
 import RandomMixButton from '../components/RandomMixButton';
-import OutfitHistory from '../components/OutfitHistory';
 import { useStyle } from '../contexts/StyleContext';
 
 const Index = () => {
@@ -73,7 +71,6 @@ const Index = () => {
 
   const [currentTopIndex, setCurrentTopIndex] = useState(0);
   const [currentBottomIndex, setCurrentBottomIndex] = useState(0);
-  const { addToHistory } = useStyle();
 
   const nextTop = () => {
     setCurrentTopIndex((prev) => (prev + 1) % tops.length);
@@ -98,20 +95,8 @@ const Index = () => {
     setCurrentBottomIndex(randomBottomIndex);
   };
 
-  const handleSelectFromHistory = (topIndex: number, bottomIndex: number) => {
-    setCurrentTopIndex(topIndex);
-    setCurrentBottomIndex(bottomIndex);
-  };
-
   const currentTop = tops[currentTopIndex];
   const currentBottom = bottoms[currentBottomIndex];
-
-  // Add outfit to history whenever combination changes
-  useEffect(() => {
-    if (currentTop && currentBottom) {
-      addToHistory(currentTop, currentBottom);
-    }
-  }, [currentTopIndex, currentBottomIndex, addToHistory]);
 
   return (
     <div className="min-h-screen bg-neutral-50">
@@ -264,9 +249,6 @@ const Index = () => {
               </div>
               <OutfitDisplay top={currentTop} bottom={currentBottom} />
             </div>
-
-            {/* Outfit History */}
-            <OutfitHistory onSelectOutfit={handleSelectFromHistory} />
           </div>
         </div>
       </section>
