@@ -133,10 +133,6 @@ const Index = () => {
           <p className="text-lg text-neutral-600 mb-8 font-light">
             <em className="italic">unlocking the potential</em> of what you already own
           </p>
-          
-          <div className="flex justify-center">
-            <RandomMixButton onRandomMix={handleRandomMix} />
-          </div>
         </div>
       </section>
 
@@ -252,6 +248,11 @@ const Index = () => {
                 >
                   <ArrowRight className="w-8 h-8 text-neutral-400" />
                 </button>
+              </div>
+              
+              {/* Random Mix Button - positioned below bottoms */}
+              <div className="flex justify-center mt-8 pt-6 border-t border-neutral-100">
+                <RandomMixButton onRandomMix={handleRandomMix} />
               </div>
             </div>
 
