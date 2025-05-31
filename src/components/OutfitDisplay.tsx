@@ -1,7 +1,8 @@
 
 import React from 'react';
-import { Plus } from 'lucide-react';
+import { Plus, Share } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useStyle } from '../contexts/StyleContext';
 
 interface OutfitDisplayProps {
   top: {
@@ -22,10 +23,10 @@ interface OutfitDisplayProps {
 
 const OutfitDisplay: React.FC<OutfitDisplayProps> = ({ top, bottom }) => {
   const navigate = useNavigate();
+  const { shareOutfit } = useStyle();
   const totalPrice = parseInt(top.price.replace('Rs.', '')) + parseInt(bottom.price.replace('Rs.', ''));
 
   const handleSaveOutfit = () => {
-    // Navigate to checkout page with outfit data
     navigate('/checkout', { 
       state: { 
         top, 
@@ -33,6 +34,10 @@ const OutfitDisplay: React.FC<OutfitDisplayProps> = ({ top, bottom }) => {
         totalPrice 
       } 
     });
+  };
+
+  const handleShare = () => {
+    shareOutfit(top, bottom);
   };
 
   return (
@@ -87,16 +92,27 @@ const OutfitDisplay: React.FC<OutfitDisplayProps> = ({ top, bottom }) => {
         </div>
       </div>
       
-      {/* Total Price and Action */}
+      {/* Total Price and Actions */}
       <div className="text-center pt-4 border-t border-neutral-200">
         <p className="text-sm text-neutral-600 mb-2 font-light">Total</p>
         <p className="text-xl font-medium text-neutral-900 mb-4">Rs.{totalPrice.toLocaleString()}</p>
-        <button 
-          onClick={handleSaveOutfit}
-          className="bg-neutral-900 text-white px-6 py-2 text-sm font-medium tracking-wide hover:bg-neutral-800 transition-colors"
-        >
-          SAVE OUTFIT
-        </button>
+        
+        <div className="flex items-center justify-center space-x-4">
+          <button 
+            onClick={handleShare}
+            className="bg-neutral-100 text-neutral-700 px-4 py-2 text-sm font-medium tracking-wide hover:bg-neutral-200 transition-colors flex items-center space-x-2"
+          >
+            <Share className="w-4 h-4" />
+            <span>SHARE</span>
+          </button>
+          
+          <button 
+            onClick={handleSaveOutfit}
+            className="bg-neutral-900 text-white px-6 py-2 text-sm font-medium tracking-wide hover:bg-neutral-800 transition-colors"
+          >
+            SAVE OUTFIT
+          </button>
+        </div>
       </div>
     </div>
   );

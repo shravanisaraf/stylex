@@ -1,5 +1,7 @@
 
 import React from 'react';
+import FavoriteButton from './FavoriteButton';
+import { useStyle } from '../contexts/StyleContext';
 
 interface ClothingItemProps {
   item: {
@@ -13,10 +15,12 @@ interface ClothingItemProps {
 }
 
 const ClothingItem: React.FC<ClothingItemProps> = ({ item, type }) => {
+  const { favoriteItems, toggleItemFavorite } = useStyle();
+  const isFavorite = favoriteItems.includes(item.id);
+
   return (
     <div className="flex items-center justify-center">
-      {/* Centered Large Image Container */}
-      <div className="w-80 h-80 bg-neutral-100 border border-neutral-200 rounded-lg flex items-center justify-center">
+      <div className="relative w-80 h-80 bg-neutral-100 border border-neutral-200 rounded-lg flex items-center justify-center">
         {item.imageUrl ? (
           <img
             src={item.imageUrl}
@@ -33,6 +37,13 @@ const ClothingItem: React.FC<ClothingItemProps> = ({ item, type }) => {
             </p>
           </div>
         )}
+        
+        <div className="absolute top-3 right-3">
+          <FavoriteButton 
+            isFavorite={isFavorite}
+            onToggle={() => toggleItemFavorite(item.id)}
+          />
+        </div>
       </div>
     </div>
   );

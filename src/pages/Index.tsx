@@ -1,8 +1,11 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import ClothingItem from '../components/ClothingItem';
 import OutfitDisplay from '../components/OutfitDisplay';
+import RandomMixButton from '../components/RandomMixButton';
+import OutfitHistory from '../components/OutfitHistory';
+import { useStyle } from '../contexts/StyleContext';
 
 const Index = () => {
   // Sample data - replace image URLs with actual clothing images
@@ -70,6 +73,7 @@ const Index = () => {
 
   const [currentTopIndex, setCurrentTopIndex] = useState(0);
   const [currentBottomIndex, setCurrentBottomIndex] = useState(0);
+  const { addToHistory } = useStyle();
 
   const nextTop = () => {
     setCurrentTopIndex((prev) => (prev + 1) % tops.length);
@@ -87,8 +91,27 @@ const Index = () => {
     setCurrentBottomIndex((prev) => (prev - 1 + bottoms.length) % bottoms.length);
   };
 
+  const handleRandomMix = () => {
+    const randomTopIndex = Math.floor(Math.random() * tops.length);
+    const randomBottomIndex = Math.floor(Math.random() * bottoms.length);
+    setCurrentTopIndex(randomTopIndex);
+    setCurrentBottomIndex(randomBottomIndex);
+  };
+
+  const handleSelectFromHistory = (topIndex: number, bottomIndex: number) => {
+    setCurrentTopIndex(topIndex);
+    setCurrentBottomIndex(bottomIndex);
+  };
+
   const currentTop = tops[currentTopIndex];
   const currentBottom = bottoms[currentBottomIndex];
+
+  // Add outfit to history whenever combination changes
+  useEffect(() => {
+    if (currentTop && currentBottom) {
+      addToHistory(currentTop, currentBottom);
+    }
+  }, [currentTopIndex, currentBottomIndex, addToHistory]);
 
   return (
     <div className="min-h-screen bg-neutral-50">
@@ -110,6 +133,10 @@ const Index = () => {
           <p className="text-lg text-neutral-600 mb-8 font-light">
             <em className="italic">unlocking the potential</em> of what you already own
           </p>
+          
+          <div className="flex justify-center">
+            <RandomMixButton onRandomMix={handleRandomMix} />
+          </div>
         </div>
       </section>
 
@@ -147,7 +174,6 @@ const Index = () => {
                 </div>
               </div>
               
-              {/* Centered layout with navigation */}
               <div className="flex items-center justify-center space-x-8">
                 <button
                   onClick={prevTop}
@@ -159,7 +185,6 @@ const Index = () => {
                 
                 <div className="flex-1 max-w-md">
                   <ClothingItem item={currentTop} type="top" />
-                  {/* Item details below image */}
                   <div className="text-center mt-6">
                     <h3 className="text-xl font-medium text-neutral-900 mb-2">{currentTop.name}</h3>
                     <p className="text-base text-neutral-600 mb-3 font-light">{currentTop.brand}</p>
@@ -202,7 +227,6 @@ const Index = () => {
                 </div>
               </div>
               
-              {/* Centered layout with navigation */}
               <div className="flex items-center justify-center space-x-8">
                 <button
                   onClick={prevBottom}
@@ -214,7 +238,6 @@ const Index = () => {
                 
                 <div className="flex-1 max-w-md">
                   <ClothingItem item={currentBottom} type="bottom" />
-                  {/* Item details below image */}
                   <div className="text-center mt-6">
                     <h3 className="text-xl font-medium text-neutral-900 mb-2">{currentBottom.name}</h3>
                     <p className="text-base text-neutral-600 mb-3 font-light">{currentBottom.brand}</p>
@@ -240,6 +263,9 @@ const Index = () => {
               </div>
               <OutfitDisplay top={currentTop} bottom={currentBottom} />
             </div>
+
+            {/* Outfit History */}
+            <OutfitHistory onSelectOutfit={handleSelectFromHistory} />
           </div>
         </div>
       </section>
