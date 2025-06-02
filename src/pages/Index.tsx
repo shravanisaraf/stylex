@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import ClothingItem from '../components/ClothingItem';
@@ -9,13 +8,13 @@ import { useStyle } from '../contexts/StyleContext';
 import { ClothingItem as ClothingItemType } from '../contexts/StyleContext';
 
 const Index = () => {
-  // Expanded sample data with new categories and properties
+  // Expanded sample data with image paths pointing to public/images folders
   const allClothingItems: ClothingItemType[] = [
     // Tops
     {
       id: 1,
       name: "White Blouse",
-      imageUrl: "",
+      imageUrl: "/images/tops/white-blouse.jpg",
       brand: "Brand 1",
       price: "Rs.990",
       category: "tops",
@@ -25,7 +24,7 @@ const Index = () => {
     {
       id: 2,
       name: "Red Sweater",
-      imageUrl: "",
+      imageUrl: "/images/tops/red-sweater.jpg",
       brand: "Brand 2",
       price: "Rs.1200",
       category: "tops",
@@ -35,7 +34,7 @@ const Index = () => {
     {
       id: 3,
       name: "Blue Shirt",
-      imageUrl: "",
+      imageUrl: "/images/tops/blue-shirt.jpg",
       brand: "Brand 3",
       price: "Rs.850",
       category: "tops",
@@ -45,7 +44,7 @@ const Index = () => {
     {
       id: 4,
       name: "Black Top",
-      imageUrl: "",
+      imageUrl: "/images/tops/black-top.jpg",
       brand: "Brand 4",
       price: "Rs.1100",
       category: "tops",
@@ -56,7 +55,7 @@ const Index = () => {
     {
       id: 5,
       name: "Dark Jeans",
-      imageUrl: "",
+      imageUrl: "/images/bottoms/dark-jeans.jpg",
       brand: "Brand 1",
       price: "Rs.1750",
       category: "bottoms",
@@ -66,7 +65,7 @@ const Index = () => {
     {
       id: 6,
       name: "Black Skirt",
-      imageUrl: "",
+      imageUrl: "/images/bottoms/black-skirt.jpg",
       brand: "Brand 2",
       price: "Rs.1100",
       category: "bottoms",
@@ -76,7 +75,7 @@ const Index = () => {
     {
       id: 7,
       name: "Navy Pants",
-      imageUrl: "",
+      imageUrl: "/images/bottoms/navy-pants.jpg",
       brand: "Brand 3",
       price: "Rs.1400",
       category: "bottoms",
@@ -86,7 +85,7 @@ const Index = () => {
     {
       id: 8,
       name: "Denim Skirt",
-      imageUrl: "",
+      imageUrl: "/images/bottoms/denim-skirt.jpg",
       brand: "Brand 4",
       price: "Rs.950",
       category: "bottoms",
@@ -97,7 +96,7 @@ const Index = () => {
     {
       id: 9,
       name: "Leather Jacket",
-      imageUrl: "",
+      imageUrl: "/images/jackets/leather-jacket.jpg",
       brand: "Brand 5",
       price: "Rs.2500",
       category: "jackets",
@@ -107,7 +106,7 @@ const Index = () => {
     {
       id: 10,
       name: "Denim Jacket",
-      imageUrl: "",
+      imageUrl: "/images/jackets/denim-jacket.jpg",
       brand: "Brand 3",
       price: "Rs.1800",
       category: "jackets",
@@ -118,7 +117,7 @@ const Index = () => {
     {
       id: 11,
       name: "Summer Dress",
-      imageUrl: "",
+      imageUrl: "/images/dresses/summer-dress.jpg",
       brand: "Brand 6",
       price: "Rs.1600",
       category: "dresses",
@@ -128,10 +127,52 @@ const Index = () => {
     {
       id: 12,
       name: "Evening Dress",
-      imageUrl: "",
+      imageUrl: "/images/dresses/evening-dress.jpg",
       brand: "Brand 7",
       price: "Rs.3200",
       category: "dresses",
+      color: "black",
+      season: ["spring", "summer", "autumn", "winter"]
+    },
+    // Accessories
+    {
+      id: 13,
+      name: "Gold Necklace",
+      imageUrl: "/images/accessories/gold-necklace.jpg",
+      brand: "Brand 8",
+      price: "Rs.1500",
+      category: "accessories",
+      color: "gold",
+      season: ["spring", "summer", "autumn", "winter"]
+    },
+    {
+      id: 14,
+      name: "Black Handbag",
+      imageUrl: "/images/accessories/black-handbag.jpg",
+      brand: "Brand 9",
+      price: "Rs.2200",
+      category: "accessories",
+      color: "black",
+      season: ["spring", "summer", "autumn", "winter"]
+    },
+    // Shoes
+    {
+      id: 15,
+      name: "White Sneakers",
+      imageUrl: "/images/shoes/white-sneakers.jpg",
+      brand: "Brand 10",
+      price: "Rs.1800",
+      category: "shoes",
+      color: "white",
+      season: ["spring", "summer", "autumn"]
+    },
+    {
+      id: 16,
+      name: "Black Heels",
+      imageUrl: "/images/shoes/black-heels.jpg",
+      brand: "Brand 11",
+      price: "Rs.2500",
+      category: "shoes",
       color: "black",
       season: ["spring", "summer", "autumn", "winter"]
     }
