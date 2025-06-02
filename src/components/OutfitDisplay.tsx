@@ -3,93 +3,75 @@ import React from 'react';
 import { Plus, Share } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useStyle } from '../contexts/StyleContext';
+import { ClothingItem } from '../contexts/StyleContext';
 
 interface OutfitDisplayProps {
-  top: {
-    id: number;
-    name: string;
-    imageUrl: string;
-    brand: string;
-    price: string;
-  };
-  bottom: {
-    id: number;
-    name: string;
-    imageUrl: string;
-    brand: string;
-    price: string;
-  };
+  items: ClothingItem[];
 }
 
-const OutfitDisplay: React.FC<OutfitDisplayProps> = ({ top, bottom }) => {
+const OutfitDisplay: React.FC<OutfitDisplayProps> = ({ items }) => {
   const navigate = useNavigate();
   const { shareOutfit } = useStyle();
-  const totalPrice = parseInt(top.price.replace('Rs.', '')) + parseInt(bottom.price.replace('Rs.', ''));
+  const totalPrice = items.reduce((sum, item) => sum + parseInt(item.price.replace('Rs.', '')), 0);
 
   const handleSaveOutfit = () => {
     navigate('/checkout', { 
       state: { 
-        top, 
-        bottom, 
+        items, 
         totalPrice 
       } 
     });
   };
 
   const handleShare = () => {
-    shareOutfit(top, bottom);
+    shareOutfit(items);
   };
+
+  if (items.length === 0) return null;
 
   return (
     <div className="space-y-8">
       {/* Combined Outfit Display */}
-      <div className="flex items-center justify-center space-x-8">
-        {/* Top Image */}
-        <div className="w-24 h-24 bg-neutral-100 border border-neutral-200 rounded-lg flex items-center justify-center">
-          {top.imageUrl ? (
-            <img
-              src={top.imageUrl}
-              alt={top.name}
-              className="w-full h-full object-cover rounded-lg"
-            />
-          ) : (
-            <div className="text-center">
-              <span className="text-2xl text-neutral-400">👕</span>
+      <div className="flex items-center justify-center space-x-4 flex-wrap">
+        {items.map((item, index) => (
+          <React.Fragment key={item.id}>
+            {index > 0 && <Plus className="w-6 h-6 text-neutral-400" />}
+            <div className="w-24 h-24 bg-neutral-100 border border-neutral-200 rounded-lg flex items-center justify-center">
+              {item.imageUrl ? (
+                <img
+                  src={item.imageUrl}
+                  alt={item.name}
+                  className="w-full h-full object-cover rounded-lg"
+                />
+              ) : (
+                <div className="text-center">
+                  <span className="text-2xl text-neutral-400">
+                    {item.category === 'tops' ? '👕' : 
+                     item.category === 'bottoms' ? '👖' :
+                     item.category === 'jackets' ? '🧥' :
+                     item.category === 'dresses' ? '👗' :
+                     item.category === 'accessories' ? '👜' :
+                     item.category === 'shoes' ? '👟' : '👕'}
+                  </span>
+                </div>
+              )}
             </div>
-          )}
-        </div>
-
-        {/* Plus Icon */}
-        <Plus className="w-6 h-6 text-neutral-400" />
-
-        {/* Bottom Image */}
-        <div className="w-24 h-24 bg-neutral-100 border border-neutral-200 rounded-lg flex items-center justify-center">
-          {bottom.imageUrl ? (
-            <img
-              src={bottom.imageUrl}
-              alt={bottom.name}
-              className="w-full h-full object-cover rounded-lg"
-            />
-          ) : (
-            <div className="text-center">
-              <span className="text-2xl text-neutral-400">👖</span>
-            </div>
-          )}
-        </div>
+          </React.Fragment>
+        ))}
       </div>
 
       {/* Outfit Details */}
-      <div className="grid grid-cols-2 gap-6">
-        <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
-          <p className="font-medium text-neutral-900 mb-1">{top.name}</p>
-          <p className="text-sm text-neutral-600 mb-2 font-light">{top.brand}</p>
-          <p className="text-sm font-medium text-neutral-900">{top.price}</p>
-        </div>
-        <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
-          <p className="font-medium text-neutral-900 mb-1">{bottom.name}</p>
-          <p className="text-sm text-neutral-600 mb-2 font-light">{bottom.brand}</p>
-          <p className="text-sm font-medium text-neutral-900">{bottom.price}</p>
-        </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {items.map(item => (
+          <div key={item.id} className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+            <p className="font-medium text-neutral-900 mb-1">{item.name}</p>
+            <p className="text-sm text-neutral-600 mb-2 font-light">{item.brand}</p>
+            <p className="text-sm font-medium text-neutral-900">{item.price}</p>
+            <span className="inline-block bg-neutral-200 text-neutral-700 px-2 py-1 rounded text-xs mt-2 capitalize">
+              {item.category}
+            </span>
+          </div>
+        ))}
       </div>
       
       {/* Total Price and Actions */}

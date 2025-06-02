@@ -1,18 +1,21 @@
 
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
-interface ClothingItem {
+export interface ClothingItem {
   id: number;
   name: string;
   imageUrl: string;
   brand: string;
   price: string;
+  category: 'tops' | 'bottoms' | 'jackets' | 'dresses' | 'accessories' | 'shoes';
+  color: string;
+  season: string[];
 }
 
 interface StyleContextType {
   favoriteItems: number[];
   toggleItemFavorite: (itemId: number) => void;
-  shareOutfit: (top: ClothingItem, bottom: ClothingItem) => void;
+  shareOutfit: (items: ClothingItem[]) => void;
 }
 
 const StyleContext = createContext<StyleContextType | undefined>(undefined);
@@ -28,8 +31,9 @@ export const StyleProvider = ({ children }: { children: ReactNode }) => {
     );
   };
 
-  const shareOutfit = (top: ClothingItem, bottom: ClothingItem) => {
-    const shareText = `Check out this outfit combo: ${top.name} + ${bottom.name} from STYLEX!`;
+  const shareOutfit = (items: ClothingItem[]) => {
+    const itemNames = items.map(item => item.name).join(' + ');
+    const shareText = `Check out this outfit combo: ${itemNames} from STYLEX!`;
     
     if (navigator.share) {
       navigator.share({
