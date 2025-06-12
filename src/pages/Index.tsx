@@ -279,7 +279,7 @@ const Index = () => {
       <header className="bg-white border-b border-neutral-200">
         <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="flex items-center justify-center">
-            <h1 className="text-2xl font-light tracking-wide text-neutral-900">CHER</h1>
+            <h1 className="text-2xl font-light tracking-wide text-neutral-900">chér</h1>
           </div>
         </div>
       </header>
