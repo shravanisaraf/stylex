@@ -179,6 +179,7 @@ const Index = () => {
   ];
 
   const [filters, setFilters] = useState<FilterState>({
+    selectedCategories: ['tops', 'bottoms'], // Default to just tops and bottoms
     categories: [],
     colors: [],
     brands: [],
@@ -188,9 +189,14 @@ const Index = () => {
 
   const [currentIndices, setCurrentIndices] = useState<{[key: string]: number}>({});
 
-  // Filter items based on current filters
+  // Filter items based on current filters and selected categories
   const filteredItems = useMemo(() => {
     return allClothingItems.filter(item => {
+      // First filter by selected categories
+      if (!filters.selectedCategories.includes(item.category)) {
+        return false;
+      }
+
       // Category filter
       if (filters.categories.length > 0 && !filters.categories.includes(item.category)) {
         return false;
@@ -221,17 +227,19 @@ const Index = () => {
     });
   }, [allClothingItems, filters]);
 
-  // Group filtered items by category
+  // Group filtered items by category, but only show selected categories
   const itemsByCategory = useMemo(() => {
     const grouped: {[key: string]: ClothingItemType[]} = {};
     filteredItems.forEach(item => {
-      if (!grouped[item.category]) {
-        grouped[item.category] = [];
+      if (filters.selectedCategories.includes(item.category)) {
+        if (!grouped[item.category]) {
+          grouped[item.category] = [];
+        }
+        grouped[item.category].push(item);
       }
-      grouped[item.category].push(item);
     });
     return grouped;
-  }, [filteredItems]);
+  }, [filteredItems, filters.selectedCategories]);
 
   // Get available brands for filter
   const availableBrands = useMemo(() => {
@@ -316,13 +324,13 @@ const Index = () => {
           />
 
           <div className="space-y-12">
-            {/* Category Sections */}
-            {Object.keys(itemsByCategory).map(category => {
-              const items = itemsByCategory[category];
+            {/* Category Sections - Only show selected categories */}
+            {filters.selectedCategories.map(category => {
+              const items = itemsByCategory[category] || [];
               const currentItem = getCurrentItem(category);
               const currentIndex = currentIndices[category] || 0;
 
-              if (!currentItem) return null;
+              if (items.length === 0) return null;
 
               return (
                 <div key={category} className="bg-white rounded-lg border border-neutral-200 p-8">
@@ -400,10 +408,18 @@ const Index = () => {
             )}
 
             {/* No items message */}
-            {Object.keys(itemsByCategory).length === 0 && (
+            {filters.selectedCategories.length === 0 && (
               <div className="text-center py-12">
                 <p className="text-lg text-neutral-600 font-light">
-                  No items match your current filters. Try adjusting your selection.
+                  Please select at least one clothing category to get started.
+                </p>
+              </div>
+            )}
+
+            {filters.selectedCategories.length > 0 && Object.keys(itemsByCategory).length === 0 && (
+              <div className="text-center py-12">
+                <p className="text-lg text-neutral-600 font-light">
+                  No items match your current selection. Try adjusting your categories or filters.
                 </p>
               </div>
             )}
