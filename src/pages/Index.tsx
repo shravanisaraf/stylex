@@ -8,6 +8,7 @@ import UserProfile from '../components/UserProfile';
 import SignOutButton from '../components/SignOutButton';
 import ColorAnalysisQuiz from '../components/ColorAnalysisQuiz';
 import { Button } from '../components/ui/button';
+import { Separator } from '../components/ui/separator';
 import { useStyle } from '../contexts/StyleContext';
 import { ClothingItem as ClothingItemType } from '../contexts/StyleContext';
 import { clothingItems } from '../data/clothingData';
@@ -138,7 +139,7 @@ const Index = () => {
       </section>
 
       {/* Divider */}
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+      <Separator className="bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
 
       {/* Wardrobe Section with improved spacing */}
       <section className="py-24 bg-gradient-to-b from-white to-gray-50">
@@ -149,12 +150,15 @@ const Index = () => {
             <p className="text-gray-600 font-light text-lg mb-8">Take our color analysis quiz to find the colors that make you shine</p>
             <Button 
               onClick={() => setShowColorQuiz(true)}
-              className="bg-black hover:bg-gray-800 text-white px-8 py-3 text-lg font-light tracking-wide transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="bg-black hover:bg-gray-800 text-white px-8 py-3 text-lg font-light tracking-wide transition-all duration-300 shadow-lg hover:shadow-xl border-0"
             >
               <Palette className="w-5 h-5 mr-2" />
               Take Color Analysis Quiz
             </Button>
           </div>
+
+          {/* Subtle Divider */}
+          <Separator className="bg-gradient-to-r from-transparent via-gray-200 to-transparent mb-16" />
 
           <div className="text-center mb-16">
             <h3 className="text-3xl font-light text-black mb-6 tracking-wide">Curate your style</h3>
