@@ -46,7 +46,7 @@ const SavedOutfits: React.FC<SavedOutfitsProps> = ({
   const triggerButton = variant === 'menu-item' ? <Button variant="ghost" className="w-full justify-start text-left">
       <Heart className="w-4 h-4 mr-2" />
       My Saved Outfits ({savedOutfits.length})
-    </Button> : <Button variant="outline" className="border-white/20 hover:bg-white/10 backdrop-blur-sm text-black">
+    </Button> : <Button variant="outline" className="border-white/20 backdrop-blur-sm bg-slate-400 hover:bg-slate-300 text-stone-600">
       <Heart className="w-4 h-4 mr-2" />
       My Saved Outfits ({savedOutfits.length})
     </Button>;
