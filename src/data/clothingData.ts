@@ -1,3 +1,4 @@
+
 import { ClothingItem } from '../contexts/StyleContext';
 
 // Easy to update clothing data - just add your store links here!
@@ -16,6 +17,17 @@ export const clothingItems: ClothingItem[] = [
   },
   {
     id: 2,
+    name: "Lemon Print Halter Tie Top",
+    imageUrl: "https://static.zara.net/assets/public/d29f/4dee/a1d44ea2bc4c/a86d64afbe71/02552029119-e1/02552029119-e1.jpg?ts=1741024039636&w=1126",
+    brand: "Zara",
+    price: "Rs.1990",
+    category: "tops",
+    color: "yellow",
+    season: ["spring", "summer"],
+    buyUrl: "https://www.zara.com/in/en/lemon-print-halter-tie-top-p02552029.html?v1=435418861&v2=2419940"
+  },
+  {
+    id: 3,
     name: "Red Sweater",
     imageUrl: "",
     brand: "H&M",
