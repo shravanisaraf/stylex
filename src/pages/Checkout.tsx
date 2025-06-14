@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ArrowLeft, ExternalLink, ShoppingCart } from 'lucide-react';
@@ -22,17 +23,21 @@ const Checkout = () => {
 
   const { items, totalPrice } = checkoutData;
 
-  // Mock buy links - replace with actual retailer links
-  const getBuyLink = (brand: string, itemName: string) => {
-    return `https://example-store.com/search?q=${encodeURIComponent(brand + ' ' + itemName)}`;
-  };
-
   const handleBuyComplete = () => {
-    toast({
-      title: "Purchase Initiated! 🛒",
-      description: "Redirecting to complete your purchase...",
+    // Open all store links in new tabs
+    items.forEach((item, index) => {
+      if (item.buyUrl) {
+        // Add a small delay between opening tabs to prevent browser blocking
+        setTimeout(() => {
+          window.open(item.buyUrl, '_blank', 'noopener,noreferrer');
+        }, index * 100);
+      }
     });
-    // In a real app, this would integrate with payment processing
+
+    toast({
+      title: "Opening Store Links! 🛒",
+      description: `Opening ${items.length} store links to complete your purchase...`,
+    });
   };
 
   return (
@@ -114,13 +119,18 @@ const Checkout = () => {
           <div className="border-t border-neutral-200 pt-6 text-center">
             <p className="text-sm text-neutral-600 mb-2 font-light">Total Outfit Cost</p>
             <p className="text-3xl font-medium text-neutral-900 mb-6">Rs.{totalPrice.toLocaleString()}</p>
-            <button 
-              onClick={handleBuyComplete}
-              className="bg-neutral-900 text-white px-8 py-3 rounded-lg text-sm font-medium tracking-wide hover:bg-neutral-800 transition-colors flex items-center space-x-2 mx-auto shadow-sm"
-            >
-              <ShoppingCart className="w-5 h-5" />
-              <span>BUY COMPLETE LOOK</span>
-            </button>
+            <div className="space-y-4">
+              <button 
+                onClick={handleBuyComplete}
+                className="bg-neutral-900 text-white px-8 py-3 rounded-lg text-sm font-medium tracking-wide hover:bg-neutral-800 transition-colors flex items-center space-x-2 mx-auto shadow-sm"
+              >
+                <ShoppingCart className="w-5 h-5" />
+                <span>BUY COMPLETE LOOK</span>
+              </button>
+              <p className="text-xs text-neutral-500 max-w-md mx-auto">
+                This will open all store links in new tabs so you can purchase each item individually from their respective retailers.
+              </p>
+            </div>
           </div>
         </div>
       </main>
