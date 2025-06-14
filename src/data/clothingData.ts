@@ -49,7 +49,7 @@ export const clothingItems: ClothingItem[] = [
     buyUrl: "https://www2.hm.com/en_us/productpage.red-sweater-example.html" // REPLACE WITH YOUR ACTUAL LINK
   },
   {
-    id: 3,
+    id: 4,
     name: "Blue Shirt",
     imageUrl: "",
     brand: "Uniqlo",
@@ -60,7 +60,7 @@ export const clothingItems: ClothingItem[] = [
     buyUrl: "https://www.uniqlo.com/us/en/blue-shirt-example" // REPLACE WITH YOUR ACTUAL LINK
   },
   {
-    id: 4,
+    id: 5,
     name: "Black Top",
     imageUrl: "",
     brand: "Mango",
@@ -73,7 +73,7 @@ export const clothingItems: ClothingItem[] = [
 
   // BOTTOMS - Add your actual store links here
   {
-    id: 5,
+    id: 6,
     name: "Sequinned Miniskirt",
     imageUrl: "https://static.zara.net/assets/public/ab24/2983/d1a2412590e3/1f5ff9370d8a/03920221450-e1/03920221450-e1.jpg?ts=1741175751379&w=1126",
     brand: "Zara",
@@ -84,7 +84,7 @@ export const clothingItems: ClothingItem[] = [
     buyUrl: "https://www.zara.com/in/en/sequinned-miniskirt-p03920221.html?v1=450245465&v2=2420454"
   },
   {
-    id: 6,
+    id: 7,
     name: "Black Skirt",
     imageUrl: "",
     brand: "Zara",
@@ -95,7 +95,7 @@ export const clothingItems: ClothingItem[] = [
     buyUrl: "https://www.zara.com/us/en/black-skirt-example" // REPLACE WITH YOUR ACTUAL LINK
   },
   {
-    id: 7,
+    id: 8,
     name: "Navy Pants",
     imageUrl: "",
     brand: "Uniqlo",
@@ -106,7 +106,7 @@ export const clothingItems: ClothingItem[] = [
     buyUrl: "https://www.uniqlo.com/us/en/navy-pants-example" // REPLACE WITH YOUR ACTUAL LINK
   },
   {
-    id: 8,
+    id: 9,
     name: "Denim Skirt",
     imageUrl: "",
     brand: "H&M",
@@ -119,7 +119,7 @@ export const clothingItems: ClothingItem[] = [
 
   // JACKETS - Add your actual store links here
   {
-    id: 9,
+    id: 10,
     name: "Leather Jacket",
     imageUrl: "",
     brand: "Zara",
@@ -130,7 +130,7 @@ export const clothingItems: ClothingItem[] = [
     buyUrl: "https://www.zara.com/us/en/leather-jacket-example" // REPLACE WITH YOUR ACTUAL LINK
   },
   {
-    id: 10,
+    id: 11,
     name: "Denim Jacket",
     imageUrl: "",
     brand: "Levi's",
@@ -143,7 +143,7 @@ export const clothingItems: ClothingItem[] = [
 
   // DRESSES - Add your actual store links here
   {
-    id: 11,
+    id: 12,
     name: "Summer Dress",
     imageUrl: "",
     brand: "Mango",
@@ -154,7 +154,7 @@ export const clothingItems: ClothingItem[] = [
     buyUrl: "https://shop.mango.com/us/summer-dress-example" // REPLACE WITH YOUR ACTUAL LINK
   },
   {
-    id: 12,
+    id: 13,
     name: "Evening Dress",
     imageUrl: "",
     brand: "Zara",
@@ -164,10 +164,21 @@ export const clothingItems: ClothingItem[] = [
     season: ["spring", "summer", "autumn", "winter"],
     buyUrl: "https://www.zara.com/us/en/evening-dress-example" // REPLACE WITH YOUR ACTUAL LINK
   },
+  {
+    id: 18,
+    name: "Pink V-Neck Ruffle Knotted Mini Dress",
+    imageUrl: "https://adn-static1.nykaa.com/nykdesignstudio-images/pub/media/catalog/product/8/3/8345694CD20230309265602MD-Pink_1.jpg?rnd=20200526195200&tr=w-1080",
+    brand: "Cider",
+    price: "Rs.2405",
+    category: "dresses",
+    color: "pink",
+    season: ["spring", "summer"],
+    buyUrl: "https://www.nykaafashion.com/cider-pink-v-neck-ruffle-knotted-mini-dress/p/16890496?intcmp=widget,similar_products&ppid=16799374"
+  },
 
   // ACCESSORIES - Add your actual store links here
   {
-    id: 13,
+    id: 14,
     name: "Gold Necklace",
     imageUrl: "",
     brand: "Pandora",
@@ -178,7 +189,7 @@ export const clothingItems: ClothingItem[] = [
     buyUrl: "https://us.pandora.net/gold-necklace-example" // REPLACE WITH YOUR ACTUAL LINK
   },
   {
-    id: 14,
+    id: 15,
     name: "Black Handbag",
     imageUrl: "",
     brand: "Michael Kors",
@@ -188,10 +199,21 @@ export const clothingItems: ClothingItem[] = [
     season: ["spring", "summer", "autumn", "winter"],
     buyUrl: "https://www.michaelkors.com/black-handbag-example" // REPLACE WITH YOUR ACTUAL LINK
   },
+  {
+    id: 19,
+    name: "Clara Beige Clutch with Detachable Strap (S)",
+    imageUrl: "https://adn-static1.nykaa.com/nykdesignstudio-images/pub/media/catalog/product/1/8/1874dcbSDT0586CHAMPAIGNE_1.jpg?rnd=20200526195200&tr=w-1080",
+    brand: "Kazo",
+    price: "Rs.2990",
+    category: "accessories",
+    color: "beige",
+    season: ["spring", "summer", "autumn", "winter"],
+    buyUrl: "https://www.nykaafashion.com/kazo-clara-beige-clutch-with-detachable-strap-s/p/17921977"
+  },
 
   // SHOES - Add your actual store links here
   {
-    id: 15,
+    id: 16,
     name: "White Sneakers",
     imageUrl: "",
     brand: "Nike",
@@ -202,7 +224,7 @@ export const clothingItems: ClothingItem[] = [
     buyUrl: "https://www.nike.com/us/en_us/white-sneakers-example" // REPLACE WITH YOUR ACTUAL LINK
   },
   {
-    id: 16,
+    id: 17,
     name: "Black Heels",
     imageUrl: "",
     brand: "Zara",
