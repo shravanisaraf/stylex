@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import ClothingItem from '../components/ClothingItem';
@@ -15,15 +14,7 @@ const Index = () => {
 
   const [filters, setFilters] = useState<FilterState>({
     selectedCategories: ['tops', 'bottoms'],
-    // Default to just tops and bottoms
-    categories: [],
-    colors: [],
-    brands: [],
-    priceRange: {
-      min: 0,
-      max: 10000
-    },
-    seasons: []
+    colors: []
   });
   const [currentIndices, setCurrentIndices] = useState<{
     [key: string]: number;
@@ -37,31 +28,11 @@ const Index = () => {
         return false;
       }
 
-      // Category filter
-      if (filters.categories.length > 0 && !filters.categories.includes(item.category)) {
-        return false;
-      }
-
       // Color filter
       if (filters.colors.length > 0 && !filters.colors.includes(item.color)) {
         return false;
       }
 
-      // Brand filter
-      if (filters.brands.length > 0 && !filters.brands.includes(item.brand)) {
-        return false;
-      }
-
-      // Price filter
-      const price = parseInt(item.price.replace('Rs.', ''));
-      if (price < filters.priceRange.min || price > filters.priceRange.max) {
-        return false;
-      }
-
-      // Season filter
-      if (filters.seasons.length > 0 && !filters.seasons.some(season => item.season.includes(season))) {
-        return false;
-      }
       return true;
     });
   }, [allClothingItems, filters]);
@@ -82,7 +53,7 @@ const Index = () => {
     return grouped;
   }, [filteredItems, filters.selectedCategories]);
 
-  // Get available brands for filter
+  // Get available brands for filter (keeping the prop even though we don't use it now)
   const availableBrands = useMemo(() => {
     return [...new Set(allClothingItems.map(item => item.brand))].sort();
   }, [allClothingItems]);
@@ -126,7 +97,8 @@ const Index = () => {
   // Get current outfit items for display
   const currentOutfitItems = Object.keys(itemsByCategory).map(category => getCurrentItem(category)).filter(item => item !== null) as ClothingItemType[];
 
-  return <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
       {/* Header with subtle shadow */}
       <header className="bg-white/90 backdrop-blur-sm border-b border-gray-100 shadow-sm sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-6 py-6">
@@ -250,7 +222,8 @@ const Index = () => {
           <div className="w-24 h-px bg-white/30 mx-auto"></div>
         </div>
       </section>
-    </div>;
+    </div>
+  );
 };
 
 export default Index;
