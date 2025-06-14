@@ -10,14 +10,14 @@ const UserProfile = () => {
 
   if (!user) {
     return (
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center justify-center space-x-4">
         <Link to="/login">
-          <Button variant="outline" className="border-white/20 text-white hover:bg-white/10">
+          <Button variant="outline" className="border-gray-300 text-gray-700 hover:bg-gray-50">
             Sign In
           </Button>
         </Link>
         <Link to="/signup">
-          <Button className="bg-white text-black hover:bg-gray-100">
+          <Button className="bg-black text-white hover:bg-gray-800">
             Sign Up
           </Button>
         </Link>
@@ -26,8 +26,8 @@ const UserProfile = () => {
   }
 
   return (
-    <div className="flex items-center space-x-4">
-      <div className="flex items-center space-x-2 text-white">
+    <div className="flex items-center justify-center space-x-4">
+      <div className="flex items-center space-x-2 text-gray-700">
         {user.avatar ? (
           <img 
             src={user.avatar} 
@@ -35,7 +35,7 @@ const UserProfile = () => {
             className="w-8 h-8 rounded-full"
           />
         ) : (
-          <User className="w-8 h-8 p-1 bg-white/20 rounded-full" />
+          <User className="w-8 h-8 p-1 bg-gray-200 rounded-full" />
         )}
         <span className="font-light">Hi, {user.name}</span>
       </div>
@@ -43,7 +43,7 @@ const UserProfile = () => {
         onClick={signOut}
         variant="outline" 
         size="sm"
-        className="border-white/20 text-white hover:bg-white/10"
+        className="border-gray-300 text-gray-700 hover:bg-gray-50"
       >
         <LogOut className="w-4 h-4 mr-2" />
         Sign Out
