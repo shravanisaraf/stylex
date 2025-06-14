@@ -116,7 +116,7 @@ const OutfitDisplay: React.FC<OutfitDisplayProps> = ({ items }) => {
           
           <button 
             onClick={handleSaveOutfit}
-            className="bg-gradient-to-r from-blue-600 to-blue-500 text-white px-6 py-3 rounded-full text-sm font-light tracking-wide hover:from-blue-500 hover:to-blue-400 transition-all duration-300 flex items-center space-x-2 shadow-lg hover:scale-105"
+            className="bg-gradient-to-r from-amber-100 to-yellow-50 text-black px-6 py-3 rounded-full text-sm font-medium tracking-wide hover:from-amber-50 hover:to-yellow-25 transition-all duration-300 flex items-center space-x-2 shadow-lg hover:scale-105 border border-amber-200"
           >
             <Save className="w-4 h-4" />
             <span>SAVE OUTFIT</span>

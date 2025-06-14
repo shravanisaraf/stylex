@@ -1,9 +1,11 @@
+
 import React, { useState, useMemo } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import ClothingItem from '../components/ClothingItem';
 import OutfitDisplay from '../components/OutfitDisplay';
 import RandomMixButton from '../components/RandomMixButton';
 import FilterPanel, { FilterState } from '../components/FilterPanel';
+import UserProfile from '../components/UserProfile';
 import { useStyle } from '../contexts/StyleContext';
 import { ClothingItem as ClothingItemType } from '../contexts/StyleContext';
 import { clothingItems } from '../data/clothingData';
@@ -118,6 +120,13 @@ const Index = () => {
             <em className="italic">unlocking the potential</em> of what you already own
           </p>
           <div className="w-24 h-px bg-black mx-auto"></div>
+        </div>
+      </section>
+
+      {/* User Authentication Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-5xl mx-auto px-6 text-center">
+          <UserProfile />
         </div>
       </section>
 
