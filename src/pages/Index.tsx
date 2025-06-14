@@ -102,6 +102,13 @@ const Index = () => {
   // Get current outfit items for display
   const currentOutfitItems = Object.keys(itemsByCategory).map(category => getCurrentItem(category)).filter(item => item !== null) as ClothingItemType[];
 
+  const handleApplyColorAnalysis = (colors: string[]) => {
+    setFilters(prev => ({
+      ...prev,
+      colors: colors
+    }));
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
       {/* Header with subtle shadow */}
@@ -130,6 +137,9 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Divider */}
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+
       {/* Wardrobe Section with improved spacing */}
       <section className="py-24 bg-gradient-to-b from-white to-gray-50">
         <div className="max-w-5xl mx-auto px-6">
@@ -139,7 +149,7 @@ const Index = () => {
             <p className="text-gray-600 font-light text-lg mb-8">Take our color analysis quiz to find the colors that make you shine</p>
             <Button 
               onClick={() => setShowColorQuiz(true)}
-              className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-8 py-3 text-lg font-light tracking-wide transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="bg-black hover:bg-gray-800 text-white px-8 py-3 text-lg font-light tracking-wide transition-all duration-300 shadow-lg hover:shadow-xl"
             >
               <Palette className="w-5 h-5 mr-2" />
               Take Color Analysis Quiz
@@ -254,6 +264,7 @@ const Index = () => {
       <ColorAnalysisQuiz 
         isOpen={showColorQuiz} 
         onClose={() => setShowColorQuiz(false)} 
+        onApplyToWardrobe={handleApplyColorAnalysis}
       />
     </div>
   );

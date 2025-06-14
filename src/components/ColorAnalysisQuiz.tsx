@@ -75,25 +75,29 @@ const seasonDescriptions = {
   spring: {
     name: "Bright Spring",
     description: "You have warm, clear coloring with bright, vibrant features.",
-    colors: ["Coral", "Peach", "Bright Yellow", "Kelly Green", "Turquoise", "Clear Navy"],
+    colors: ["white", "yellow", "green", "blue", "red", "pink"],
+    colorLabels: ["Coral", "Peach", "Bright Yellow", "Kelly Green", "Turquoise", "Clear Navy"],
     avoid: ["Dusty colors", "Muted tones", "Black", "Pure white"]
   },
   summer: {
     name: "Cool Summer",
     description: "You have cool, soft coloring with muted, elegant features.",
-    colors: ["Soft Pink", "Lavender", "Sky Blue", "Sage Green", "Rose Brown", "Cool Gray"],
+    colors: ["pink", "blue", "green", "grey", "white"],
+    colorLabels: ["Soft Pink", "Lavender", "Sky Blue", "Sage Green", "Rose Brown", "Cool Gray"],
     avoid: ["Orange", "Bright yellow", "Warm browns", "Black"]
   },
   autumn: {
     name: "Deep Autumn",
     description: "You have warm, rich coloring with deep, earthy features.",
-    colors: ["Rust", "Deep Orange", "Olive Green", "Burgundy", "Chocolate Brown", "Camel"],
+    colors: ["red", "brown", "green", "yellow", "navy"],
+    colorLabels: ["Rust", "Deep Orange", "Olive Green", "Burgundy", "Chocolate Brown", "Camel"],
     avoid: ["Pastels", "Cool blues", "Bright pink", "Pure white"]
   },
   winter: {
     name: "Clear Winter",
     description: "You have cool, high-contrast coloring with striking features.",
-    colors: ["Pure White", "Black", "Royal Blue", "Emerald Green", "Fuchsia", "Ruby Red"],
+    colors: ["white", "black", "blue", "green", "red", "pink"],
+    colorLabels: ["Pure White", "Black", "Royal Blue", "Emerald Green", "Fuchsia", "Ruby Red"],
     avoid: ["Orange", "Peach", "Warm browns", "Muted colors"]
   }
 };
@@ -101,9 +105,10 @@ const seasonDescriptions = {
 interface ColorAnalysisQuizProps {
   isOpen: boolean;
   onClose: () => void;
+  onApplyToWardrobe?: (colors: string[]) => void;
 }
 
-const ColorAnalysisQuiz: React.FC<ColorAnalysisQuizProps> = ({ isOpen, onClose }) => {
+const ColorAnalysisQuiz: React.FC<ColorAnalysisQuizProps> = ({ isOpen, onClose, onApplyToWardrobe }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<{ [key: number]: string }>({});
   const [showResults, setShowResults] = useState(false);
@@ -145,6 +150,14 @@ const ColorAnalysisQuiz: React.FC<ColorAnalysisQuizProps> = ({ isOpen, onClose }
     setResults('');
   };
 
+  const handleApplyToWardrobe = () => {
+    if (results && onApplyToWardrobe) {
+      const season = seasonDescriptions[results as keyof typeof seasonDescriptions];
+      onApplyToWardrobe(season.colors);
+    }
+    onClose();
+  };
+
   const currentQ = questions[currentQuestion];
   const isLastQuestion = currentQuestion === questions.length - 1;
   const canProceed = answers[currentQ?.id];
@@ -164,7 +177,7 @@ const ColorAnalysisQuiz: React.FC<ColorAnalysisQuizProps> = ({ isOpen, onClose }
             </div>
 
             <div className="text-center mb-8">
-              <div className="w-20 h-20 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full mx-auto mb-6 flex items-center justify-center">
+              <div className="w-20 h-20 bg-black rounded-full mx-auto mb-6 flex items-center justify-center">
                 <Palette className="w-10 h-10 text-white" />
               </div>
               <h3 className="text-3xl font-light text-black mb-4">{season.name}</h3>
@@ -175,8 +188,8 @@ const ColorAnalysisQuiz: React.FC<ColorAnalysisQuizProps> = ({ isOpen, onClose }
               <div>
                 <h4 className="text-lg font-medium text-black mb-4">Your Best Colors</h4>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                  {season.colors.map((color) => (
-                    <div key={color} className="bg-gray-50 rounded-lg p-3 text-center">
+                  {season.colorLabels.map((color) => (
+                    <div key={color} className="bg-gray-50 rounded-lg p-3 text-center border border-gray-200">
                       <span className="text-sm font-medium text-gray-700">{color}</span>
                     </div>
                   ))}
@@ -196,10 +209,10 @@ const ColorAnalysisQuiz: React.FC<ColorAnalysisQuizProps> = ({ isOpen, onClose }
             </div>
 
             <div className="flex space-x-4 mt-8">
-              <Button onClick={resetQuiz} variant="outline" className="flex-1">
+              <Button onClick={resetQuiz} variant="outline" className="flex-1 border-gray-300 text-gray-700 hover:bg-gray-50">
                 Retake Quiz
               </Button>
-              <Button onClick={onClose} className="flex-1">
+              <Button onClick={handleApplyToWardrobe} className="flex-1 bg-black text-white hover:bg-gray-800">
                 Apply to Wardrobe
               </Button>
             </div>
@@ -259,7 +272,7 @@ const ColorAnalysisQuiz: React.FC<ColorAnalysisQuizProps> = ({ isOpen, onClose }
               onClick={() => setCurrentQuestion(Math.max(0, currentQuestion - 1))}
               disabled={currentQuestion === 0}
               variant="outline"
-              className="flex items-center space-x-2"
+              className="flex items-center space-x-2 border-gray-300 text-gray-700 hover:bg-gray-50"
             >
               <ArrowLeft className="w-4 h-4" />
               <span>Previous</span>
@@ -269,7 +282,7 @@ const ColorAnalysisQuiz: React.FC<ColorAnalysisQuizProps> = ({ isOpen, onClose }
               <Button
                 onClick={calculateResults}
                 disabled={!canProceed}
-                className="flex items-center space-x-2"
+                className="flex items-center space-x-2 bg-black text-white hover:bg-gray-800"
               >
                 <span>See Results</span>
                 <Palette className="w-4 h-4" />
@@ -278,7 +291,7 @@ const ColorAnalysisQuiz: React.FC<ColorAnalysisQuizProps> = ({ isOpen, onClose }
               <Button
                 onClick={() => setCurrentQuestion(Math.min(questions.length - 1, currentQuestion + 1))}
                 disabled={!canProceed}
-                className="flex items-center space-x-2"
+                className="flex items-center space-x-2 bg-black text-white hover:bg-gray-800"
               >
                 <span>Next</span>
                 <ArrowRight className="w-4 h-4" />
