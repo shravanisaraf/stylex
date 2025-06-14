@@ -1,3 +1,4 @@
+
 import React, { useState, useMemo } from 'react';
 import { ArrowLeft, ArrowRight, Palette } from 'lucide-react';
 import ClothingItem from '../components/ClothingItem';
@@ -7,6 +8,7 @@ import FilterPanel, { FilterState } from '../components/FilterPanel';
 import UserProfile from '../components/UserProfile';
 import SignOutButton from '../components/SignOutButton';
 import ColorAnalysisQuiz from '../components/ColorAnalysisQuiz';
+import HamburgerMenu from '../components/HamburgerMenu';
 import { Button } from '../components/ui/button';
 import { Separator } from '../components/ui/separator';
 import { useStyle } from '../contexts/StyleContext';
@@ -116,7 +118,9 @@ const Index = () => {
       <header className="bg-white/90 backdrop-blur-sm border-b border-gray-100 shadow-sm sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-6 py-6">
           <div className="flex items-center justify-between">
-            <div className="flex-1"></div>
+            <div className="flex-1">
+              <HamburgerMenu />
+            </div>
             <h1 className="text-3xl font-extralight tracking-[0.2em] text-black">chér</h1>
             <div className="flex-1 flex justify-end">
               <UserProfile />

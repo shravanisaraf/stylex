@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Heart, ShoppingCart, Trash2 } from 'lucide-react';
+import { Heart, ShoppingCart, Trash2, ExternalLink } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { ClothingItem } from '../contexts/StyleContext';
 
@@ -14,7 +14,11 @@ interface SavedOutfit {
   createdAt: string;
 }
 
-const SavedOutfits = () => {
+interface SavedOutfitsProps {
+  variant?: 'button' | 'menu-item';
+}
+
+const SavedOutfits: React.FC<SavedOutfitsProps> = ({ variant = 'button' }) => {
   const { user } = useAuth();
   const [savedOutfits, setSavedOutfits] = useState<SavedOutfit[]>([]);
 
@@ -31,20 +35,41 @@ const SavedOutfits = () => {
     localStorage.setItem('savedOutfits', JSON.stringify(updatedOutfits));
   };
 
+  const buyOutfit = (outfit: SavedOutfit) => {
+    // Open all item buy URLs in new tabs
+    outfit.items.forEach(item => {
+      if (item.buyUrl) {
+        window.open(item.buyUrl, '_blank');
+      }
+    });
+  };
+
   if (!user) {
     return null;
   }
 
+  const triggerButton = variant === 'menu-item' ? (
+    <Button 
+      variant="ghost" 
+      className="w-full justify-start text-left"
+    >
+      <Heart className="w-4 h-4 mr-2" />
+      My Saved Outfits ({savedOutfits.length})
+    </Button>
+  ) : (
+    <Button 
+      variant="outline" 
+      className="border-white/20 text-white hover:bg-white/10 backdrop-blur-sm"
+    >
+      <Heart className="w-4 h-4 mr-2" />
+      My Saved Outfits ({savedOutfits.length})
+    </Button>
+  );
+
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button 
-          variant="outline" 
-          className="border-white/20 text-white hover:bg-white/10 backdrop-blur-sm"
-        >
-          <Heart className="w-4 h-4 mr-2" />
-          My Saved Outfits ({savedOutfits.length})
-        </Button>
+        {triggerButton}
       </DialogTrigger>
       <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
         <DialogHeader>
@@ -101,12 +126,26 @@ const SavedOutfits = () => {
                   ))}
                 </div>
                 
-                <div className="flex justify-between items-center">
-                  <p className="font-medium">Rs.{outfit.totalPrice.toLocaleString()}</p>
-                  <Button size="sm" className="bg-black text-white hover:bg-gray-800">
-                    <ShoppingCart className="w-4 h-4 mr-1" />
-                    Buy Now
-                  </Button>
+                <div className="space-y-2">
+                  <div className="flex justify-between items-center">
+                    <p className="font-medium">Rs.{outfit.totalPrice.toLocaleString()}</p>
+                    <Button 
+                      onClick={() => buyOutfit(outfit)}
+                      size="sm" 
+                      className="bg-black text-white hover:bg-gray-800"
+                    >
+                      <ExternalLink className="w-4 h-4 mr-1" />
+                      Shop Items
+                    </Button>
+                  </div>
+                  
+                  {/* Show all items in the outfit */}
+                  <div className="text-xs text-gray-600">
+                    <p className="font-medium mb-1">Items:</p>
+                    {outfit.items.map((item, index) => (
+                      <p key={index}>• {item.name} - {item.brand} ({item.price})</p>
+                    ))}
+                  </div>
                 </div>
               </div>
             ))}

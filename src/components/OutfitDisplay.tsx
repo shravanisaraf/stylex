@@ -1,10 +1,11 @@
-
-import React from 'react';
-import { Plus, Share, Save, ShoppingCart } from 'lucide-react';
+import React, { useState } from 'react';
+import { Plus, Share, Save, ShoppingCart, Edit2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useStyle } from '../contexts/StyleContext';
 import { ClothingItem } from '../contexts/StyleContext';
 import { useToast } from '@/hooks/use-toast';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 interface OutfitDisplayProps {
   items: ClothingItem[];
@@ -14,17 +15,21 @@ const OutfitDisplay: React.FC<OutfitDisplayProps> = ({ items }) => {
   const navigate = useNavigate();
   const { shareOutfit } = useStyle();
   const { toast } = useToast();
+  const [isNaming, setIsNaming] = useState(false);
+  const [outfitName, setOutfitName] = useState('');
+  
   const totalPrice = items.reduce((sum, item) => sum + parseInt(item.price.replace('Rs.', '')), 0);
 
-  const handleSaveOutfit = () => {
-    // Save outfit to localStorage for persistence
+  const handleSaveOutfit = (customName?: string) => {
     const savedOutfits = JSON.parse(localStorage.getItem('savedOutfits') || '[]');
+    const finalName = customName || `Outfit ${savedOutfits.length + 1}`;
+    
     const newOutfit = {
       id: Date.now(),
       items,
       totalPrice,
       createdAt: new Date().toISOString(),
-      name: `Outfit ${savedOutfits.length + 1}`
+      name: finalName
     };
     
     savedOutfits.push(newOutfit);
@@ -32,8 +37,23 @@ const OutfitDisplay: React.FC<OutfitDisplayProps> = ({ items }) => {
     
     toast({
       title: "Outfit Saved! 🎉",
-      description: `Your outfit has been saved successfully. Total: Rs.${totalPrice.toLocaleString()}`,
+      description: `"${finalName}" has been saved successfully. Total: Rs.${totalPrice.toLocaleString()}`,
     });
+
+    // Reset naming state
+    setIsNaming(false);
+    setOutfitName('');
+  };
+
+  const handleQuickSave = () => {
+    setIsNaming(true);
+  };
+
+  const handleNameSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (outfitName.trim()) {
+      handleSaveOutfit(outfitName.trim());
+    }
   };
 
   const handleCheckout = () => {
@@ -105,6 +125,38 @@ const OutfitDisplay: React.FC<OutfitDisplayProps> = ({ items }) => {
         <p className="text-sm text-gray-300 mb-3 font-light uppercase tracking-wide">Total</p>
         <p className="text-3xl font-light text-white mb-8 tracking-wide">Rs.{totalPrice.toLocaleString()}</p>
         
+        {/* Outfit Naming Section */}
+        {isNaming && (
+          <div className="mb-6 max-w-md mx-auto">
+            <form onSubmit={handleNameSubmit} className="flex gap-2">
+              <Input
+                type="text"
+                placeholder="Name your outfit..."
+                value={outfitName}
+                onChange={(e) => setOutfitName(e.target.value)}
+                className="bg-white/10 border-white/20 text-white placeholder-white/60"
+                autoFocus
+              />
+              <Button 
+                type="submit" 
+                size="sm"
+                className="bg-white text-black hover:bg-gray-100"
+              >
+                Save
+              </Button>
+              <Button 
+                type="button" 
+                variant="ghost"
+                size="sm"
+                onClick={() => setIsNaming(false)}
+                className="text-white/60 hover:text-white"
+              >
+                Cancel
+              </Button>
+            </form>
+          </div>
+        )}
+        
         <div className="flex items-center justify-center space-x-4 flex-wrap gap-y-4">
           <button 
             onClick={handleShare}
@@ -115,7 +167,7 @@ const OutfitDisplay: React.FC<OutfitDisplayProps> = ({ items }) => {
           </button>
           
           <button 
-            onClick={handleSaveOutfit}
+            onClick={handleQuickSave}
             className="bg-gradient-to-r from-amber-100 to-yellow-50 text-black px-6 py-3 rounded-full text-sm font-medium tracking-wide hover:from-amber-50 hover:to-yellow-25 transition-all duration-300 flex items-center space-x-2 shadow-lg hover:scale-105 border border-amber-200"
           >
             <Save className="w-4 h-4" />
