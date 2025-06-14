@@ -6,181 +6,12 @@ import RandomMixButton from '../components/RandomMixButton';
 import FilterPanel, { FilterState } from '../components/FilterPanel';
 import { useStyle } from '../contexts/StyleContext';
 import { ClothingItem as ClothingItemType } from '../contexts/StyleContext';
+import { clothingItems } from '../data/clothingData';
+
 const Index = () => {
-  // Expanded sample data with image paths pointing to public/images folders
-  const allClothingItems: ClothingItemType[] = [
-  // Tops
-  {
-    id: 1,
-    name: "White Blouse",
-    imageUrl: "/images/tops/white-blouse.jpg",
-    brand: "Brand 1",
-    price: "Rs.990",
-    category: "tops",
-    color: "white",
-    season: ["spring", "summer"],
-    buyUrl: "https://example-store.com/white-blouse" // Replace with actual store URL
-  }, {
-    id: 2,
-    name: "Red Sweater",
-    imageUrl: "/images/tops/red-sweater.jpg",
-    brand: "Brand 2",
-    price: "Rs.1200",
-    category: "tops",
-    color: "red",
-    season: ["autumn", "winter"],
-    buyUrl: "https://example-store.com/red-sweater"
-  }, {
-    id: 3,
-    name: "Blue Shirt",
-    imageUrl: "/images/tops/blue-shirt.jpg",
-    brand: "Brand 3",
-    price: "Rs.850",
-    category: "tops",
-    color: "blue",
-    season: ["spring", "summer", "autumn"],
-    buyUrl: "https://example-store.com/blue-shirt"
-  }, {
-    id: 4,
-    name: "Black Top",
-    imageUrl: "/images/tops/black-top.jpg",
-    brand: "Brand 4",
-    price: "Rs.1100",
-    category: "tops",
-    color: "black",
-    season: ["spring", "summer", "autumn", "winter"],
-    buyUrl: "https://example-store.com/black-top"
-  },
-  // Bottoms
-  {
-    id: 5,
-    name: "Dark Jeans",
-    imageUrl: "/images/bottoms/dark-jeans.jpg",
-    brand: "Brand 1",
-    price: "Rs.1750",
-    category: "bottoms",
-    color: "blue",
-    season: ["spring", "autumn", "winter"],
-    buyUrl: "https://example-store.com/dark-jeans"
-  }, {
-    id: 6,
-    name: "Black Skirt",
-    imageUrl: "/images/bottoms/black-skirt.jpg",
-    brand: "Brand 2",
-    price: "Rs.1100",
-    category: "bottoms",
-    color: "black",
-    season: ["spring", "summer"],
-    buyUrl: "https://example-store.com/black-skirt"
-  }, {
-    id: 7,
-    name: "Navy Pants",
-    imageUrl: "/images/bottoms/navy-pants.jpg",
-    brand: "Brand 3",
-    price: "Rs.1400",
-    category: "bottoms",
-    color: "navy",
-    season: ["autumn", "winter"],
-    buyUrl: "https://example-store.com/navy-pants"
-  }, {
-    id: 8,
-    name: "Denim Skirt",
-    imageUrl: "/images/bottoms/denim-skirt.jpg",
-    brand: "Brand 4",
-    price: "Rs.950",
-    category: "bottoms",
-    color: "blue",
-    season: ["spring", "summer"],
-    buyUrl: "https://example-store.com/denim-skirt"
-  },
-  // Jackets
-  {
-    id: 9,
-    name: "Leather Jacket",
-    imageUrl: "/images/jackets/leather-jacket.jpg",
-    brand: "Brand 5",
-    price: "Rs.2500",
-    category: "jackets",
-    color: "black",
-    season: ["autumn", "winter"],
-    buyUrl: "https://example-store.com/leather-jacket"
-  }, {
-    id: 10,
-    name: "Denim Jacket",
-    imageUrl: "/images/jackets/denim-jacket.jpg",
-    brand: "Brand 3",
-    price: "Rs.1800",
-    category: "jackets",
-    color: "blue",
-    season: ["spring", "autumn"],
-    buyUrl: "https://example-store.com/denim-jacket"
-  },
-  // Dresses
-  {
-    id: 11,
-    name: "Summer Dress",
-    imageUrl: "/images/dresses/summer-dress.jpg",
-    brand: "Brand 6",
-    price: "Rs.1600",
-    category: "dresses",
-    color: "white",
-    season: ["spring", "summer"],
-    buyUrl: "https://example-store.com/summer-dress"
-  }, {
-    id: 12,
-    name: "Evening Dress",
-    imageUrl: "/images/dresses/evening-dress.jpg",
-    brand: "Brand 7",
-    price: "Rs.3200",
-    category: "dresses",
-    color: "black",
-    season: ["spring", "summer", "autumn", "winter"],
-    buyUrl: "https://example-store.com/evening-dress"
-  },
-  // Accessories
-  {
-    id: 13,
-    name: "Gold Necklace",
-    imageUrl: "/images/accessories/gold-necklace.jpg",
-    brand: "Brand 8",
-    price: "Rs.1500",
-    category: "accessories",
-    color: "gold",
-    season: ["spring", "summer", "autumn", "winter"],
-    buyUrl: "https://example-store.com/gold-necklace"
-  }, {
-    id: 14,
-    name: "Black Handbag",
-    imageUrl: "/images/accessories/black-handbag.jpg",
-    brand: "Brand 9",
-    price: "Rs.2200",
-    category: "accessories",
-    color: "black",
-    season: ["spring", "summer", "autumn", "winter"],
-    buyUrl: "https://example-store.com/black-handbag"
-  },
-  // Shoes
-  {
-    id: 15,
-    name: "White Sneakers",
-    imageUrl: "/images/shoes/white-sneakers.jpg",
-    brand: "Brand 10",
-    price: "Rs.1800",
-    category: "shoes",
-    color: "white",
-    season: ["spring", "summer", "autumn"],
-    buyUrl: "https://example-store.com/white-sneakers"
-  }, {
-    id: 16,
-    name: "Black Heels",
-    imageUrl: "/images/shoes/black-heels.jpg",
-    brand: "Brand 11",
-    price: "Rs.2500",
-    category: "shoes",
-    color: "black",
-    season: ["spring", "summer", "autumn", "winter"],
-    buyUrl: "https://example-store.com/black-heels"
-  }];
+  // Use the clothing data from our separate file
+  const allClothingItems: ClothingItemType[] = clothingItems;
+
   const [filters, setFilters] = useState<FilterState>({
     selectedCategories: ['tops', 'bottoms'],
     // Default to just tops and bottoms
@@ -254,12 +85,14 @@ const Index = () => {
   const availableBrands = useMemo(() => {
     return [...new Set(allClothingItems.map(item => item.brand))].sort();
   }, [allClothingItems]);
+
   const getCurrentItem = (category: string) => {
     const items = itemsByCategory[category] || [];
     if (items.length === 0) return null;
     const index = currentIndices[category] || 0;
     return items[Math.min(index, items.length - 1)];
   };
+
   const navigateCategory = (category: string, direction: 'next' | 'prev') => {
     const items = itemsByCategory[category] || [];
     if (items.length === 0) return;
@@ -275,6 +108,7 @@ const Index = () => {
       [category]: newIndex
     }));
   };
+
   const handleRandomMix = () => {
     const newIndices: {
       [key: string]: number;
@@ -290,6 +124,7 @@ const Index = () => {
 
   // Get current outfit items for display
   const currentOutfitItems = Object.keys(itemsByCategory).map(category => getCurrentItem(category)).filter(item => item !== null) as ClothingItemType[];
+
   return <div className="min-h-screen bg-neutral-50">
       {/* Header */}
       <header className="bg-white border-b border-neutral-200">
@@ -412,4 +247,5 @@ const Index = () => {
       </section>
     </div>;
 };
+
 export default Index;
