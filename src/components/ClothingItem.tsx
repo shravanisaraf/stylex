@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { ExternalLink } from 'lucide-react';
 import FavoriteButton from './FavoriteButton';
 import { useStyle } from '../contexts/StyleContext';
 import { ClothingItem as ClothingItemType } from '../contexts/StyleContext';
@@ -25,15 +26,32 @@ const ClothingItem: React.FC<ClothingItemProps> = ({ item, type }) => {
     }
   };
 
+  const handleImageClick = () => {
+    if (item.buyUrl) {
+      window.open(item.buyUrl, '_blank', 'noopener,noreferrer');
+    }
+  };
+
   return (
     <div className="flex items-center justify-center">
-      <div className="relative w-80 h-80 bg-neutral-100 border border-neutral-200 rounded-lg flex items-center justify-center">
+      <div className="relative w-80 h-80 bg-neutral-100 border border-neutral-200 rounded-lg flex items-center justify-center group">
         {item.imageUrl ? (
-          <img
-            src={item.imageUrl}
-            alt={item.name}
-            className="w-full h-full object-cover rounded-lg"
-          />
+          <div 
+            className="relative w-full h-full cursor-pointer overflow-hidden rounded-lg"
+            onClick={handleImageClick}
+          >
+            <img
+              src={item.imageUrl}
+              alt={item.name}
+              className="w-full h-full object-cover rounded-lg transition-transform group-hover:scale-105"
+            />
+            {/* Overlay with shop icon */}
+            <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-200 flex items-center justify-center">
+              <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-white rounded-full p-3">
+                <ExternalLink className="w-6 h-6 text-neutral-900" />
+              </div>
+            </div>
+          </div>
         ) : (
           <div className="text-center p-8">
             <div className="text-8xl text-neutral-400 mb-4">

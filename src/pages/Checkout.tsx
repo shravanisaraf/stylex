@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ArrowLeft, ExternalLink, ShoppingCart } from 'lucide-react';
@@ -99,7 +98,7 @@ const Checkout = () => {
                   </span>
                 </div>
                 <a 
-                  href={getBuyLink(item.brand, item.name)}
+                  href={item.buyUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center space-x-2 bg-neutral-900 text-white px-4 py-2 rounded-lg text-sm font-medium tracking-wide hover:bg-neutral-800 transition-colors"

@@ -18,7 +18,8 @@ const Index = () => {
     price: "Rs.990",
     category: "tops",
     color: "white",
-    season: ["spring", "summer"]
+    season: ["spring", "summer"],
+    buyUrl: "https://example-store.com/white-blouse" // Replace with actual store URL
   }, {
     id: 2,
     name: "Red Sweater",
@@ -27,7 +28,8 @@ const Index = () => {
     price: "Rs.1200",
     category: "tops",
     color: "red",
-    season: ["autumn", "winter"]
+    season: ["autumn", "winter"],
+    buyUrl: "https://example-store.com/red-sweater"
   }, {
     id: 3,
     name: "Blue Shirt",
@@ -36,7 +38,8 @@ const Index = () => {
     price: "Rs.850",
     category: "tops",
     color: "blue",
-    season: ["spring", "summer", "autumn"]
+    season: ["spring", "summer", "autumn"],
+    buyUrl: "https://example-store.com/blue-shirt"
   }, {
     id: 4,
     name: "Black Top",
@@ -45,7 +48,8 @@ const Index = () => {
     price: "Rs.1100",
     category: "tops",
     color: "black",
-    season: ["spring", "summer", "autumn", "winter"]
+    season: ["spring", "summer", "autumn", "winter"],
+    buyUrl: "https://example-store.com/black-top"
   },
   // Bottoms
   {
@@ -56,7 +60,8 @@ const Index = () => {
     price: "Rs.1750",
     category: "bottoms",
     color: "blue",
-    season: ["spring", "autumn", "winter"]
+    season: ["spring", "autumn", "winter"],
+    buyUrl: "https://example-store.com/dark-jeans"
   }, {
     id: 6,
     name: "Black Skirt",
@@ -65,7 +70,8 @@ const Index = () => {
     price: "Rs.1100",
     category: "bottoms",
     color: "black",
-    season: ["spring", "summer"]
+    season: ["spring", "summer"],
+    buyUrl: "https://example-store.com/black-skirt"
   }, {
     id: 7,
     name: "Navy Pants",
@@ -74,7 +80,8 @@ const Index = () => {
     price: "Rs.1400",
     category: "bottoms",
     color: "navy",
-    season: ["autumn", "winter"]
+    season: ["autumn", "winter"],
+    buyUrl: "https://example-store.com/navy-pants"
   }, {
     id: 8,
     name: "Denim Skirt",
@@ -83,7 +90,8 @@ const Index = () => {
     price: "Rs.950",
     category: "bottoms",
     color: "blue",
-    season: ["spring", "summer"]
+    season: ["spring", "summer"],
+    buyUrl: "https://example-store.com/denim-skirt"
   },
   // Jackets
   {
@@ -94,7 +102,8 @@ const Index = () => {
     price: "Rs.2500",
     category: "jackets",
     color: "black",
-    season: ["autumn", "winter"]
+    season: ["autumn", "winter"],
+    buyUrl: "https://example-store.com/leather-jacket"
   }, {
     id: 10,
     name: "Denim Jacket",
@@ -103,7 +112,8 @@ const Index = () => {
     price: "Rs.1800",
     category: "jackets",
     color: "blue",
-    season: ["spring", "autumn"]
+    season: ["spring", "autumn"],
+    buyUrl: "https://example-store.com/denim-jacket"
   },
   // Dresses
   {
@@ -114,7 +124,8 @@ const Index = () => {
     price: "Rs.1600",
     category: "dresses",
     color: "white",
-    season: ["spring", "summer"]
+    season: ["spring", "summer"],
+    buyUrl: "https://example-store.com/summer-dress"
   }, {
     id: 12,
     name: "Evening Dress",
@@ -123,7 +134,8 @@ const Index = () => {
     price: "Rs.3200",
     category: "dresses",
     color: "black",
-    season: ["spring", "summer", "autumn", "winter"]
+    season: ["spring", "summer", "autumn", "winter"],
+    buyUrl: "https://example-store.com/evening-dress"
   },
   // Accessories
   {
@@ -134,7 +146,8 @@ const Index = () => {
     price: "Rs.1500",
     category: "accessories",
     color: "gold",
-    season: ["spring", "summer", "autumn", "winter"]
+    season: ["spring", "summer", "autumn", "winter"],
+    buyUrl: "https://example-store.com/gold-necklace"
   }, {
     id: 14,
     name: "Black Handbag",
@@ -143,7 +156,8 @@ const Index = () => {
     price: "Rs.2200",
     category: "accessories",
     color: "black",
-    season: ["spring", "summer", "autumn", "winter"]
+    season: ["spring", "summer", "autumn", "winter"],
+    buyUrl: "https://example-store.com/black-handbag"
   },
   // Shoes
   {
@@ -154,7 +168,8 @@ const Index = () => {
     price: "Rs.1800",
     category: "shoes",
     color: "white",
-    season: ["spring", "summer", "autumn"]
+    season: ["spring", "summer", "autumn"],
+    buyUrl: "https://example-store.com/white-sneakers"
   }, {
     id: 16,
     name: "Black Heels",
@@ -163,7 +178,8 @@ const Index = () => {
     price: "Rs.2500",
     category: "shoes",
     color: "black",
-    season: ["spring", "summer", "autumn", "winter"]
+    season: ["spring", "summer", "autumn", "winter"],
+    buyUrl: "https://example-store.com/black-heels"
   }];
   const [filters, setFilters] = useState<FilterState>({
     selectedCategories: ['tops', 'bottoms'],
