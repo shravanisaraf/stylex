@@ -1,9 +1,10 @@
 
 import React from 'react';
-import { Plus, Share } from 'lucide-react';
+import { Plus, Share, Save, ShoppingCart } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useStyle } from '../contexts/StyleContext';
 import { ClothingItem } from '../contexts/StyleContext';
+import { useToast } from '@/hooks/use-toast';
 
 interface OutfitDisplayProps {
   items: ClothingItem[];
@@ -12,9 +13,30 @@ interface OutfitDisplayProps {
 const OutfitDisplay: React.FC<OutfitDisplayProps> = ({ items }) => {
   const navigate = useNavigate();
   const { shareOutfit } = useStyle();
+  const { toast } = useToast();
   const totalPrice = items.reduce((sum, item) => sum + parseInt(item.price.replace('Rs.', '')), 0);
 
   const handleSaveOutfit = () => {
+    // Save outfit to localStorage for persistence
+    const savedOutfits = JSON.parse(localStorage.getItem('savedOutfits') || '[]');
+    const newOutfit = {
+      id: Date.now(),
+      items,
+      totalPrice,
+      createdAt: new Date().toISOString(),
+      name: `Outfit ${savedOutfits.length + 1}`
+    };
+    
+    savedOutfits.push(newOutfit);
+    localStorage.setItem('savedOutfits', JSON.stringify(savedOutfits));
+    
+    toast({
+      title: "Outfit Saved! 🎉",
+      description: `Your outfit has been saved successfully. Total: Rs.${totalPrice.toLocaleString()}`,
+    });
+  };
+
+  const handleCheckout = () => {
     navigate('/checkout', { 
       state: { 
         items, 
@@ -25,6 +47,10 @@ const OutfitDisplay: React.FC<OutfitDisplayProps> = ({ items }) => {
 
   const handleShare = () => {
     shareOutfit(items);
+    toast({
+      title: "Outfit Shared! 📤",
+      description: "Your outfit has been shared successfully.",
+    });
   };
 
   if (items.length === 0) return null;
@@ -36,7 +62,7 @@ const OutfitDisplay: React.FC<OutfitDisplayProps> = ({ items }) => {
         {items.map((item, index) => (
           <React.Fragment key={item.id}>
             {index > 0 && <Plus className="w-6 h-6 text-neutral-400" />}
-            <div className="w-24 h-24 bg-neutral-100 border border-neutral-200 rounded-lg flex items-center justify-center">
+            <div className="w-24 h-24 bg-neutral-100 border border-neutral-200 rounded-lg flex items-center justify-center overflow-hidden">
               {item.imageUrl ? (
                 <img
                   src={item.imageUrl}
@@ -63,7 +89,7 @@ const OutfitDisplay: React.FC<OutfitDisplayProps> = ({ items }) => {
       {/* Outfit Details */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {items.map(item => (
-          <div key={item.id} className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+          <div key={item.id} className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 hover:shadow-sm transition-shadow">
             <p className="font-medium text-neutral-900 mb-1">{item.name}</p>
             <p className="text-sm text-neutral-600 mb-2 font-light">{item.brand}</p>
             <p className="text-sm font-medium text-neutral-900">{item.price}</p>
@@ -77,12 +103,12 @@ const OutfitDisplay: React.FC<OutfitDisplayProps> = ({ items }) => {
       {/* Total Price and Actions */}
       <div className="text-center pt-4 border-t border-neutral-200">
         <p className="text-sm text-neutral-600 mb-2 font-light">Total</p>
-        <p className="text-xl font-medium text-neutral-900 mb-4">Rs.{totalPrice.toLocaleString()}</p>
+        <p className="text-xl font-medium text-neutral-900 mb-6">Rs.{totalPrice.toLocaleString()}</p>
         
         <div className="flex items-center justify-center space-x-4">
           <button 
             onClick={handleShare}
-            className="bg-neutral-100 text-neutral-700 px-4 py-2 text-sm font-medium tracking-wide hover:bg-neutral-200 transition-colors flex items-center space-x-2"
+            className="bg-neutral-100 text-neutral-700 px-4 py-2 rounded-lg text-sm font-medium tracking-wide hover:bg-neutral-200 transition-colors flex items-center space-x-2 border border-neutral-200"
           >
             <Share className="w-4 h-4" />
             <span>SHARE</span>
@@ -90,9 +116,18 @@ const OutfitDisplay: React.FC<OutfitDisplayProps> = ({ items }) => {
           
           <button 
             onClick={handleSaveOutfit}
-            className="bg-neutral-900 text-white px-6 py-2 text-sm font-medium tracking-wide hover:bg-neutral-800 transition-colors"
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium tracking-wide hover:bg-blue-700 transition-colors flex items-center space-x-2 shadow-sm"
           >
-            SAVE OUTFIT
+            <Save className="w-4 h-4" />
+            <span>SAVE OUTFIT</span>
+          </button>
+          
+          <button 
+            onClick={handleCheckout}
+            className="bg-neutral-900 text-white px-6 py-2 rounded-lg text-sm font-medium tracking-wide hover:bg-neutral-800 transition-colors flex items-center space-x-2 shadow-sm"
+          >
+            <ShoppingCart className="w-4 h-4" />
+            <span>CHECKOUT</span>
           </button>
         </div>
       </div>

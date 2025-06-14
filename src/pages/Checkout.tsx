@@ -1,41 +1,39 @@
 
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ArrowLeft, ExternalLink } from 'lucide-react';
+import { ArrowLeft, ExternalLink, ShoppingCart } from 'lucide-react';
+import { ClothingItem } from '../contexts/StyleContext';
+import { useToast } from '@/hooks/use-toast';
 
-interface OutfitData {
-  top: {
-    id: number;
-    name: string;
-    imageUrl: string;
-    brand: string;
-    price: string;
-  };
-  bottom: {
-    id: number;
-    name: string;
-    imageUrl: string;
-    brand: string;
-    price: string;
-  };
+interface CheckoutData {
+  items: ClothingItem[];
   totalPrice: number;
 }
 
 const Checkout = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const outfitData = location.state as OutfitData;
+  const { toast } = useToast();
+  const checkoutData = location.state as CheckoutData;
 
-  if (!outfitData) {
+  if (!checkoutData) {
     navigate('/');
     return null;
   }
 
-  const { top, bottom, totalPrice } = outfitData;
+  const { items, totalPrice } = checkoutData;
 
   // Mock buy links - replace with actual retailer links
   const getBuyLink = (brand: string, itemName: string) => {
     return `https://example-store.com/search?q=${encodeURIComponent(brand + ' ' + itemName)}`;
+  };
+
+  const handleBuyComplete = () => {
+    toast({
+      title: "Purchase Initiated! 🛒",
+      description: "Redirecting to complete your purchase...",
+    });
+    // In a real app, this would integrate with payment processing
   };
 
   return (
@@ -51,7 +49,7 @@ const Checkout = () => {
               <ArrowLeft className="w-4 h-4" />
               <span className="text-sm font-medium">Back to Styling</span>
             </button>
-            <h1 className="text-2xl font-light tracking-wide text-neutral-900">STYLEX</h1>
+            <h1 className="text-2xl font-light tracking-wide text-neutral-900">chér</h1>
             <div className="w-24"></div> {/* Spacer for centering */}
           </div>
         </div>
@@ -64,71 +62,65 @@ const Checkout = () => {
           <p className="text-neutral-600 font-light">Ready to complete your style</p>
         </div>
 
-        <div className="bg-white rounded-lg border border-neutral-200 p-8 mb-8">
+        <div className="bg-white rounded-lg border border-neutral-200 p-8 mb-8 shadow-sm">
           {/* Outfit Preview */}
-          <div className="flex items-center justify-center space-x-8 mb-12">
-            <div className="w-32 h-32 bg-neutral-100 border border-neutral-200 rounded-lg flex items-center justify-center">
-              {top.imageUrl ? (
-                <img src={top.imageUrl} alt={top.name} className="w-full h-full object-cover rounded-lg" />
-              ) : (
-                <span className="text-3xl text-neutral-400">👕</span>
-              )}
-            </div>
-            <div className="text-2xl text-neutral-400">+</div>
-            <div className="w-32 h-32 bg-neutral-100 border border-neutral-200 rounded-lg flex items-center justify-center">
-              {bottom.imageUrl ? (
-                <img src={bottom.imageUrl} alt={bottom.name} className="w-full h-full object-cover rounded-lg" />
-              ) : (
-                <span className="text-3xl text-neutral-400">👖</span>
-              )}
-            </div>
+          <div className="flex items-center justify-center space-x-4 mb-12 flex-wrap">
+            {items.map((item, index) => (
+              <React.Fragment key={item.id}>
+                {index > 0 && <span className="text-2xl text-neutral-400">+</span>}
+                <div className="w-32 h-32 bg-neutral-100 border border-neutral-200 rounded-lg flex items-center justify-center overflow-hidden">
+                  {item.imageUrl ? (
+                    <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover rounded-lg" />
+                  ) : (
+                    <span className="text-3xl text-neutral-400">
+                      {item.category === 'tops' ? '👕' : 
+                       item.category === 'bottoms' ? '👖' :
+                       item.category === 'jackets' ? '🧥' :
+                       item.category === 'dresses' ? '👗' :
+                       item.category === 'accessories' ? '👜' :
+                       item.category === 'shoes' ? '👟' : '👕'}
+                    </span>
+                  )}
+                </div>
+              </React.Fragment>
+            ))}
           </div>
 
           {/* Item Details */}
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Top Details */}
-            <div className="border border-neutral-200 rounded-lg p-6">
-              <div className="mb-4">
-                <h3 className="text-xl font-medium text-neutral-900 mb-2">{top.name}</h3>
-                <p className="text-neutral-600 font-light mb-2">{top.brand}</p>
-                <p className="text-lg font-medium text-neutral-900">{top.price}</p>
+          <div className="grid md:grid-cols-2 gap-6 mb-8">
+            {items.map(item => (
+              <div key={item.id} className="border border-neutral-200 rounded-lg p-6 hover:shadow-sm transition-shadow">
+                <div className="mb-4">
+                  <h3 className="text-xl font-medium text-neutral-900 mb-2">{item.name}</h3>
+                  <p className="text-neutral-600 font-light mb-2">{item.brand}</p>
+                  <p className="text-lg font-medium text-neutral-900 mb-2">{item.price}</p>
+                  <span className="inline-block bg-neutral-100 text-neutral-700 px-2 py-1 rounded text-xs capitalize">
+                    {item.category}
+                  </span>
+                </div>
+                <a 
+                  href={getBuyLink(item.brand, item.name)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center space-x-2 bg-neutral-900 text-white px-4 py-2 rounded-lg text-sm font-medium tracking-wide hover:bg-neutral-800 transition-colors"
+                >
+                  <span>Buy Now</span>
+                  <ExternalLink className="w-4 h-4" />
+                </a>
               </div>
-              <a 
-                href={getBuyLink(top.brand, top.name)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center space-x-2 bg-neutral-900 text-white px-4 py-2 text-sm font-medium tracking-wide hover:bg-neutral-800 transition-colors"
-              >
-                <span>Buy Now</span>
-                <ExternalLink className="w-4 h-4" />
-              </a>
-            </div>
-
-            {/* Bottom Details */}
-            <div className="border border-neutral-200 rounded-lg p-6">
-              <div className="mb-4">
-                <h3 className="text-xl font-medium text-neutral-900 mb-2">{bottom.name}</h3>
-                <p className="text-neutral-600 font-light mb-2">{bottom.brand}</p>
-                <p className="text-lg font-medium text-neutral-900">{bottom.price}</p>
-              </div>
-              <a 
-                href={getBuyLink(bottom.brand, bottom.name)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center space-x-2 bg-neutral-900 text-white px-4 py-2 text-sm font-medium tracking-wide hover:bg-neutral-800 transition-colors"
-              >
-                <span>Buy Now</span>
-                <ExternalLink className="w-4 h-4" />
-              </a>
-            </div>
+            ))}
           </div>
 
           {/* Total */}
-          <div className="border-t border-neutral-200 pt-6 mt-8 text-center">
+          <div className="border-t border-neutral-200 pt-6 text-center">
             <p className="text-sm text-neutral-600 mb-2 font-light">Total Outfit Cost</p>
-            <p className="text-2xl font-medium text-neutral-900 mb-6">Rs.{totalPrice.toLocaleString()}</p>
-            <button className="bg-neutral-900 text-white px-8 py-3 text-sm font-medium tracking-wide hover:bg-neutral-800 transition-colors">
-              BUY COMPLETE LOOK
+            <p className="text-3xl font-medium text-neutral-900 mb-6">Rs.{totalPrice.toLocaleString()}</p>
+            <button 
+              onClick={handleBuyComplete}
+              className="bg-neutral-900 text-white px-8 py-3 rounded-lg text-sm font-medium tracking-wide hover:bg-neutral-800 transition-colors flex items-center space-x-2 mx-auto shadow-sm"
+            >
+              <ShoppingCart className="w-5 h-5" />
+              <span>BUY COMPLETE LOOK</span>
             </button>
           </div>
         </div>
