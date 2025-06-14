@@ -1,3 +1,4 @@
+
 import React, { useState, useMemo } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import ClothingItem from '../components/ClothingItem';
@@ -125,108 +126,111 @@ const Index = () => {
   // Get current outfit items for display
   const currentOutfitItems = Object.keys(itemsByCategory).map(category => getCurrentItem(category)).filter(item => item !== null) as ClothingItemType[];
 
-  return <div className="min-h-screen bg-neutral-50">
-      {/* Header */}
-      <header className="bg-white border-b border-neutral-200">
-        <div className="max-w-6xl mx-auto px-6 py-4">
+  return <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
+      {/* Header with subtle shadow */}
+      <header className="bg-white/90 backdrop-blur-sm border-b border-gray-100 shadow-sm sticky top-0 z-50">
+        <div className="max-w-6xl mx-auto px-6 py-6">
           <div className="flex items-center justify-center">
-            <h1 className="text-2xl font-light tracking-wide text-neutral-900">chér</h1>
+            <h1 className="text-3xl font-extralight tracking-[0.2em] text-black">chér</h1>
           </div>
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="bg-white py-16">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-4xl md:text-5xl font-light text-neutral-900 mb-6 leading-tight">
-            The <em className="italic">one-stop</em> digital wardrobe app
+      {/* Hero Section with refined typography */}
+      <section className="bg-white py-24">
+        <div className="max-w-5xl mx-auto px-6 text-center">
+          <h2 className="text-5xl md:text-6xl font-extralight text-black mb-8 leading-[1.1] tracking-tight">
+            The <em className="italic font-light">one-stop</em> digital wardrobe app
           </h2>
-          <p className="text-lg text-neutral-600 mb-8 font-light">
+          <p className="text-xl text-gray-600 mb-12 font-light max-w-2xl mx-auto leading-relaxed">
             <em className="italic">unlocking the potential</em> of what you already own
           </p>
+          <div className="w-24 h-px bg-black mx-auto"></div>
         </div>
       </section>
 
-      {/* Wardrobe Section */}
-      <section className="py-16 bg-neutral-50">
-        <div className="max-w-4xl mx-auto px-6">
-          <div className="text-center mb-12">
-            <h3 className="text-2xl font-light text-neutral-900 mb-4">Curate your style</h3>
-            <p className="text-neutral-600 font-light">Organize your wardrobe and discover new combinations</p>
+      {/* Wardrobe Section with improved spacing */}
+      <section className="py-24 bg-gradient-to-b from-white to-gray-50">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h3 className="text-3xl font-light text-black mb-6 tracking-wide">Curate your style</h3>
+            <p className="text-gray-600 font-light text-lg">Organize your wardrobe and discover new combinations</p>
           </div>
 
           {/* Filter Panel */}
           <FilterPanel filters={filters} onFiltersChange={setFilters} availableBrands={availableBrands} />
 
-          <div className="space-y-12">
-            {/* Category Sections - Only show selected categories */}
+          <div className="space-y-16">
+            {/* Category Sections - Enhanced design */}
             {filters.selectedCategories.map(category => {
             const items = itemsByCategory[category] || [];
             const currentItem = getCurrentItem(category);
             const currentIndex = currentIndices[category] || 0;
             if (items.length === 0) return null;
-            return <div key={category} className="bg-white rounded-lg border border-neutral-200 p-8">
-                  <div className="flex items-center justify-between mb-8">
-                    <h4 className="text-lg font-medium text-neutral-900 tracking-wide uppercase">
+            return <div key={category} className="bg-white rounded-2xl border border-gray-100 p-10 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all duration-300">
+                  <div className="flex items-center justify-between mb-12">
+                    <h4 className="text-xl font-light text-black tracking-[0.15em] uppercase">
                       {category}
                     </h4>
-                    <div className="flex items-center space-x-4">
-                      <button onClick={() => navigateCategory(category, 'prev')} className="p-2 border border-neutral-300 rounded-full hover:bg-neutral-50 transition-colors" aria-label={`Previous ${category}`}>
-                        <ArrowLeft className="w-4 h-4 text-neutral-600" />
+                    <div className="flex items-center space-x-6">
+                      <button onClick={() => navigateCategory(category, 'prev')} className="p-3 border border-gray-200 rounded-full hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 group" aria-label={`Previous ${category}`}>
+                        <ArrowLeft className="w-5 h-5 text-gray-600 group-hover:text-black transition-colors" />
                       </button>
-                      <span className="text-sm text-neutral-500 font-light">
+                      <span className="text-sm text-gray-500 font-light min-w-[4rem] text-center">
                         {currentIndex + 1} / {items.length}
                       </span>
-                      <button onClick={() => navigateCategory(category, 'next')} className="p-2 border border-neutral-300 rounded-full hover:bg-neutral-50 transition-colors" aria-label={`Next ${category}`}>
-                        <ArrowRight className="w-4 h-4 text-neutral-600" />
+                      <button onClick={() => navigateCategory(category, 'next')} className="p-3 border border-gray-200 rounded-full hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 group" aria-label={`Next ${category}`}>
+                        <ArrowRight className="w-5 h-5 text-gray-600 group-hover:text-black transition-colors" />
                       </button>
                     </div>
                   </div>
                   
-                  <div className="flex items-center justify-center space-x-8">
-                    <button onClick={() => navigateCategory(category, 'prev')} className="p-4 hover:bg-neutral-50 transition-colors rounded-full" aria-label={`Previous ${category}`}>
-                      <ArrowLeft className="w-8 h-8 text-neutral-400" />
+                  <div className="flex items-center justify-center space-x-12">
+                    <button onClick={() => navigateCategory(category, 'prev')} className="p-6 hover:bg-gray-50 transition-all duration-200 rounded-full group" aria-label={`Previous ${category}`}>
+                      <ArrowLeft className="w-10 h-10 text-gray-300 group-hover:text-gray-600 transition-colors" />
                     </button>
                     
                     <div className="flex-1 max-w-md">
                       <ClothingItem item={currentItem} type={category as any} />
-                      <div className="text-center mt-6">
-                        <h3 className="text-xl font-medium text-neutral-900 mb-2">{currentItem.name}</h3>
-                        <p className="text-base text-neutral-600 mb-3 font-light">{currentItem.brand}</p>
-                        <p className="text-xl font-medium text-neutral-900">{currentItem.price}</p>
+                      <div className="text-center mt-8">
+                        <h3 className="text-2xl font-light text-black mb-3 tracking-wide">{currentItem.name}</h3>
+                        <p className="text-lg text-gray-500 mb-4 font-light">{currentItem.brand}</p>
+                        <p className="text-2xl font-medium text-black tracking-wide">{currentItem.price}</p>
                       </div>
                     </div>
                     
-                    <button onClick={() => navigateCategory(category, 'next')} className="p-4 hover:bg-neutral-50 transition-colors rounded-full" aria-label={`Next ${category}`}>
-                      <ArrowRight className="w-8 h-8 text-neutral-400" />
+                    <button onClick={() => navigateCategory(category, 'next')} className="p-6 hover:bg-gray-50 transition-all duration-200 rounded-full group" aria-label={`Next ${category}`}>
+                      <ArrowRight className="w-10 h-10 text-gray-300 group-hover:text-gray-600 transition-colors" />
                     </button>
                   </div>
                 </div>;
           })}
 
-            {/* Random Mix Button */}
-            {Object.keys(itemsByCategory).length > 0 && <div className="flex justify-center pt-6">
+            {/* Random Mix Button - Enhanced style */}
+            {Object.keys(itemsByCategory).length > 0 && <div className="flex justify-center pt-8">
                 <RandomMixButton onRandomMix={handleRandomMix} />
               </div>}
 
-            {/* Outfit Display */}
-            {currentOutfitItems.length > 0 && <div className="bg-white rounded-lg border border-neutral-200 p-8">
-                <div className="text-center mb-8">
-                  <h4 className="text-lg font-medium text-neutral-900 tracking-wide mb-2">YOUR CURATED LOOK</h4>
-                  <p className="text-neutral-600 font-light text-sm">Complete look ready to wear</p>
+            {/* Outfit Display - Enhanced container */}
+            {currentOutfitItems.length > 0 && <div className="bg-gradient-to-br from-black to-gray-900 rounded-2xl border border-gray-200 p-12 shadow-[0_8px_30px_rgba(0,0,0,0.08)]">
+                <div className="text-center mb-12">
+                  <h4 className="text-xl font-light text-white tracking-[0.15em] mb-3 uppercase">Your Curated Look</h4>
+                  <p className="text-gray-300 font-light">Complete look ready to wear</p>
                 </div>
                 <OutfitDisplay items={currentOutfitItems} />
               </div>}
 
-            {/* No items message */}
-            {filters.selectedCategories.length === 0 && <div className="text-center py-12">
-                <p className="text-lg text-neutral-600 font-light">
+            {/* No items message - Enhanced styling */}
+            {filters.selectedCategories.length === 0 && <div className="text-center py-16">
+                <div className="w-16 h-px bg-gray-300 mx-auto mb-6"></div>
+                <p className="text-xl text-gray-500 font-light">
                   Please select at least one clothing category to get started.
                 </p>
               </div>}
 
-            {filters.selectedCategories.length > 0 && Object.keys(itemsByCategory).length === 0 && <div className="text-center py-12">
-                <p className="text-lg text-neutral-600 font-light">
+            {filters.selectedCategories.length > 0 && Object.keys(itemsByCategory).length === 0 && <div className="text-center py-16">
+                <div className="w-16 h-px bg-gray-300 mx-auto mb-6"></div>
+                <p className="text-xl text-gray-500 font-light">
                   No items match your current selection. Try adjusting your categories or filters.
                 </p>
               </div>}
@@ -234,15 +238,16 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Footer CTA */}
-      <section className="bg-neutral-900 py-16">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h3 className="text-2xl font-light text-white mb-4">
+      {/* Footer CTA - Enhanced with gradient */}
+      <section className="bg-gradient-to-r from-black to-gray-900 py-24">
+        <div className="max-w-5xl mx-auto px-6 text-center">
+          <h3 className="text-3xl font-light text-white mb-6 tracking-wide">
             Know what you own, <em className="italic">love</em> what you wear
           </h3>
-          <p className="text-neutral-400 mb-8 font-light">
+          <p className="text-gray-300 mb-12 font-light text-lg max-w-2xl mx-auto leading-relaxed">
             Discover endless styling possibilities with pieces you already have
           </p>
+          <div className="w-24 h-px bg-white/30 mx-auto"></div>
         </div>
       </section>
     </div>;
