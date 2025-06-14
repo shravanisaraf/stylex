@@ -1,4 +1,3 @@
-
 import { ClothingItem } from '../contexts/StyleContext';
 
 // Easy to update clothing data - just add your store links here!
@@ -63,14 +62,14 @@ export const clothingItems: ClothingItem[] = [
   // BOTTOMS - Add your actual store links here
   {
     id: 5,
-    name: "Dark Jeans",
-    imageUrl: "",
-    brand: "Levi's",
-    price: "Rs.1750",
+    name: "Sequinned Miniskirt",
+    imageUrl: "https://static.zara.net/assets/public/ab24/2983/d1a2412590e3/1f5ff9370d8a/03920221450-e1/03920221450-e1.jpg?ts=1741175751379&w=1126",
+    brand: "Zara",
+    price: "Rs.3550",
     category: "bottoms",
-    color: "blue",
-    season: ["spring", "autumn", "winter"],
-    buyUrl: "https://www.levi.com/US/en_US/dark-jeans-example" // REPLACE WITH YOUR ACTUAL LINK
+    color: "silver",
+    season: ["spring", "summer", "autumn", "winter"],
+    buyUrl: "https://www.zara.com/in/en/sequinned-miniskirt-p03920221.html?v1=450245465&v2=2420454"
   },
   {
     id: 6,
