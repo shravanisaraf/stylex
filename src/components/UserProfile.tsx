@@ -8,6 +8,8 @@ import { User } from 'lucide-react';
 const UserProfile = () => {
   const { user } = useAuth();
 
+  console.log('UserProfile - current user:', user); // Debug log
+
   if (!user) {
     return (
       <div className="flex items-center justify-center space-x-4">
