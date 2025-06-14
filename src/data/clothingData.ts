@@ -1,4 +1,3 @@
-
 import { ClothingItem } from '../contexts/StyleContext';
 
 // Easy to update clothing data - just add your store links here!
@@ -6,14 +5,14 @@ export const clothingItems: ClothingItem[] = [
   // TOPS - Add your actual store links here
   {
     id: 1,
-    name: "White Blouse",
-    imageUrl: "", // Will be auto-extracted from buyUrl
+    name: "Embroidered Ruffle Top",
+    imageUrl: "https://static.zara.net/assets/public/a37f/4a39/16ae4420ae72/98a0bb77cfa0/05107004400-p/05107004400-p.jpg?ts=1749467895943&w=1500",
     brand: "Zara",
-    price: "Rs.990",
+    price: "Rs.2990",
     category: "tops",
     color: "white",
     season: ["spring", "summer"],
-    buyUrl: "https://www.zara.com/us/en/white-blouse-example" // REPLACE WITH YOUR ACTUAL LINK
+    buyUrl: "https://www.zara.com/in/en/embroidered-ruffle-top-p05107004.html?v1=452717291&v2=2419940"
   },
   {
     id: 2,
