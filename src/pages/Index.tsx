@@ -260,6 +260,11 @@ const Index = () => {
             Discover endless styling possibilities with pieces you already have
           </p>
           <div className="w-24 h-px bg-white/30 mx-auto"></div>
+          
+          {/* Made by credit */}
+          <p className="text-gray-500 text-xs mt-8 font-light">
+            Made by Shravani Saraf
+          </p>
         </div>
         
         {/* Sign Out Button positioned at bottom right */}
