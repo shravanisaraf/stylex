@@ -1,7 +1,5 @@
-
 import React, { useState, useMemo } from 'react';
-import { ArrowLeft, ArrowRight, Sparkles } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import ClothingItem from '../components/ClothingItem';
 import OutfitDisplay from '../components/OutfitDisplay';
 import RandomMixButton from '../components/RandomMixButton';
@@ -107,13 +105,7 @@ const Index = () => {
       <header className="bg-white/90 backdrop-blur-sm border-b border-gray-100 shadow-sm sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-6 py-6">
           <div className="flex items-center justify-between">
-            <Link 
-              to="/style-coach"
-              className="flex items-center space-x-2 px-4 py-2 bg-purple-100 text-purple-700 rounded-full hover:bg-purple-200 transition-colors font-medium"
-            >
-              <Sparkles className="w-4 h-4" />
-              <span>AI Style Coach</span>
-            </Link>
+            <div className="flex-1"></div>
             <h1 className="text-3xl font-extralight tracking-[0.2em] text-black">chér</h1>
             <div className="flex-1 flex justify-end">
               <UserProfile />
