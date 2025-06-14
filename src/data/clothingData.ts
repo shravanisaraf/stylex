@@ -26,6 +26,17 @@ export const clothingItems: ClothingItem[] = [
     buyUrl: "https://www.zara.com/in/en/lemon-print-halter-tie-top-p02552029.html?v1=435418861&v2=2419940"
   },
   {
+    id: 17,
+    name: "Embroidered Bodysuit",
+    imageUrl: "https://static.zara.net/assets/public/44b6/0024/4c934cc78be1/aa6fc75f5c75/07521200808-e1/07521200808-e1.jpg?ts=1749452080025&w=1126",
+    brand: "Zara",
+    price: "Rs.8550",
+    category: "tops",
+    color: "beige",
+    season: ["spring", "summer", "autumn", "winter"],
+    buyUrl: "https://www.zara.com/in/en/zw-collection-embroidered-bodysuit-p07521200.html?v1=463714950&v2=2419940"
+  },
+  {
     id: 3,
     name: "Red Sweater",
     imageUrl: "",
