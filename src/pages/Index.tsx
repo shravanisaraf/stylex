@@ -1,5 +1,4 @@
-
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { ArrowLeft, ArrowRight, Palette } from 'lucide-react';
 import ClothingItem from '../components/ClothingItem';
 import OutfitDisplay from '../components/OutfitDisplay';
@@ -9,6 +8,7 @@ import UserProfile from '../components/UserProfile';
 import SignOutButton from '../components/SignOutButton';
 import ColorAnalysisQuiz from '../components/ColorAnalysisQuiz';
 import HamburgerMenu from '../components/HamburgerMenu';
+import Tutorial from '../components/Tutorial';
 import { Button } from '../components/ui/button';
 import { Separator } from '../components/ui/separator';
 import { useStyle } from '../contexts/StyleContext';
@@ -19,6 +19,20 @@ const Index = () => {
   // Use the clothing data from our separate file
   const allClothingItems: ClothingItemType[] = clothingItems;
   const [showColorQuiz, setShowColorQuiz] = useState(false);
+  const [showTutorial, setShowTutorial] = useState(false);
+
+  // Show tutorial on first visit
+  useEffect(() => {
+    const hasSeenTutorial = localStorage.getItem('hasSeenTutorial');
+    if (!hasSeenTutorial) {
+      setShowTutorial(true);
+    }
+  }, []);
+
+  const handleCloseTutorial = () => {
+    setShowTutorial(false);
+    localStorage.setItem('hasSeenTutorial', 'true');
+  };
 
   const [filters, setFilters] = useState<FilterState>({
     selectedCategories: ['tops', 'bottoms'],
@@ -272,6 +286,9 @@ const Index = () => {
           <SignOutButton />
         </div>
       </section>
+
+      {/* Tutorial Modal */}
+      <Tutorial isOpen={showTutorial} onClose={handleCloseTutorial} />
 
       {/* Color Analysis Quiz Modal */}
       <ColorAnalysisQuiz 
