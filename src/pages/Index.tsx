@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import ClothingItem from '../components/ClothingItem';
@@ -104,8 +103,12 @@ const Index = () => {
       {/* Header with subtle shadow */}
       <header className="bg-white/90 backdrop-blur-sm border-b border-gray-100 shadow-sm sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-6 py-6">
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-between">
+            <div className="flex-1"></div>
             <h1 className="text-3xl font-extralight tracking-[0.2em] text-black">chér</h1>
+            <div className="flex-1 flex justify-end">
+              <UserProfile />
+            </div>
           </div>
         </div>
       </header>
@@ -120,13 +123,6 @@ const Index = () => {
             <em className="italic">unlocking the potential</em> of what you already own
           </p>
           <div className="w-24 h-px bg-black mx-auto"></div>
-        </div>
-      </section>
-
-      {/* User Authentication Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-5xl mx-auto px-6 text-center">
-          <UserProfile />
         </div>
       </section>
 
