@@ -12,7 +12,7 @@ interface TutorialProps {
 const tutorialSteps = [
   {
     title: "Welcome to Chér",
-    content: "Your one-stop digital wardrobe app for curating pieces you want to buy and discovering the perfect outfits to pair them with.",
+    content: "Discover outfits curated from real pieces across brands, then click through to buy the exact items you love.",
     icon: null
   },
   {
