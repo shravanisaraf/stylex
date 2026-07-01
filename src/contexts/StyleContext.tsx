@@ -1,11 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
-export interface ShopLink {
-  store: string;
-  url: string;
-  price: string;
-}
-
 export interface ClothingItem {
   id: number;
   name: string;
@@ -15,8 +9,7 @@ export interface ClothingItem {
   category: 'tops' | 'bottoms' | 'jackets' | 'dresses' | 'accessories' | 'shoes';
   color: string;
   season: string[];
-  buyUrl: string;
-  shopLinks?: ShopLink[]; // similar real products across partner stores
+  buyUrl: string; // Add this new property for store links
 }
 
 interface StyleContextType {
@@ -31,8 +24,8 @@ export const StyleProvider = ({ children }: { children: ReactNode }) => {
   const [favoriteItems, setFavoriteItems] = useState<number[]>([]);
 
   const toggleItemFavorite = (itemId: number) => {
-    setFavoriteItems(prev =>
-      prev.includes(itemId)
+    setFavoriteItems(prev => 
+      prev.includes(itemId) 
         ? prev.filter(id => id !== itemId)
         : [...prev, itemId]
     );
@@ -40,9 +33,14 @@ export const StyleProvider = ({ children }: { children: ReactNode }) => {
 
   const shareOutfit = (items: ClothingItem[]) => {
     const itemNames = items.map(item => item.name).join(' + ');
-    const shareText = `Check out this outfit combo: ${itemNames} from chér!`;
+    const shareText = `Check out this outfit combo: ${itemNames} from STYLEX!`;
+    
     if (navigator.share) {
-      navigator.share({ title: 'chér Outfit', text: shareText, url: window.location.href });
+      navigator.share({
+        title: 'STYLEX Outfit',
+        text: shareText,
+        url: window.location.href
+      });
     } else {
       navigator.clipboard.writeText(`${shareText} ${window.location.href}`);
       alert('Outfit link copied to clipboard!');
@@ -50,7 +48,11 @@ export const StyleProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <StyleContext.Provider value={{ favoriteItems, toggleItemFavorite, shareOutfit }}>
+    <StyleContext.Provider value={{
+      favoriteItems,
+      toggleItemFavorite,
+      shareOutfit
+    }}>
       {children}
     </StyleContext.Provider>
   );
@@ -58,6 +60,8 @@ export const StyleProvider = ({ children }: { children: ReactNode }) => {
 
 export const useStyle = () => {
   const context = useContext(StyleContext);
-  if (!context) throw new Error('useStyle must be used within a StyleProvider');
+  if (!context) {
+    throw new Error('useStyle must be used within a StyleProvider');
+  }
   return context;
 };

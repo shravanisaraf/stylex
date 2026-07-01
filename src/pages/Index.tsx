@@ -156,9 +156,6 @@ const Index = () => {
         currentOutfitItems={currentOutfitItems}
         onOpenColorQuiz={() => setShowColorQuiz(true)}
         onOpenTutorial={() => setShowTutorial(true)}
-        onSelectItem={(category, index) =>
-          setCurrentIndices((prev) => ({ ...prev, [category]: index }))
-        }
       />
 
       <FooterSection />
