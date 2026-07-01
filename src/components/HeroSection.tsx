@@ -1,17 +1,16 @@
-
 import React from 'react';
 import { Separator } from './ui/separator';
 
 const HeroSection: React.FC = () => {
   return (
     <>
-      <section className="bg-white py-24">
+      <section className="bg-white py-20">
         <div className="max-w-5xl mx-auto px-6 text-center">
-          <h2 className="text-5xl md:text-6xl font-extralight text-black mb-8 leading-[1.1] tracking-tight">
-            The <em className="italic font-light">one-stop</em> digital wardrobe app
+          <h2 className="text-4xl md:text-5xl font-extralight text-black mb-6 leading-[1.1] tracking-tight">
+            AI-generated basics <em className="italic font-light">+</em> smart matching
           </h2>
-          <p className="text-xl text-gray-600 mb-12 font-light max-w-2xl mx-auto leading-relaxed">
-            <em className="italic">unlocking the potential</em> of what you already own
+          <p className="text-lg text-gray-600 mb-8 font-light max-w-2xl mx-auto leading-relaxed">
+            No models. No copied images. Just AI-generated clothing paired with real shopping links.
           </p>
           <div className="w-24 h-px bg-black mx-auto"></div>
         </div>
