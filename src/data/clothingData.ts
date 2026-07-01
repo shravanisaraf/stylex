@@ -1,244 +1,107 @@
-
 import { ClothingItem } from '../contexts/StyleContext';
+import blackTee from '../assets/basics/black-tee.jpg';
+import whiteTee from '../assets/basics/white-tee.jpg';
+import blueJeans from '../assets/basics/blue-jeans.jpg';
+import blackJeans from '../assets/basics/black-jeans.jpg';
+import blackHoodie from '../assets/basics/black-hoodie.jpg';
+import whiteSneakers from '../assets/basics/white-sneakers.jpg';
 
-// Easy to update clothing data - just add your store links here!
+// AI-generated basics catalog. Each item lists real similar products
+// across partner stores in `shopLinks` — that's what powers "Shop the Look".
 export const clothingItems: ClothingItem[] = [
-  // TOPS - Add your actual store links here
+  // ===== TOPS =====
   {
-    id: 1,
-    name: "Embroidered Ruffle Top",
-    imageUrl: "https://static.zara.net/assets/public/cefe/39bc/7e054594925b/af5a3c7d320f/05107004400-e1/05107004400-e1.jpg?ts=1749476318532&w=1126",
-    brand: "Zara",
-    price: "Rs.2990",
-    category: "tops",
-    color: "white",
-    season: ["spring", "summer"],
-    buyUrl: "https://www.zara.com/in/en/embroidered-ruffle-top-p05107004.html?v1=452717291&v2=2419940"
+    id: 101,
+    name: 'Basic Black Tee',
+    imageUrl: blackTee,
+    brand: 'chér basics',
+    price: '—',
+    category: 'tops',
+    color: 'black',
+    season: ['spring', 'summer', 'autumn', 'winter'],
+    buyUrl: 'https://www.myntra.com/tshirts?f=Color%3ABlack_000000&rawQuery=black%20crew%20neck%20tshirt',
+    shopLinks: [
+      { store: 'Myntra', url: 'https://www.myntra.com/tshirts?f=Color%3ABlack_000000&rawQuery=black%20crew%20neck%20tshirt', price: '₹499' },
+      { store: 'AJIO', url: 'https://www.ajio.com/search/?text=black%20crew%20neck%20tshirt', price: '₹450' },
+    ],
   },
   {
-    id: 2,
-    name: "Lemon Print Halter Tie Top",
-    imageUrl: "https://static.zara.net/assets/public/d29f/4dee/a1d44ea2bc4c/a86d64afbe71/02552029119-e1/02552029119-e1.jpg?ts=1741024039636&w=1126",
-    brand: "Zara",
-    price: "Rs.1990",
-    category: "tops",
-    color: "yellow",
-    season: ["spring", "summer"],
-    buyUrl: "https://www.zara.com/in/en/lemon-print-halter-tie-top-p02552029.html?v1=435418861&v2=2419940"
+    id: 102,
+    name: 'Basic White Tee',
+    imageUrl: whiteTee,
+    brand: 'chér basics',
+    price: '—',
+    category: 'tops',
+    color: 'white',
+    season: ['spring', 'summer', 'autumn', 'winter'],
+    buyUrl: 'https://www.myntra.com/tshirts?rawQuery=white%20crew%20neck%20tshirt',
+    shopLinks: [
+      { store: 'Myntra', url: 'https://www.myntra.com/tshirts?rawQuery=white%20crew%20neck%20tshirt', price: '₹499' },
+      { store: 'AJIO', url: 'https://www.ajio.com/search/?text=white%20crew%20neck%20tshirt', price: '₹450' },
+    ],
   },
   {
-    id: 17,
-    name: "Embroidered Bodysuit",
-    imageUrl: "https://static.zara.net/assets/public/44b6/0024/4c934cc78be1/aa6fc75f5c75/07521200808-e1/07521200808-e1.jpg?ts=1749452080025&w=1126",
-    brand: "Zara",
-    price: "Rs.8550",
-    category: "tops",
-    color: "beige",
-    season: ["spring", "summer", "autumn", "winter"],
-    buyUrl: "https://www.zara.com/in/en/zw-collection-embroidered-bodysuit-p07521200.html?v1=463714950&v2=2419940"
-  },
-  {
-    id: 3,
-    name: "Red Sweater",
-    imageUrl: "",
-    brand: "H&M",
-    price: "Rs.1200",
-    category: "tops",
-    color: "red",
-    season: ["autumn", "winter"],
-    buyUrl: "https://www2.hm.com/en_us/productpage.red-sweater-example.html" // REPLACE WITH YOUR ACTUAL LINK
-  },
-  {
-    id: 4,
-    name: "Blue Shirt",
-    imageUrl: "",
-    brand: "Uniqlo",
-    price: "Rs.850",
-    category: "tops",
-    color: "blue",
-    season: ["spring", "summer", "autumn"],
-    buyUrl: "https://www.uniqlo.com/us/en/blue-shirt-example" // REPLACE WITH YOUR ACTUAL LINK
-  },
-  {
-    id: 5,
-    name: "Black Top",
-    imageUrl: "",
-    brand: "Mango",
-    price: "Rs.1100",
-    category: "tops",
-    color: "black",
-    season: ["spring", "summer", "autumn", "winter"],
-    buyUrl: "https://shop.mango.com/us/black-top-example" // REPLACE WITH YOUR ACTUAL LINK
+    id: 103,
+    name: 'Black Oversized Hoodie',
+    imageUrl: blackHoodie,
+    brand: 'chér basics',
+    price: '—',
+    category: 'tops',
+    color: 'black',
+    season: ['autumn', 'winter'],
+    buyUrl: 'https://www.myntra.com/hoodies?f=Color%3ABlack_000000',
+    shopLinks: [
+      { store: 'Myntra', url: 'https://www.myntra.com/hoodies?f=Color%3ABlack_000000', price: '₹1,299' },
+      { store: 'AJIO', url: 'https://www.ajio.com/search/?text=black%20oversized%20hoodie', price: '₹1,199' },
+    ],
   },
 
-  // BOTTOMS - Add your actual store links here
+  // ===== BOTTOMS =====
   {
-    id: 6,
-    name: "Sequinned Miniskirt",
-    imageUrl: "https://static.zara.net/assets/public/ab24/2983/d1a2412590e3/1f5ff9370d8a/03920221450-e1/03920221450-e1.jpg?ts=1741175751379&w=1126",
-    brand: "Zara",
-    price: "Rs.3550",
-    category: "bottoms",
-    color: "silver",
-    season: ["spring", "summer", "autumn", "winter"],
-    buyUrl: "https://www.zara.com/in/en/sequinned-miniskirt-p03920221.html?v1=450245465&v2=2420454"
+    id: 201,
+    name: 'Blue Straight Jeans',
+    imageUrl: blueJeans,
+    brand: 'chér basics',
+    price: '—',
+    category: 'bottoms',
+    color: 'blue',
+    season: ['spring', 'summer', 'autumn', 'winter'],
+    buyUrl: 'https://www.myntra.com/jeans?rawQuery=blue%20straight%20jeans',
+    shopLinks: [
+      { store: 'Myntra', url: 'https://www.myntra.com/jeans?rawQuery=blue%20straight%20jeans', price: '₹1,299' },
+      { store: "Levi's Official", url: 'https://www.levi.in/collections/mens-jeans', price: '₹2,499' },
+    ],
   },
   {
-    id: 7,
-    name: "Black Skirt",
-    imageUrl: "",
-    brand: "Zara",
-    price: "Rs.1100",
-    category: "bottoms",
-    color: "black",
-    season: ["spring", "summer"],
-    buyUrl: "https://www.zara.com/us/en/black-skirt-example" // REPLACE WITH YOUR ACTUAL LINK
-  },
-  {
-    id: 8,
-    name: "Navy Pants",
-    imageUrl: "",
-    brand: "Uniqlo",
-    price: "Rs.1400",
-    category: "bottoms",
-    color: "navy",
-    season: ["autumn", "winter"],
-    buyUrl: "https://www.uniqlo.com/us/en/navy-pants-example" // REPLACE WITH YOUR ACTUAL LINK
-  },
-  {
-    id: 9,
-    name: "Denim Skirt",
-    imageUrl: "",
-    brand: "H&M",
-    price: "Rs.950",
-    category: "bottoms",
-    color: "blue",
-    season: ["spring", "summer"],
-    buyUrl: "https://www2.hm.com/en_us/productpage.denim-skirt-example.html" // REPLACE WITH YOUR ACTUAL LINK
+    id: 202,
+    name: 'Black Straight Jeans',
+    imageUrl: blackJeans,
+    brand: 'chér basics',
+    price: '—',
+    category: 'bottoms',
+    color: 'black',
+    season: ['spring', 'summer', 'autumn', 'winter'],
+    buyUrl: 'https://www.myntra.com/jeans?f=Color%3ABlack_000000',
+    shopLinks: [
+      { store: 'Myntra', url: 'https://www.myntra.com/jeans?f=Color%3ABlack_000000', price: '₹1,399' },
+      { store: 'AJIO', url: 'https://www.ajio.com/search/?text=black%20straight%20jeans', price: '₹1,199' },
+    ],
   },
 
-  // JACKETS - Add your actual store links here
+  // ===== SHOES =====
   {
-    id: 10,
-    name: "Leather Jacket",
-    imageUrl: "",
-    brand: "Zara",
-    price: "Rs.2500",
-    category: "jackets",
-    color: "black",
-    season: ["autumn", "winter"],
-    buyUrl: "https://www.zara.com/us/en/leather-jacket-example" // REPLACE WITH YOUR ACTUAL LINK
+    id: 301,
+    name: 'White Sneakers',
+    imageUrl: whiteSneakers,
+    brand: 'chér basics',
+    price: '—',
+    category: 'shoes',
+    color: 'white',
+    season: ['spring', 'summer', 'autumn'],
+    buyUrl: 'https://www.myntra.com/casual-shoes?rawQuery=white%20sneakers',
+    shopLinks: [
+      { store: 'Myntra', url: 'https://www.myntra.com/casual-shoes?rawQuery=white%20sneakers', price: '₹1,999' },
+      { store: 'AJIO', url: 'https://www.ajio.com/search/?text=white%20sneakers', price: '₹1,799' },
+    ],
   },
-  {
-    id: 11,
-    name: "Denim Jacket",
-    imageUrl: "",
-    brand: "Levi's",
-    price: "Rs.1800",
-    category: "jackets",
-    color: "blue",
-    season: ["spring", "autumn"],
-    buyUrl: "https://www.levi.com/US/en_US/denim-jacket-example" // REPLACE WITH YOUR ACTUAL LINK
-  },
-
-  // DRESSES - Add your actual store links here
-  {
-    id: 12,
-    name: "Summer Dress",
-    imageUrl: "",
-    brand: "Mango",
-    price: "Rs.1600",
-    category: "dresses",
-    color: "white",
-    season: ["spring", "summer"],
-    buyUrl: "https://shop.mango.com/us/summer-dress-example" // REPLACE WITH YOUR ACTUAL LINK
-  },
-  {
-    id: 13,
-    name: "Evening Dress",
-    imageUrl: "",
-    brand: "Zara",
-    price: "Rs.3200",
-    category: "dresses",
-    color: "black",
-    season: ["spring", "summer", "autumn", "winter"],
-    buyUrl: "https://www.zara.com/us/en/evening-dress-example" // REPLACE WITH YOUR ACTUAL LINK
-  },
-  {
-    id: 18,
-    name: "Pink V-Neck Ruffle Knotted Mini Dress",
-    imageUrl: "https://adn-static1.nykaa.com/nykdesignstudio-images/pub/media/catalog/product/8/3/8345694CD20230309265602MD-Pink_1.jpg?rnd=20200526195200&tr=w-1080",
-    brand: "Cider",
-    price: "Rs.2405",
-    category: "dresses",
-    color: "pink",
-    season: ["spring", "summer"],
-    buyUrl: "https://www.nykaafashion.com/cider-pink-v-neck-ruffle-knotted-mini-dress/p/16890496?intcmp=widget,similar_products&ppid=16799374"
-  },
-
-  // ACCESSORIES - Add your actual store links here
-  {
-    id: 14,
-    name: "Gold Necklace",
-    imageUrl: "",
-    brand: "Pandora",
-    price: "Rs.1500",
-    category: "accessories",
-    color: "gold",
-    season: ["spring", "summer", "autumn", "winter"],
-    buyUrl: "https://us.pandora.net/gold-necklace-example" // REPLACE WITH YOUR ACTUAL LINK
-  },
-  {
-    id: 15,
-    name: "Black Handbag",
-    imageUrl: "",
-    brand: "Michael Kors",
-    price: "Rs.2200",
-    category: "accessories",
-    color: "black",
-    season: ["spring", "summer", "autumn", "winter"],
-    buyUrl: "https://www.michaelkors.com/black-handbag-example" // REPLACE WITH YOUR ACTUAL LINK
-  },
-  {
-    id: 19,
-    name: "Clara Beige Clutch with Detachable Strap (S)",
-    imageUrl: "https://adn-static1.nykaa.com/nykdesignstudio-images/pub/media/catalog/product/1/8/1874dcbSDT0586CHAMPAIGNE_1.jpg?rnd=20200526195200&tr=w-1080",
-    brand: "Kazo",
-    price: "Rs.2990",
-    category: "accessories",
-    color: "beige",
-    season: ["spring", "summer", "autumn", "winter"],
-    buyUrl: "https://www.nykaafashion.com/kazo-clara-beige-clutch-with-detachable-strap-s/p/17921977"
-  },
-
-  // SHOES - Add your actual store links here
-  {
-    id: 16,
-    name: "White Sneakers",
-    imageUrl: "",
-    brand: "Nike",
-    price: "Rs.1800",
-    category: "shoes",
-    color: "white",
-    season: ["spring", "summer", "autumn"],
-    buyUrl: "https://www.nike.com/us/en_us/white-sneakers-example" // REPLACE WITH YOUR ACTUAL LINK
-  },
-  {
-    id: 17,
-    name: "Black Heels",
-    imageUrl: "",
-    brand: "Zara",
-    price: "Rs.2500",
-    category: "shoes",
-    color: "black",
-    season: ["spring", "summer", "autumn", "winter"],
-    buyUrl: "https://www.zara.com/us/en/black-heels-example" // REPLACE WITH YOUR ACTUAL LINK
-  }
 ];
-
-// Helper function to extract image URL from product page
-export const extractImageFromUrl = (url: string): string => {
-  // For now, return empty string - you can add actual image URLs here
-  // or we can implement image extraction logic later
-  return "";
-};
