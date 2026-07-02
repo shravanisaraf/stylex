@@ -1,7 +1,8 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { ExternalLink } from 'lucide-react';
 import FavoriteButton from './FavoriteButton';
+import FindSimilarDialog from './FindSimilarDialog';
 import { useStyle } from '../contexts/StyleContext';
 import { ClothingItem as ClothingItemType } from '../contexts/StyleContext';
 
@@ -13,6 +14,7 @@ interface ClothingItemProps {
 const ClothingItem: React.FC<ClothingItemProps> = ({ item, type }) => {
   const { favoriteItems, toggleItemFavorite } = useStyle();
   const isFavorite = favoriteItems.includes(item.id);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   const getEmojiForCategory = (category: string) => {
     switch (category) {
@@ -26,11 +28,7 @@ const ClothingItem: React.FC<ClothingItemProps> = ({ item, type }) => {
     }
   };
 
-  const handleImageClick = () => {
-    if (item.buyUrl) {
-      window.open(item.buyUrl, '_blank', 'noopener,noreferrer');
-    }
-  };
+  const handleImageClick = () => setDialogOpen(true);
 
   return (
     <div className="flex items-center justify-center">
