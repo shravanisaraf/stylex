@@ -9,7 +9,9 @@ export interface ClothingItem {
   category: 'tops' | 'bottoms' | 'jackets' | 'dresses' | 'accessories' | 'shoes';
   color: string;
   season: string[];
-  buyUrl: string; // Add this new property for store links
+  buyUrl: string;
+  searchKeywords?: string;
+  referenceUrl?: string;
 }
 
 interface StyleContextType {
