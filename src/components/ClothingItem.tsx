@@ -51,12 +51,15 @@ const ClothingItem: React.FC<ClothingItemProps> = ({ item, type }) => {
             </div>
           </div>
         ) : (
-          <div className="text-center p-8">
+          <div
+            className="text-center p-8 cursor-pointer w-full h-full flex flex-col items-center justify-center hover:bg-neutral-200 transition-colors rounded-lg"
+            onClick={handleImageClick}
+          >
             <div className="text-8xl text-neutral-400 mb-4">
               {getEmojiForCategory(item.category)}
             </div>
-            <p className="text-lg text-neutral-400 font-light">
-              Image required
+            <p className="text-sm text-neutral-500 font-light tracking-wide uppercase">
+              Tap to shop
             </p>
           </div>
         )}
@@ -68,6 +71,7 @@ const ClothingItem: React.FC<ClothingItemProps> = ({ item, type }) => {
           />
         </div>
       </div>
+      <FindSimilarDialog item={item} open={dialogOpen} onClose={() => setDialogOpen(false)} />
     </div>
   );
 };
