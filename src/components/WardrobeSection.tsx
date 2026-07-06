@@ -61,7 +61,7 @@ const WardrobeSection: React.FC<WardrobeSectionProps> = ({
         {/* Filter Panel */}
         <FilterPanel filters={filters} onFiltersChange={onFiltersChange} availableBrands={availableBrands} />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {/* Category Sections */}
           {filters.selectedCategories.map(category => {
             const items = itemsByCategory[category] || [];
