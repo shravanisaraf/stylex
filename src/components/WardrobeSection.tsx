@@ -61,7 +61,7 @@ const WardrobeSection: React.FC<WardrobeSectionProps> = ({
         {/* Filter Panel */}
         <FilterPanel filters={filters} onFiltersChange={onFiltersChange} availableBrands={availableBrands} />
 
-        <div className="space-y-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {/* Category Sections */}
           {filters.selectedCategories.map(category => {
             const items = itemsByCategory[category] || [];
@@ -79,7 +79,9 @@ const WardrobeSection: React.FC<WardrobeSectionProps> = ({
               />
             );
           })}
+        </div>
 
+        <div className="space-y-16 mt-16">
           {/* Random Mix Button */}
           {Object.keys(itemsByCategory).length > 0 && (
             <div className="flex justify-center pt-8">
