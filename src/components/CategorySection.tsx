@@ -2,7 +2,7 @@
 import React from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import ClothingItem from './ClothingItem';
-import { ClothingItem as ClothingItemType } from '../contexts/StyleContext';
+import { ClothingItem as ClothingItemType, CATEGORY_LABELS, Category } from '../contexts/StyleContext';
 
 interface CategorySectionProps {
   category: string;
