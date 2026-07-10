@@ -92,13 +92,9 @@ const OutfitDisplay: React.FC<OutfitDisplayProps> = ({ items }) => {
               ) : (
                 <div className="text-center">
                   <span className="text-3xl text-white/60">
-                    {item.category === 'tops' ? '👕' : 
-                     item.category === 'bottoms' ? '👖' :
-                     item.category === 'jackets' ? '🧥' :
-                     item.category === 'dresses' ? '👗' :
-                     item.category === 'accessories' ? '👜' :
-                     item.category === 'shoes' ? '👟' : '👕'}
+                    {item.category.includes('tops') ? '👕' : '👖'}
                   </span>
+
                 </div>
               )}
             </div>
