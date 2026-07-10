@@ -80,7 +80,7 @@ const SavedOutfits: React.FC<SavedOutfitsProps> = ({
                 <div className="grid grid-cols-3 gap-2">
                   {outfit.items.slice(0, 3).map((item, index) => <div key={index} className="aspect-square bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden">
                       {item.imageUrl ? <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover" /> : <span className="text-2xl">
-                          {item.category === 'tops' ? '👕' : item.category === 'bottoms' ? '👖' : item.category === 'jackets' ? '🧥' : item.category === 'dresses' ? '👗' : item.category === 'accessories' ? '👜' : item.category === 'shoes' ? '👟' : '👕'}
+                          {item.category.includes('tops') ? '👕' : '👖'}
                         </span>}
                     </div>)}
                 </div>
