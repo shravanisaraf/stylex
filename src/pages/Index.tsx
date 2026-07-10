@@ -32,7 +32,7 @@ const Index = () => {
   };
 
   const [filters, setFilters] = useState<FilterState>({
-    selectedCategories: ['tops', 'bottoms'],
+    selectedCategories: ['womens-tops', 'womens-bottoms', 'mens-tops', 'mens-bottoms'],
     colors: []
   });
   const [currentIndices, setCurrentIndices] = useState<{
