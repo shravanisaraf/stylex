@@ -21,7 +21,14 @@ interface FilterPanelProps {
   availableBrands: string[];
 }
 
-const ALL_CATEGORIES = ['tops', 'bottoms', 'jackets', 'dresses', 'accessories', 'shoes'];
+const ALL_CATEGORIES = ['womens-tops', 'womens-bottoms', 'mens-tops', 'mens-bottoms'];
+const CATEGORY_LABELS: Record<string, string> = {
+  'womens-tops': "Women's Tops",
+  'womens-bottoms': "Women's Bottoms",
+  'mens-tops': "Men's Tops",
+  'mens-bottoms': "Men's Bottoms",
+};
+
 const COLORS = ['white', 'black', 'red', 'blue', 'navy', 'grey', 'brown', 'green', 'pink', 'yellow'];
 
 const FilterPanel: React.FC<FilterPanelProps> = ({ filters, onFiltersChange, availableBrands }) => {
