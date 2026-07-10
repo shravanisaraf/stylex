@@ -15,6 +15,9 @@ const ClothingItem: React.FC<ClothingItemProps> = ({ item, type }) => {
   const { favoriteItems, toggleItemFavorite } = useStyle();
   const isFavorite = favoriteItems.includes(item.id);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [imgFailed, setImgFailed] = useState(false);
+  const showImage = item.imageUrl && !imgFailed;
+
 
   const getEmojiForCategory = (category: string) => {
     switch (category) {
