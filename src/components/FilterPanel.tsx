@@ -62,21 +62,22 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ filters, onFiltersChange, ava
         <h3 className="text-lg font-medium text-neutral-900 mb-4">Select Categories to Display</h3>
         <p className="text-sm text-neutral-600 mb-4">Choose which clothing categories you want to see in your wardrobe</p>
         
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {ALL_CATEGORIES.map(category => (
             <button
               key={category}
               onClick={() => toggleSelectedCategory(category)}
-              className={`px-4 py-3 rounded-lg border text-sm font-medium capitalize transition-colors ${
+              className={`px-4 py-3 rounded-lg border text-sm font-medium transition-colors ${
                 filters.selectedCategories.includes(category)
                   ? 'bg-neutral-900 text-white border-neutral-900'
                   : 'bg-white text-neutral-700 border-neutral-300 hover:border-neutral-400'
               }`}
             >
-              {category}
+              {CATEGORY_LABELS[category]}
             </button>
           ))}
         </div>
+
       </div>
 
       {/* Filter Panel */}
