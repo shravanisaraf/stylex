@@ -162,6 +162,7 @@ const Index = () => {
         </div>
       </header>
 
+      <HeroSection />
 
       <WardrobeSection
         filters={filters}
