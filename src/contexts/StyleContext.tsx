@@ -1,12 +1,17 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
+export type Gender = 'women' | 'men';
+
 export interface ClothingItem {
   id: number;
+  productId?: string;
   name: string;
+  description?: string;
   imageUrl: string;
   brand: string;
   price: string;
   category: 'tops' | 'bottoms' | 'jackets' | 'dresses' | 'accessories' | 'shoes';
+  gender?: Gender;
   color: string;
   season: string[];
   buyUrl: string;
