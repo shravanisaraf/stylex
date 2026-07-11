@@ -77,10 +77,14 @@ const Checkout = () => {
                     <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover rounded-lg" />
                   ) : (
                     <span className="text-3xl text-neutral-400">
-                      {item.category.includes('tops') ? '👕' : '👖'}
+                      {item.category === 'tops' ? '👕' : 
+                       item.category === 'bottoms' ? '👖' :
+                       item.category === 'jackets' ? '🧥' :
+                       item.category === 'dresses' ? '👗' :
+                       item.category === 'accessories' ? '👜' :
+                       item.category === 'shoes' ? '👟' : '👕'}
                     </span>
                   )}
-
                 </div>
               </React.Fragment>
             ))}

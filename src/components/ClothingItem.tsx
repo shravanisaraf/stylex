@@ -15,9 +15,6 @@ const ClothingItem: React.FC<ClothingItemProps> = ({ item, type }) => {
   const { favoriteItems, toggleItemFavorite } = useStyle();
   const isFavorite = favoriteItems.includes(item.id);
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [imgFailed, setImgFailed] = useState(false);
-  const showImage = item.imageUrl && !imgFailed;
-
 
   const getEmojiForCategory = (category: string) => {
     switch (category) {
@@ -36,7 +33,7 @@ const ClothingItem: React.FC<ClothingItemProps> = ({ item, type }) => {
   return (
     <div className="flex items-center justify-center w-full">
       <div className="relative w-full max-w-[260px] aspect-square bg-neutral-100 border border-neutral-200 rounded-lg flex items-center justify-center group">
-        {showImage ? (
+        {item.imageUrl ? (
           <div 
             className="relative w-full h-full cursor-pointer overflow-hidden rounded-lg"
             onClick={handleImageClick}
@@ -44,9 +41,9 @@ const ClothingItem: React.FC<ClothingItemProps> = ({ item, type }) => {
             <img
               src={item.imageUrl}
               alt={item.name}
-              onError={() => setImgFailed(true)}
-              className="w-full h-full object-contain rounded-lg transition-transform group-hover:scale-105"
+              className="w-full h-full object-cover rounded-lg transition-transform group-hover:scale-105"
             />
+            {/* Overlay with shop icon */}
             <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-200 flex items-center justify-center">
               <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-white rounded-full p-3">
                 <ExternalLink className="w-6 h-6 text-neutral-900" />
@@ -59,14 +56,13 @@ const ClothingItem: React.FC<ClothingItemProps> = ({ item, type }) => {
             onClick={handleImageClick}
           >
             <div className="text-8xl text-neutral-400 mb-4">
-              {item.category.includes('tops') ? '👕' : '👖'}
+              {getEmojiForCategory(item.category)}
             </div>
             <p className="text-sm text-neutral-500 font-light tracking-wide uppercase">
               Tap to shop
             </p>
           </div>
         )}
-
         
         <div className="absolute top-3 right-3">
           <FavoriteButton 

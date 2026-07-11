@@ -2,7 +2,7 @@
 import React from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import ClothingItem from './ClothingItem';
-import { ClothingItem as ClothingItemType, CATEGORY_LABELS, Category } from '../contexts/StyleContext';
+import { ClothingItem as ClothingItemType } from '../contexts/StyleContext';
 
 interface CategorySectionProps {
   category: string;
@@ -25,9 +25,8 @@ const CategorySection: React.FC<CategorySectionProps> = ({
     <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all duration-300 h-full flex flex-col">
       <div className="flex items-center justify-between mb-6">
         <h4 className="text-lg font-light text-black tracking-[0.15em] uppercase">
-          {CATEGORY_LABELS[category as Category] ?? category}
+          {category}
         </h4>
-
         <div className="flex items-center space-x-3">
           <button 
             onClick={() => onNavigate(category, 'prev')} 

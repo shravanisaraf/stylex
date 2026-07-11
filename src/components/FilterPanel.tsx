@@ -21,14 +21,7 @@ interface FilterPanelProps {
   availableBrands: string[];
 }
 
-const ALL_CATEGORIES = ['womens-tops', 'womens-bottoms', 'mens-tops', 'mens-bottoms'];
-const CATEGORY_LABELS: Record<string, string> = {
-  'womens-tops': "Women's Tops",
-  'womens-bottoms': "Women's Bottoms",
-  'mens-tops': "Men's Tops",
-  'mens-bottoms': "Men's Bottoms",
-};
-
+const ALL_CATEGORIES = ['tops', 'bottoms', 'jackets', 'dresses', 'accessories', 'shoes'];
 const COLORS = ['white', 'black', 'red', 'blue', 'navy', 'grey', 'brown', 'green', 'pink', 'yellow'];
 
 const FilterPanel: React.FC<FilterPanelProps> = ({ filters, onFiltersChange, availableBrands }) => {
@@ -62,22 +55,21 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ filters, onFiltersChange, ava
         <h3 className="text-lg font-medium text-neutral-900 mb-4">Select Categories to Display</h3>
         <p className="text-sm text-neutral-600 mb-4">Choose which clothing categories you want to see in your wardrobe</p>
         
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
           {ALL_CATEGORIES.map(category => (
             <button
               key={category}
               onClick={() => toggleSelectedCategory(category)}
-              className={`px-4 py-3 rounded-lg border text-sm font-medium transition-colors ${
+              className={`px-4 py-3 rounded-lg border text-sm font-medium capitalize transition-colors ${
                 filters.selectedCategories.includes(category)
                   ? 'bg-neutral-900 text-white border-neutral-900'
                   : 'bg-white text-neutral-700 border-neutral-300 hover:border-neutral-400'
               }`}
             >
-              {CATEGORY_LABELS[category]}
+              {category}
             </button>
           ))}
         </div>
-
       </div>
 
       {/* Filter Panel */}
