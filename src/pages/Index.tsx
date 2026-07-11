@@ -15,6 +15,7 @@ import { clothingItems } from '../data/clothingData';
 const Index = () => {
   // Use the clothing data from our separate file
   const allClothingItems: ClothingItemType[] = clothingItems;
+  const [gender, setGender] = useState<'women' | 'men' | null>(null);
   const [showColorQuiz, setShowColorQuiz] = useState(false);
   const [showTutorial, setShowTutorial] = useState(false);
 
