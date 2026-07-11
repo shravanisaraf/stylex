@@ -43,19 +43,12 @@ const Index = () => {
   // Filter items based on current filters and selected categories
   const filteredItems = useMemo(() => {
     return allClothingItems.filter(item => {
-      // First filter by selected categories
-      if (!filters.selectedCategories.includes(item.category)) {
-        return false;
-      }
-
-      // Color filter
-      if (filters.colors.length > 0 && !filters.colors.includes(item.color)) {
-        return false;
-      }
-
+      if (gender && item.gender !== gender) return false;
+      if (!filters.selectedCategories.includes(item.category)) return false;
+      if (filters.colors.length > 0 && !filters.colors.includes(item.color)) return false;
       return true;
     });
-  }, [allClothingItems, filters]);
+  }, [allClothingItems, filters, gender]);
 
   // Group filtered items by category, but only show selected categories
   const itemsByCategory = useMemo(() => {
