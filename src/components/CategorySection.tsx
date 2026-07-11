@@ -60,9 +60,8 @@ const CategorySection: React.FC<CategorySectionProps> = ({
         <div className="flex-1 min-w-0 px-4">
           <ClothingItem item={currentItem} type={category as any} />
           <div className="text-center mt-4">
-            <h3 className="text-lg font-light text-black mb-1 tracking-wide truncate">{currentItem.name}</h3>
-            <p className="text-sm text-gray-500 mb-2 font-light">{currentItem.brand}</p>
-            <p className="text-xl font-medium text-black tracking-wide">{currentItem.price}</p>
+            <h3 className="text-base font-light text-black mb-1 tracking-wide truncate">{currentItem.name}</h3>
+            <p className="text-xs text-gray-500 font-light uppercase tracking-widest">{currentItem.color}</p>
           </div>
         </div>
         
