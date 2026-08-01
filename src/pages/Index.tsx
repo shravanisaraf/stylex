@@ -8,14 +8,17 @@ import ColorAnalysisQuiz from '../components/ColorAnalysisQuiz';
 import HamburgerMenu from '../components/HamburgerMenu';
 import Tutorial from '../components/Tutorial';
 import { FilterState } from '../components/FilterPanel';
-import { useStyle } from '../contexts/StyleContext';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { ClothingItem as ClothingItemType } from '../contexts/StyleContext';
 import { clothingItems } from '../data/clothingData';
 
+type Step = 'home' | 'gender' | 'category' | 'builder';
+
 const Index = () => {
-  // Use the clothing data from our separate file
   const allClothingItems: ClothingItemType[] = clothingItems;
+  const [step, setStep] = useState<Step>('home');
   const [gender, setGender] = useState<'women' | 'men' | null>(null);
+  const [focusCategory, setFocusCategory] = useState<'tops' | 'bottoms'>('tops');
   const [showColorQuiz, setShowColorQuiz] = useState(false);
   const [showTutorial, setShowTutorial] = useState(false);
 
@@ -34,39 +37,37 @@ const Index = () => {
 
   const [filters, setFilters] = useState<FilterState>({
     selectedCategories: ['tops', 'bottoms'],
-    colors: []
+    colors: [],
+    search: ''
   });
   const [currentIndices, setCurrentIndices] = useState<{
     [key: string]: number;
   }>({});
 
-  // Filter items based on current filters and selected categories
+  // MVP: only tops and bottoms are available
   const filteredItems = useMemo(() => {
+    const query = filters.search.trim().toLowerCase();
     return allClothingItems.filter(item => {
+      if (item.category !== 'tops' && item.category !== 'bottoms') return false;
       if (gender && item.gender !== gender) return false;
-      if (!filters.selectedCategories.includes(item.category)) return false;
-      if (filters.colors.length > 0 && !filters.colors.includes(item.color)) return false;
+      if (filters.colors.length > 0 && !filters.colors.some(c => item.color.toLowerCase().includes(c))) return false;
+      if (query) {
+        const haystack = `${item.name} ${item.color} ${item.description || ''} ${item.searchKeywords || ''}`.toLowerCase();
+        if (!haystack.includes(query)) return false;
+      }
       return true;
     });
   }, [allClothingItems, filters, gender]);
 
-  // Group filtered items by category, but only show selected categories
   const itemsByCategory = useMemo(() => {
-    const grouped: {
-      [key: string]: ClothingItemType[];
-    } = {};
+    const grouped: { [key: string]: ClothingItemType[] } = {};
     filteredItems.forEach(item => {
-      if (filters.selectedCategories.includes(item.category)) {
-        if (!grouped[item.category]) {
-          grouped[item.category] = [];
-        }
-        grouped[item.category].push(item);
-      }
+      if (!grouped[item.category]) grouped[item.category] = [];
+      grouped[item.category].push(item);
     });
     return grouped;
-  }, [filteredItems, filters.selectedCategories]);
+  }, [filteredItems]);
 
-  // Get available brands for filter
   const availableBrands = useMemo(() => {
     return [...new Set(allClothingItems.map(item => item.brand))].sort();
   }, [allClothingItems]);
@@ -81,16 +82,11 @@ const Index = () => {
     } else {
       newIndex = (currentIndex - 1 + items.length) % items.length;
     }
-    setCurrentIndices(prev => ({
-      ...prev,
-      [category]: newIndex
-    }));
+    setCurrentIndices(prev => ({ ...prev, [category]: newIndex }));
   };
 
   const handleRandomMix = () => {
-    const newIndices: {
-      [key: string]: number;
-    } = {};
+    const newIndices: { [key: string]: number } = {};
     Object.keys(itemsByCategory).forEach(category => {
       const items = itemsByCategory[category];
       if (items.length > 0) {
@@ -100,7 +96,6 @@ const Index = () => {
     setCurrentIndices(newIndices);
   };
 
-  // Get current outfit items for display
   const getCurrentItem = (category: string) => {
     const items = itemsByCategory[category] || [];
     if (items.length === 0) return null;
@@ -108,61 +103,140 @@ const Index = () => {
     return items[Math.min(index, items.length - 1)];
   };
 
-  const currentOutfitItems = Object.keys(itemsByCategory)
+  const currentOutfitItems = ['tops', 'bottoms']
     .map(category => getCurrentItem(category))
     .filter(item => item !== null) as ClothingItemType[];
 
   const handleApplyColorAnalysis = (colors: string[]) => {
-    setFilters(prev => ({
-      ...prev,
-      colors: colors
-    }));
+    setFilters(prev => ({ ...prev, colors }));
   };
 
-  if (!gender) {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-50 to-white px-6">
-        <h1 className="text-5xl font-extralight tracking-[0.2em] text-black mb-4">chér</h1>
-        <p className="text-gray-500 font-light mb-16 tracking-wide">Choose your section to begin</p>
-        <div className="flex gap-6 w-full max-w-2xl">
-          <button
-            onClick={() => setGender('women')}
-            className="flex-1 aspect-square border border-black bg-white hover:bg-black hover:text-white transition-all duration-300 flex items-center justify-center text-2xl font-light tracking-[0.3em] uppercase"
-          >
-            Women
-          </button>
-          <button
-            onClick={() => setGender('men')}
-            className="flex-1 aspect-square border border-black bg-white hover:bg-black hover:text-white transition-all duration-300 flex items-center justify-center text-2xl font-light tracking-[0.3em] uppercase"
-          >
-            Men
-          </button>
+  const header = (
+    <header className="bg-white/90 backdrop-blur-sm border-b border-gray-100 shadow-sm sticky top-0 z-50">
+      <div className="max-w-6xl mx-auto px-6 py-6">
+        <div className="flex items-center justify-between">
+          <div className="flex-1 flex items-center gap-3">
+            <HamburgerMenu />
+            {step === 'builder' && (
+              <div className="hidden sm:flex items-center border border-gray-200 rounded-full overflow-hidden text-xs tracking-[0.2em] uppercase">
+                <button onClick={() => setGender('women')} className={`px-4 py-1.5 transition ${gender === 'women' ? 'bg-black text-white' : 'text-gray-600 hover:bg-gray-50'}`}>Women</button>
+                <button onClick={() => setGender('men')} className={`px-4 py-1.5 transition ${gender === 'men' ? 'bg-black text-white' : 'text-gray-600 hover:bg-gray-50'}`}>Men</button>
+              </div>
+            )}
+          </div>
+          <button onClick={() => setStep('home')} className="text-3xl font-extralight tracking-[0.2em] text-black">chér</button>
+          <div className="flex-1 flex justify-end">
+            <UserProfile />
+          </div>
         </div>
+      </div>
+    </header>
+  );
+
+  const modals = (
+    <>
+      <Tutorial isOpen={showTutorial} onClose={handleCloseTutorial} />
+      <ColorAnalysisQuiz
+        isOpen={showColorQuiz}
+        onClose={() => setShowColorQuiz(false)}
+        onApplyToWardrobe={handleApplyColorAnalysis}
+      />
+    </>
+  );
+
+  // Step: choose section (women / men)
+  if (step === 'gender' || step === 'category') {
+    const isGender = step === 'gender';
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white flex flex-col">
+        {header}
+        <main className="flex-1 flex flex-col items-center justify-center px-6 py-20">
+          <button
+            onClick={() => setStep(isGender ? 'home' : 'gender')}
+            className="mb-10 flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-gray-500 hover:text-black transition"
+          >
+            <ArrowLeft className="w-4 h-4" /> Back
+          </button>
+          <p className="text-gray-500 font-light mb-12 tracking-[0.2em] uppercase text-xs">
+            {isGender ? 'Step 1 — Choose your section' : 'Step 2 — Choose a category'}
+          </p>
+          <div className="flex flex-col sm:flex-row gap-6 w-full max-w-2xl">
+            {(isGender
+              ? [
+                  { label: "Women's Fashion", value: 'women' },
+                  { label: "Men's Fashion", value: 'men' }
+                ]
+              : [
+                  { label: 'Tops', value: 'tops' },
+                  { label: 'Bottoms', value: 'bottoms' }
+                ]
+            ).map(option => (
+              <button
+                key={option.value}
+                onClick={() => {
+                  if (isGender) {
+                    setGender(option.value as 'women' | 'men');
+                    setStep('category');
+                  } else {
+                    setFocusCategory(option.value as 'tops' | 'bottoms');
+                    setStep('builder');
+                  }
+                }}
+                className="flex-1 aspect-square border border-black bg-white hover:bg-black hover:text-white transition-all duration-300 flex items-center justify-center text-xl sm:text-2xl font-light tracking-[0.25em] uppercase text-center px-4"
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+        </main>
+        {modals}
       </div>
     );
   }
 
+  // Homepage
+  if (step === 'home') {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
+        {header}
+        <HeroSection />
+        <section className="py-24 bg-white">
+          <div className="max-w-3xl mx-auto px-6 text-center">
+            <h3 className="text-3xl font-light text-black mb-6 tracking-wide">Build your look</h3>
+            <p className="text-gray-600 font-light text-lg mb-12">
+              Mix and match curated pieces, save your favourite combinations, and shop the look.
+            </p>
+            <button
+              onClick={() => setStep('gender')}
+              className="group inline-flex items-center gap-3 bg-black text-white px-10 py-5 text-sm tracking-[0.25em] uppercase font-light hover:bg-gray-900 transition-all duration-300 shadow-[0_8px_30px_rgba(0,0,0,0.12)]"
+            >
+              Start Building Your Outfit
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </button>
+          </div>
+        </section>
+        <FooterSection />
+        {modals}
+      </div>
+    );
+  }
+
+  // Outfit builder
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
-      <header className="bg-white/90 backdrop-blur-sm border-b border-gray-100 shadow-sm sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-6 py-6">
-          <div className="flex items-center justify-between">
-            <div className="flex-1 flex items-center gap-3">
-              <HamburgerMenu />
-              <div className="hidden sm:flex items-center border border-gray-200 rounded-full overflow-hidden text-xs tracking-[0.2em] uppercase">
-                <button onClick={() => setGender('women')} className={`px-4 py-1.5 transition ${gender==='women' ? 'bg-black text-white' : 'text-gray-600 hover:bg-gray-50'}`}>Women</button>
-                <button onClick={() => setGender('men')} className={`px-4 py-1.5 transition ${gender==='men' ? 'bg-black text-white' : 'text-gray-600 hover:bg-gray-50'}`}>Men</button>
-              </div>
-            </div>
-            <h1 className="text-3xl font-extralight tracking-[0.2em] text-black">chér</h1>
-            <div className="flex-1 flex justify-end">
-              <UserProfile />
-            </div>
-          </div>
-        </div>
-      </header>
+      {header}
 
-      <HeroSection />
+      <div className="max-w-5xl mx-auto px-6 pt-8 flex items-center justify-between">
+        <button
+          onClick={() => setStep('category')}
+          className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-gray-500 hover:text-black transition"
+        >
+          <ArrowLeft className="w-4 h-4" /> Back
+        </button>
+        <p className="text-xs uppercase tracking-[0.2em] text-gray-400">
+          {gender === 'men' ? "Men's" : "Women's"} · {focusCategory}
+        </p>
+      </div>
 
       <WardrobeSection
         filters={filters}
@@ -176,19 +250,11 @@ const Index = () => {
         currentOutfitItems={currentOutfitItems}
         onOpenColorQuiz={() => setShowColorQuiz(true)}
         onOpenTutorial={() => setShowTutorial(true)}
+        focusCategory={focusCategory}
       />
 
       <FooterSection />
-
-      {/* Tutorial Modal */}
-      <Tutorial isOpen={showTutorial} onClose={handleCloseTutorial} />
-
-      {/* Color Analysis Quiz Modal */}
-      <ColorAnalysisQuiz 
-        isOpen={showColorQuiz} 
-        onClose={() => setShowColorQuiz(false)} 
-        onApplyToWardrobe={handleApplyColorAnalysis}
-      />
+      {modals}
     </div>
   );
 };
