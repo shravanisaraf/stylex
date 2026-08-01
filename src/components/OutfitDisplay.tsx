@@ -18,7 +18,10 @@ const OutfitDisplay: React.FC<OutfitDisplayProps> = ({ items }) => {
   const [isNaming, setIsNaming] = useState(false);
   const [outfitName, setOutfitName] = useState('');
   
-  const totalPrice = items.reduce((sum, item) => sum + parseInt(item.price.replace('Rs.', '')), 0);
+  const totalPrice = items.reduce((sum, item) => {
+    const value = parseInt((item.price || '').replace(/[^0-9]/g, ''), 10);
+    return sum + (isNaN(value) ? 0 : value);
+  }, 0);
 
   const handleSaveOutfit = (customName?: string) => {
     const savedOutfits = JSON.parse(localStorage.getItem('savedOutfits') || '[]');
@@ -37,7 +40,7 @@ const OutfitDisplay: React.FC<OutfitDisplayProps> = ({ items }) => {
     
     toast({
       title: "Outfit Saved! 🎉",
-      description: `"${finalName}" has been saved successfully. Total: Rs.${totalPrice.toLocaleString()}`,
+      description: `"${finalName}" has been saved to your outfits.`,
     });
 
     // Reset naming state
@@ -111,8 +114,7 @@ const OutfitDisplay: React.FC<OutfitDisplayProps> = ({ items }) => {
         {items.map(item => (
           <div key={item.id} className="bg-white/5 border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 backdrop-blur-sm">
             <p className="font-light text-white mb-2 text-lg">{item.name}</p>
-            <p className="text-sm text-gray-300 mb-3 font-light">{item.brand}</p>
-            <p className="text-sm font-medium text-white mb-3">{item.price}</p>
+            <p className="text-sm text-gray-300 mb-3 font-light capitalize">{item.color}</p>
             <span className="inline-block bg-white/20 text-white/80 px-3 py-1 rounded-full text-xs font-light uppercase tracking-wide">
               {item.category}
             </span>
@@ -122,8 +124,6 @@ const OutfitDisplay: React.FC<OutfitDisplayProps> = ({ items }) => {
       
       {/* Total Price and Actions */}
       <div className="text-center pt-6 border-t border-white/20">
-        <p className="text-sm text-gray-300 mb-3 font-light uppercase tracking-wide">Total</p>
-        <p className="text-3xl font-light text-white mb-8 tracking-wide">Rs.{totalPrice.toLocaleString()}</p>
         
         {/* Outfit Naming Section */}
         {isNaming && (
@@ -179,7 +179,7 @@ const OutfitDisplay: React.FC<OutfitDisplayProps> = ({ items }) => {
             className="bg-white text-black px-8 py-3 rounded-full text-sm font-medium tracking-wide hover:bg-gray-100 transition-all duration-300 flex items-center space-x-2 shadow-lg hover:scale-105"
           >
             <ShoppingCart className="w-4 h-4" />
-            <span>CHECKOUT</span>
+            <span>VIEW LOOK</span>
           </button>
         </div>
       </div>

@@ -96,8 +96,7 @@ const Checkout = () => {
               <div key={item.id} className="border border-neutral-200 rounded-lg p-6 hover:shadow-sm transition-shadow">
                 <div className="mb-4">
                   <h3 className="text-xl font-medium text-neutral-900 mb-2">{item.name}</h3>
-                  <p className="text-neutral-600 font-light mb-2">{item.brand}</p>
-                  <p className="text-lg font-medium text-neutral-900 mb-2">{item.price}</p>
+                  <p className="text-neutral-600 font-light mb-2 capitalize">{item.color}</p>
                   <span className="inline-block bg-neutral-100 text-neutral-700 px-2 py-1 rounded text-xs capitalize">
                     {item.category}
                   </span>
