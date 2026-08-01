@@ -41,7 +41,7 @@ const ClothingItem: React.FC<ClothingItemProps> = ({ item, type }) => {
             <img
               src={item.imageUrl}
               alt={item.name}
-              className="w-full h-full object-cover rounded-lg transition-transform group-hover:scale-105"
+              className="w-full h-full object-contain rounded-lg transition-transform group-hover:scale-105"
             />
             {/* Overlay with shop icon */}
             <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-200 flex items-center justify-center">
