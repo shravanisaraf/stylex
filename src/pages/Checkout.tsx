@@ -64,7 +64,7 @@ const Checkout = () => {
                 {index > 0 && <span className="text-2xl text-neutral-400">+</span>}
                 <div className="w-32 h-32 bg-neutral-100 border border-neutral-200 rounded-lg flex items-center justify-center overflow-hidden">
                   {item.imageUrl ? (
-                    <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover rounded-lg" />
+                    <img src={item.imageUrl} alt={item.name} className="w-full h-full object-contain rounded-lg" />
                   ) : (
                     <span className="text-3xl text-neutral-400">
                       {item.category === 'tops' ? '👕' : 

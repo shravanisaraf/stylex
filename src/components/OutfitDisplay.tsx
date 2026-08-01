@@ -90,7 +90,7 @@ const OutfitDisplay: React.FC<OutfitDisplayProps> = ({ items }) => {
                 <img
                   src={item.imageUrl}
                   alt={item.name}
-                  className="w-full h-full object-cover rounded-xl"
+                  className="w-full h-full object-contain rounded-xl"
                 />
               ) : (
                 <div className="text-center">
