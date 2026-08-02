@@ -23,6 +23,8 @@ interface WardrobeSectionProps {
   focusCategory?: 'tops' | 'bottoms';
 }
 
+const preloaded = new Set<string>();
+
 const WardrobeSection: React.FC<WardrobeSectionProps> = ({
   filters,
   onFiltersChange,
@@ -47,6 +49,17 @@ const WardrobeSection: React.FC<WardrobeSectionProps> = ({
 
   const hasItems = Object.keys(itemsByCategory).length > 0;
 
+  // Preload every item image once so left/right navigation is instant
+  React.useEffect(() => {
+    Object.values(itemsByCategory).flat().forEach(item => {
+      if (item.imageUrl && !preloaded.has(item.imageUrl)) {
+        preloaded.add(item.imageUrl);
+        const img = new Image();
+        img.src = item.imageUrl;
+      }
+    });
+  }, [itemsByCategory]);
+
   return (
     <section className="py-16 bg-gradient-to-b from-white to-gray-50">
       <div className="max-w-5xl mx-auto px-6">
@@ -67,7 +80,7 @@ const WardrobeSection: React.FC<WardrobeSectionProps> = ({
         {/* Filters: colour + search */}
         <FilterPanel filters={filters} onFiltersChange={onFiltersChange} />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="flex flex-col gap-6">
           {categories.map(category => (
             <CategorySection
               key={category}
