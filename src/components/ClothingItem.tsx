@@ -32,7 +32,7 @@ const ClothingItem: React.FC<ClothingItemProps> = ({ item, type }) => {
 
   return (
     <div className="flex items-center justify-center w-full">
-      <div className="relative w-full max-w-[260px] aspect-square bg-neutral-100 border border-neutral-200 rounded-lg flex items-center justify-center group">
+      <div className="relative w-full max-w-[340px] aspect-square bg-neutral-100 border border-neutral-200 rounded-lg flex items-center justify-center group">
         {item.imageUrl ? (
           <div 
             className="relative w-full h-full cursor-pointer overflow-hidden rounded-lg"
@@ -41,7 +41,9 @@ const ClothingItem: React.FC<ClothingItemProps> = ({ item, type }) => {
             <img
               src={item.imageUrl}
               alt={item.name}
-              className="w-full h-full object-contain rounded-lg transition-transform group-hover:scale-105"
+              loading="eager"
+              decoding="sync"
+              className="w-full h-full object-contain rounded-lg"
             />
             {/* Overlay with shop icon */}
             <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-200 flex items-center justify-center">
