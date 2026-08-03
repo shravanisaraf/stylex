@@ -214,17 +214,18 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
       {header}
 
-      <div className="max-w-5xl mx-auto px-6 pt-8 flex items-center justify-between">
+      <div className="max-w-5xl mx-auto px-6 pt-6 flex items-center justify-between">
         <button
-          onClick={() => setStep('category')}
+          onClick={() => setStep('gender')}
           className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-gray-500 hover:text-black transition"
         >
           <ArrowLeft className="w-4 h-4" /> Back
         </button>
         <p className="text-xs uppercase tracking-[0.2em] text-gray-400">
-          {gender === 'men' ? "Men's" : "Women's"} · {focusCategory}
+          {gender === 'men' ? 'Men' : 'Women'}
         </p>
       </div>
+
 
       <WardrobeSection
         filters={filters}
