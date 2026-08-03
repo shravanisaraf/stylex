@@ -61,26 +61,17 @@ const WardrobeSection: React.FC<WardrobeSectionProps> = ({
   }, [itemsByCategory]);
 
   return (
-    <section className="py-16 bg-gradient-to-b from-white to-gray-50">
+    <section className="py-8 bg-gradient-to-b from-white to-gray-50">
       <div className="max-w-5xl mx-auto px-6">
-        {/* Color Analysis Section */}
-        <ColorAnalysisSection 
-          onOpenColorQuiz={onOpenColorQuiz}
-          onOpenTutorial={onOpenTutorial}
-        />
-
-        {/* Subtle Divider */}
-        <Separator className="bg-gradient-to-r from-transparent via-gray-200 to-transparent mb-16" />
-
-        <div className="text-center mb-12">
-          <h3 className="text-3xl font-light text-black mb-6 tracking-wide">Curate your style</h3>
-          <p className="text-gray-600 font-light text-lg">Mix and match pieces to build your look</p>
+        <div className="text-center mb-6">
+          <h3 className="text-2xl font-light text-black mb-2 tracking-wide">Curate your style</h3>
+          <p className="text-gray-600 font-light">Mix and match pieces to build your look</p>
         </div>
 
         {/* Filters: colour + search */}
         <FilterPanel filters={filters} onFiltersChange={onFiltersChange} />
 
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-4">
           {categories.map(category => (
             <CategorySection
               key={category}
@@ -92,6 +83,7 @@ const WardrobeSection: React.FC<WardrobeSectionProps> = ({
             />
           ))}
         </div>
+
 
         <div className="space-y-16 mt-16">
           {/* Random Mix Button */}
