@@ -34,7 +34,7 @@ const ClothingItem: React.FC<ClothingItemProps> = ({ item, type, compact = false
 
   return (
     <div className="flex items-center justify-center w-full">
-      <div className="relative w-full max-w-[340px] aspect-square bg-neutral-100 border border-neutral-200 rounded-lg flex items-center justify-center group">
+      <div className={`relative w-full ${compact ? "max-w-[190px]" : "max-w-[340px]"} aspect-square bg-neutral-100 border border-neutral-200 rounded-lg flex items-center justify-center group`}>
         {item.imageUrl ? (
           <div 
             className="relative w-full h-full cursor-pointer overflow-hidden rounded-lg"
