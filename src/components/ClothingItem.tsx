@@ -9,12 +9,14 @@ import { ClothingItem as ClothingItemType } from '../contexts/StyleContext';
 interface ClothingItemProps {
   item: ClothingItemType;
   type: string;
+  compact?: boolean;
 }
 
-const ClothingItem: React.FC<ClothingItemProps> = ({ item, type }) => {
+const ClothingItem: React.FC<ClothingItemProps> = ({ item, type, compact = false }) => {
   const { favoriteItems, toggleItemFavorite } = useStyle();
   const isFavorite = favoriteItems.includes(item.id);
   const [dialogOpen, setDialogOpen] = useState(false);
+
 
   const getEmojiForCategory = (category: string) => {
     switch (category) {
@@ -32,7 +34,7 @@ const ClothingItem: React.FC<ClothingItemProps> = ({ item, type }) => {
 
   return (
     <div className="flex items-center justify-center w-full">
-      <div className="relative w-full max-w-[340px] aspect-square bg-neutral-100 border border-neutral-200 rounded-lg flex items-center justify-center group">
+      <div className={`relative w-full ${compact ? "max-w-[190px]" : "max-w-[340px]"} aspect-square bg-neutral-100 border border-neutral-200 rounded-lg flex items-center justify-center group`}>
         {item.imageUrl ? (
           <div 
             className="relative w-full h-full cursor-pointer overflow-hidden rounded-lg"

@@ -12,7 +12,7 @@ import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { ClothingItem as ClothingItemType } from '../contexts/StyleContext';
 import { clothingItems } from '../data/clothingData';
 
-type Step = 'home' | 'gender' | 'category' | 'builder';
+type Step = 'home' | 'gender' | 'builder';
 
 const Index = () => {
   const allClothingItems: ClothingItemType[] = clothingItems;
@@ -124,7 +124,7 @@ const Index = () => {
               </div>
             )}
           </div>
-          <button onClick={() => setStep('home')} className="text-3xl font-extralight tracking-[0.2em] text-black">chér</button>
+          <button onClick={() => setStep('home')} className="text-3xl font-extralight tracking-[0.2em] text-black">muse</button>
           <div className="flex-1 flex justify-end">
             <UserProfile />
           </div>
@@ -145,42 +145,30 @@ const Index = () => {
   );
 
   // Step: choose section (women / men)
-  if (step === 'gender' || step === 'category') {
-    const isGender = step === 'gender';
+  if (step === 'gender') {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white flex flex-col">
         {header}
         <main className="flex-1 flex flex-col items-center justify-center px-6 py-20">
           <button
-            onClick={() => setStep(isGender ? 'home' : 'gender')}
+            onClick={() => setStep('home')}
             className="mb-10 flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-gray-500 hover:text-black transition"
           >
             <ArrowLeft className="w-4 h-4" /> Back
           </button>
           <p className="text-gray-500 font-light mb-12 tracking-[0.2em] uppercase text-xs">
-            {isGender ? 'Step 1 — Choose your section' : 'Step 2 — Choose a category'}
+            Choose your section
           </p>
           <div className="flex flex-col sm:flex-row gap-6 w-full max-w-2xl">
-            {(isGender
-              ? [
-                  { label: "Women's Fashion", value: 'women' },
-                  { label: "Men's Fashion", value: 'men' }
-                ]
-              : [
-                  { label: 'Tops', value: 'tops' },
-                  { label: 'Bottoms', value: 'bottoms' }
-                ]
-            ).map(option => (
+            {[
+              { label: 'Women', value: 'women' },
+              { label: 'Men', value: 'men' }
+            ].map(option => (
               <button
                 key={option.value}
                 onClick={() => {
-                  if (isGender) {
-                    setGender(option.value as 'women' | 'men');
-                    setStep('category');
-                  } else {
-                    setFocusCategory(option.value as 'tops' | 'bottoms');
-                    setStep('builder');
-                  }
+                  setGender(option.value as 'women' | 'men');
+                  setStep('builder');
                 }}
                 className="flex-1 aspect-square border border-black bg-white hover:bg-black hover:text-white transition-all duration-300 flex items-center justify-center text-xl sm:text-2xl font-light tracking-[0.25em] uppercase text-center px-4"
               >
@@ -226,17 +214,18 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
       {header}
 
-      <div className="max-w-5xl mx-auto px-6 pt-8 flex items-center justify-between">
+      <div className="max-w-5xl mx-auto px-6 pt-6 flex items-center justify-between">
         <button
-          onClick={() => setStep('category')}
+          onClick={() => setStep('gender')}
           className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-gray-500 hover:text-black transition"
         >
           <ArrowLeft className="w-4 h-4" /> Back
         </button>
         <p className="text-xs uppercase tracking-[0.2em] text-gray-400">
-          {gender === 'men' ? "Men's" : "Women's"} · {focusCategory}
+          {gender === 'men' ? 'Men' : 'Women'}
         </p>
       </div>
+
 
       <WardrobeSection
         filters={filters}
