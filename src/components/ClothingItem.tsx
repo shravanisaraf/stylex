@@ -9,12 +9,14 @@ import { ClothingItem as ClothingItemType } from '../contexts/StyleContext';
 interface ClothingItemProps {
   item: ClothingItemType;
   type: string;
+  compact?: boolean;
 }
 
-const ClothingItem: React.FC<ClothingItemProps> = ({ item, type }) => {
+const ClothingItem: React.FC<ClothingItemProps> = ({ item, type, compact = false }) => {
   const { favoriteItems, toggleItemFavorite } = useStyle();
   const isFavorite = favoriteItems.includes(item.id);
   const [dialogOpen, setDialogOpen] = useState(false);
+
 
   const getEmojiForCategory = (category: string) => {
     switch (category) {
