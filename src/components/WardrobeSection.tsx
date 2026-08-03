@@ -84,14 +84,14 @@ const WardrobeSection: React.FC<WardrobeSectionProps> = ({
           ))}
         </div>
 
-
-        <div className="space-y-16 mt-16">
+        <div className="space-y-12 mt-8">
           {/* Random Mix Button */}
           {hasItems && (
-            <div className="flex justify-center pt-8">
+            <div className="flex justify-center">
               <RandomMixButton onRandomMix={onRandomMix} />
             </div>
           )}
+
 
           {/* Outfit Display */}
           {currentOutfitItems.length > 0 && (
