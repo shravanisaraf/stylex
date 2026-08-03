@@ -12,7 +12,7 @@ import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { ClothingItem as ClothingItemType } from '../contexts/StyleContext';
 import { clothingItems } from '../data/clothingData';
 
-type Step = 'home' | 'gender' | 'category' | 'builder';
+type Step = 'home' | 'gender' | 'builder';
 
 const Index = () => {
   const allClothingItems: ClothingItemType[] = clothingItems;
