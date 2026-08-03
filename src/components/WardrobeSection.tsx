@@ -112,6 +112,14 @@ const WardrobeSection: React.FC<WardrobeSectionProps> = ({
               </p>
             </div>
           )}
+
+          {/* Colour analysis tools */}
+          <Separator className="bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
+          <ColorAnalysisSection
+            onOpenColorQuiz={onOpenColorQuiz}
+            onOpenTutorial={onOpenTutorial}
+          />
+
         </div>
       </div>
     </section>
