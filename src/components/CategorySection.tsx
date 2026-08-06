@@ -27,23 +27,6 @@ const CategorySection: React.FC<CategorySectionProps> = ({
         <h4 className="text-sm font-light text-black tracking-[0.15em] uppercase">
           {category}
         </h4>
-        <div className="flex items-center space-x-2">
-          <button 
-            onClick={() => onNavigate(category, 'prev')} 
-            className="p-1.5 border border-gray-200 rounded-full hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 group" 
-            aria-label={`Previous ${category}`}
-          >
-            <ArrowLeft className="w-3.5 h-3.5 text-gray-600 group-hover:text-black transition-colors" />
-          </button>
-          <button 
-            onClick={() => onNavigate(category, 'next')} 
-            className="p-1.5 border border-gray-200 rounded-full hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 group" 
-            aria-label={`Next ${category}`}
-          >
-            <ArrowRight className="w-3.5 h-3.5 text-gray-600 group-hover:text-black transition-colors" />
-          </button>
-        </div>
-
       </div>
       
       <div className="flex items-center justify-center flex-1">
