@@ -35,9 +35,6 @@ const CategorySection: React.FC<CategorySectionProps> = ({
           >
             <ArrowLeft className="w-3.5 h-3.5 text-gray-600 group-hover:text-black transition-colors" />
           </button>
-          <span className="text-[10px] text-gray-500 font-light min-w-[3rem] text-center">
-            {currentIndex + 1} / {items.length}
-          </span>
           <button 
             onClick={() => onNavigate(category, 'next')} 
             className="p-1.5 border border-gray-200 rounded-full hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 group" 
@@ -46,6 +43,7 @@ const CategorySection: React.FC<CategorySectionProps> = ({
             <ArrowRight className="w-3.5 h-3.5 text-gray-600 group-hover:text-black transition-colors" />
           </button>
         </div>
+
       </div>
       
       <div className="flex items-center justify-center flex-1">
