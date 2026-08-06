@@ -22,7 +22,7 @@ const CategorySection: React.FC<CategorySectionProps> = ({
   if (items.length === 0 || !currentItem) return null;
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 p-4 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all duration-300 h-full flex flex-col">
+    <div className="relative bg-white rounded-2xl border border-gray-100 p-4 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all duration-300 h-full flex flex-col">
       <div className="flex items-center justify-between mb-2">
         <h4 className="text-sm font-light text-black tracking-[0.15em] uppercase">
           {category}
