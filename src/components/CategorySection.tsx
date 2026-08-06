@@ -71,7 +71,15 @@ const CategorySection: React.FC<CategorySectionProps> = ({
           <ArrowRight className="w-5 h-5 text-gray-300 group-hover:text-gray-600 transition-colors" />
         </button>
       </div>
+
+      {/* Keep every image decoded in the DOM so left/right swaps are instant */}
+      <div aria-hidden className="w-0 h-0 overflow-hidden absolute opacity-0 pointer-events-none">
+        {items.map(item => (
+          <img key={item.id} src={item.imageUrl} alt="" width={1} height={1} decoding="sync" />
+        ))}
+      </div>
     </div>
+
 
   );
 };
