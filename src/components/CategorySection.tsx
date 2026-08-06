@@ -22,7 +22,7 @@ const CategorySection: React.FC<CategorySectionProps> = ({
   if (items.length === 0 || !currentItem) return null;
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 p-4 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all duration-300 h-full flex flex-col">
+    <div className="relative bg-white rounded-2xl border border-gray-100 p-4 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all duration-300 h-full flex flex-col">
       <div className="flex items-center justify-between mb-2">
         <h4 className="text-sm font-light text-black tracking-[0.15em] uppercase">
           {category}
@@ -35,9 +35,6 @@ const CategorySection: React.FC<CategorySectionProps> = ({
           >
             <ArrowLeft className="w-3.5 h-3.5 text-gray-600 group-hover:text-black transition-colors" />
           </button>
-          <span className="text-[10px] text-gray-500 font-light min-w-[3rem] text-center">
-            {currentIndex + 1} / {items.length}
-          </span>
           <button 
             onClick={() => onNavigate(category, 'next')} 
             className="p-1.5 border border-gray-200 rounded-full hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 group" 
@@ -46,6 +43,7 @@ const CategorySection: React.FC<CategorySectionProps> = ({
             <ArrowRight className="w-3.5 h-3.5 text-gray-600 group-hover:text-black transition-colors" />
           </button>
         </div>
+
       </div>
       
       <div className="flex items-center justify-center flex-1">
@@ -73,7 +71,15 @@ const CategorySection: React.FC<CategorySectionProps> = ({
           <ArrowRight className="w-5 h-5 text-gray-300 group-hover:text-gray-600 transition-colors" />
         </button>
       </div>
+
+      {/* Keep every image decoded in the DOM so left/right swaps are instant */}
+      <div aria-hidden className="w-0 h-0 overflow-hidden absolute opacity-0 pointer-events-none">
+        {items.map(item => (
+          <img key={item.id} src={item.imageUrl} alt="" width={1} height={1} decoding="sync" />
+        ))}
+      </div>
     </div>
+
 
   );
 };
