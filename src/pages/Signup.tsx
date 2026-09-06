@@ -31,7 +31,7 @@ const Signup = () => {
     try {
       await signUp(formData.name, formData.email, formData.password);
       toast({
-        title: "Welcome to STYLEX! 🎉",
+        title: "Welcome to Almaree! 🎉",
         description: "Your account has been created successfully.",
       });
       navigate('/');
@@ -49,7 +49,7 @@ const Signup = () => {
     try {
       await signInWithGoogle();
       toast({
-        title: "Welcome to STYLEX! 🎉",
+        title: "Welcome to Almaree! 🎉",
         description: "You've been signed in with Google successfully.",
       });
       navigate('/');
@@ -77,7 +77,7 @@ const Signup = () => {
           {/* Header */}
           <div className="text-center mb-8">
             <Link to="/" className="text-2xl font-light tracking-wider text-neutral-900 hover:text-neutral-700 transition-colors">
-              STYLEX
+              Almaree
             </Link>
             <h1 className="text-xl font-light text-neutral-900 mt-6 mb-2">Create Account</h1>
             <p className="text-neutral-600 text-sm font-light">Start curating your digital wardrobe</p>
