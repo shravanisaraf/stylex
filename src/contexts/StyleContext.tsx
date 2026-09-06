@@ -40,11 +40,11 @@ export const StyleProvider = ({ children }: { children: ReactNode }) => {
 
   const shareOutfit = (items: ClothingItem[]) => {
     const itemNames = items.map(item => item.name).join(' + ');
-    const shareText = `Check out this outfit combo: ${itemNames} from STYLEX!`;
+    const shareText = `Check out this outfit combo: ${itemNames} from Almaree!`;
     
     if (navigator.share) {
       navigator.share({
-        title: 'STYLEX Outfit',
+        title: 'Almaree Outfit',
         text: shareText,
         url: window.location.href
       });
