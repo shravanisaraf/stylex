@@ -124,7 +124,7 @@ const Index = () => {
               </div>
             )}
           </div>
-          <button onClick={() => setStep('home')} className="text-3xl font-extralight tracking-[0.2em] text-black">Almaree</button>
+          <button onClick={() => setStep('home')} className="text-4xl font-cursive text-black">Almaree</button>
           <div className="flex-1 flex justify-end">
             <UserProfile />
           </div>
