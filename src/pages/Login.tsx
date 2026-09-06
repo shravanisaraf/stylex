@@ -65,7 +65,7 @@ const Login = () => {
           {/* Header */}
           <div className="text-center mb-8">
             <Link to="/" className="text-2xl font-light tracking-wide text-neutral-900">
-              STYLEX
+              Almaree
             </Link>
             <h1 className="text-2xl font-light text-neutral-900 mt-6 mb-2">Welcome Back</h1>
             <p className="text-neutral-600 font-light">Sign in to your digital wardrobe</p>

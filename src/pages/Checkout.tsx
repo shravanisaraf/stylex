@@ -43,7 +43,7 @@ const Checkout = () => {
               <ArrowLeft className="w-4 h-4" />
               <span className="text-sm font-medium">Back to Styling</span>
             </button>
-            <h1 className="text-2xl font-light tracking-wide text-neutral-900">muse</h1>
+            <h1 className="text-2xl font-light tracking-wide text-neutral-900">Almaree</h1>
             <div className="w-24"></div> {/* Spacer for centering */}
           </div>
         </div>
