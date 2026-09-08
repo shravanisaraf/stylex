@@ -76,7 +76,7 @@ const Signup = () => {
         <div className="bg-white rounded-2xl border border-neutral-200 p-8 shadow-xl">
           {/* Header */}
           <div className="text-center mb-8">
-            <Link to="/" className="text-4xl font-cursive text-neutral-900 hover:text-neutral-700 transition-colors">
+            <Link to="/" className="text-4xl font-light font-cursive text-neutral-900 hover:text-neutral-700 transition-colors">
               Almaree
             </Link>
             <h1 className="text-xl font-light text-neutral-900 mt-6 mb-2">Create Account</h1>
