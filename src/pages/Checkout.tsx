@@ -2,6 +2,7 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ArrowLeft, ShoppingBag } from 'lucide-react';
+import Logo from '../components/Logo';
 import { ClothingItem } from '../contexts/StyleContext';
 import { useToast } from '@/hooks/use-toast';
 
@@ -43,7 +44,7 @@ const Checkout = () => {
               <ArrowLeft className="w-4 h-4" />
               <span className="text-sm font-medium">Back to Styling</span>
             </button>
-            <h1 className="text-4xl font-light font-cursive text-neutral-900">Almaree</h1>
+            <h1 className="text-4xl font-light text-neutral-900"><Logo className="text-4xl font-light text-neutral-900" /></h1>
             <div className="w-24"></div> {/* Spacer for centering */}
           </div>
         </div>

@@ -7,6 +7,7 @@ import UserProfile from '../components/UserProfile';
 import ColorAnalysisQuiz from '../components/ColorAnalysisQuiz';
 import HamburgerMenu from '../components/HamburgerMenu';
 import Tutorial from '../components/Tutorial';
+import Logo from '../components/Logo';
 import { FilterState } from '../components/FilterPanel';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { ClothingItem as ClothingItemType } from '../contexts/StyleContext';
@@ -124,7 +125,7 @@ const Index = () => {
               </div>
             )}
           </div>
-          <button onClick={() => setStep('home')} className="text-4xl font-light font-cursive text-black">Almaree</button>
+          <Logo onClick={() => setStep('home')} className="text-4xl font-light text-black" />
           <div className="flex-1 flex justify-end">
             <UserProfile />
           </div>
