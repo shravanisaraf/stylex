@@ -104,4 +104,9 @@
   .font-cursive {
     font-style: italic;
   }
+
+  .font-cursive-a {
+    font-family: 'Pinyon Script', 'Great Vibes', cursive;
+    font-weight: 400;
+  }
 }

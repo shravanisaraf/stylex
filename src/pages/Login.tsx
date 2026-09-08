@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import Logo from '../components/Logo';
 import { useAuth } from '../contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 
@@ -64,9 +65,7 @@ const Login = () => {
         <div className="bg-white rounded-lg border border-neutral-200 p-8 shadow-sm">
           {/* Header */}
           <div className="text-center mb-8">
-            <Link to="/" className="text-4xl font-light font-cursive text-neutral-900">
-              Almaree
-            </Link>
+            <Logo className="text-4xl font-light text-neutral-900" />
             <h1 className="text-2xl font-light text-neutral-900 mt-6 mb-2">Welcome Back</h1>
             <p className="text-neutral-600 font-light">Sign in to your digital wardrobe</p>
           </div>
