@@ -34,7 +34,7 @@
 
     --radius: 0.5rem;
 
-    --font-cursive: 'Pinyon Script', 'Great Vibes', cursive;
+    --font-cursive: 'Cormorant Garamond', 'Garamond', 'Times New Roman', serif;
 
     --sidebar-background: 0 0% 98%;
 
@@ -99,5 +99,9 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+
+  .font-cursive {
+    font-style: italic;
   }
 }

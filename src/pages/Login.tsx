@@ -64,7 +64,7 @@ const Login = () => {
         <div className="bg-white rounded-lg border border-neutral-200 p-8 shadow-sm">
           {/* Header */}
           <div className="text-center mb-8">
-            <Link to="/" className="text-4xl font-cursive text-neutral-900">
+            <Link to="/" className="text-4xl font-light font-cursive text-neutral-900">
               Almaree
             </Link>
             <h1 className="text-2xl font-light text-neutral-900 mt-6 mb-2">Welcome Back</h1>
