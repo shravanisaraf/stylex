@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, ExternalLink, ShoppingBag } from 'lucide-react';
+import { ShoppingBag } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { ClothingItem } from '../contexts/StyleContext';
 
