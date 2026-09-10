@@ -21,20 +21,12 @@ const Index = () => {
   const [gender, setGender] = useState<'women' | 'men' | null>(null);
   const [focusCategory, setFocusCategory] = useState<'tops' | 'bottoms'>('tops');
   const [showColorQuiz, setShowColorQuiz] = useState(false);
-  const [showTutorial, setShowTutorial] = useState(false);
-
-  // Show tutorial on first visit
-  useEffect(() => {
-    const hasSeenTutorial = localStorage.getItem('hasSeenTutorial');
-    if (!hasSeenTutorial) {
-      setShowTutorial(true);
-    }
-  }, []);
+  const [showTutorial, setShowTutorial] = useState(true);
 
   const handleCloseTutorial = () => {
     setShowTutorial(false);
-    localStorage.setItem('hasSeenTutorial', 'true');
   };
+
 
   const [filters, setFilters] = useState<FilterState>({
     selectedCategories: ['tops', 'bottoms'],
