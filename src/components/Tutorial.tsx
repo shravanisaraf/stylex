@@ -11,7 +11,7 @@ interface TutorialProps {
 
 const tutorialSteps = [
   {
-    title: "Welcome to Chér",
+    title: "Welcome to Almaree",
     content: "Discover outfits curated from real pieces across brands, then click through to buy the exact items you love.",
     icon: null
   },
