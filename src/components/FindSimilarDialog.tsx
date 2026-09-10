@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, ExternalLink, ShoppingBag } from 'lucide-react';
+import { ShoppingBag } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { ClothingItem } from '../contexts/StyleContext';
 
@@ -33,22 +33,6 @@ const FindSimilarDialog: React.FC<FindSimilarDialogProps> = ({ item, open, onClo
             </p>
           </div>
 
-          {item.referenceUrl && (
-            <div className="pt-2 border-t border-neutral-200">
-              <p className="text-xs uppercase tracking-widest text-neutral-500 mb-3 flex items-center gap-1">
-                <Sparkles className="w-3 h-3" /> Style inspiration
-              </p>
-              <a
-                href={item.referenceUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-between px-4 py-3 rounded-lg bg-neutral-900 text-white hover:bg-neutral-800 transition-all"
-              >
-                <span className="text-sm">View reference</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
-            </div>
-          )}
         </div>
       </DialogContent>
     </Dialog>
