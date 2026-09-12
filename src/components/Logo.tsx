@@ -9,7 +9,7 @@ interface LogoProps {
 const Logo: React.FC<LogoProps> = ({ className = '', onClick }) => {
   const content = (
     <span className="inline-flex items-baseline leading-none">
-      <span className="font-cursive-a leading-none -mr-1 text-[0.9em]">A</span>
+      <span className="font-cursive-a leading-none mr-[1px] text-[0.78em]">A</span>
       <span className="font-cursive leading-none">lmaree</span>
     </span>
   );
