@@ -12,7 +12,7 @@ const Logo: React.FC<LogoProps> = ({ className = '', onClick }) => {
     <img
       src={optionThreeWordmark}
       alt="Almaree"
-      className="h-12 w-auto object-contain"
+      className="h-14 w-auto object-contain"
     />
   );
 
